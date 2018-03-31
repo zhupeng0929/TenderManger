@@ -1,0 +1,5 @@
+E:\Git\OpenAuth.Net\OpenAuth.Domain\bin\Debug\OpenAuth.Domain.dll
+E:\Git\OpenAuth.Net\OpenAuth.Domain\bin\Debug\OpenAuth.Domain.pdb
+E:\Git\OpenAuth.Net\OpenAuth.Domain\obj\Debug\OpenAuth.Domain.csproj.CoreCompileInputs.cache
+E:\Git\OpenAuth.Net\OpenAuth.Domain\obj\Debug\OpenAuth.Domain.dll
+E:\Git\OpenAuth.Net\OpenAuth.Domain\obj\Debug\OpenAuth.Domain.pdb
