@@ -21,43 +21,48 @@ namespace TenderManger.Mvc.Controllers
             return View();
         }
 
-        public string LoadOrg()
+        public JsonResult LoadOrg()
         {
-            return JsonHelper.Instance.Serialize(AuthUtil.GetCurrentUser().Orgs);
+            //return JsonHelper.Serialize(AuthUtil.GetCurrentUser().Orgs);
+            return Json("");
         }
 
-        public string LoadForUser(Guid firstId)
+        public JsonResult LoadForUser(Guid firstId)
         {
-            var orgs = OrgApp.LoadForUser(firstId);
-            return JsonHelper.Instance.Serialize(orgs);
+            //var orgs = OrgApp.LoadForUser(firstId);
+            //return JsonHelper.Instance.Serialize(orgs);
+            return Json("");
         }
 
-        public string LoadForRole(Guid firstId)
+        public JsonResult LoadForRole(Guid firstId)
         {
-            var orgs = OrgApp.LoadForRole(firstId);
-            return JsonHelper.Instance.Serialize(orgs);
+            //var orgs = OrgApp.LoadForRole(firstId);
+            //return JsonHelper.Instance.Serialize(orgs);
+            return Json("");
         }
 
 
         //添加组织提交
         [HttpPost]
-        public string AddOrg(Org org)
+        public JsonResult AddOrg(/*Org org*/)
         {
-            try
-            {
-                OrgApp.AddOrUpdate(org);
-            }
-            catch (Exception ex)
-            {
-                 Result.Status = false;
-                Result.Message = ex.Message;
-            }
-            return JsonHelper.Instance.Serialize(Result);
+            //try
+            //{
+            //    OrgApp.AddOrUpdate(org);
+            //}
+            //catch (Exception ex)
+            //{
+            //     Result.Status = false;
+            //    Result.Message = ex.Message;
+            //}
+            //return JsonHelper.Instance.Serialize(Result);
+            return Json("");
         }
         
-        public string LoadChildren(Guid id)
+        public JsonResult LoadChildren(Guid id)
         {
-            return JsonHelper.Instance.Serialize(OrgApp.LoadAllChildren(id));
+            //return JsonHelper.Instance.Serialize(OrgApp.LoadAllChildren(id));
+            return Json("");
         }
 
         /// <summary>
@@ -66,19 +71,20 @@ namespace TenderManger.Mvc.Controllers
         /// </summary>
         /// <returns>System.String.</returns>
         [HttpPost]
-        public string DelOrg(Guid[] ids)
+        public JsonResult DelOrg(Guid[] ids)
         {
-            try
-            {
-                OrgApp.DelOrg(ids);
-            }
-            catch (Exception e)
-            {
-                 Result.Status = false;
-                Result.Message = e.Message;
-            }
+            //try
+            //{
+            //    OrgApp.DelOrg(ids);
+            //}
+            //catch (Exception e)
+            //{
+            //     Result.Status = false;
+            //    Result.Message = e.Message;
+            //}
 
-            return JsonHelper.Instance.Serialize(Result);
+            //return JsonHelper.Instance.Serialize(Result);
+            return Json("");
         }
     }
 }
