@@ -1,20 +1,15 @@
-﻿using Infrastructure;
-using Tender.App;
-using Tender.Domain;
-using Tender.Mvc.Models;
-using System;
+﻿using System;
 using System.Web.Mvc;
-using Tender.App.SSO;
+using TenderManger.Mvc.Controllers;
 
-namespace Tender.Mvc.Controllers
+namespace TenderManger.Mvc.Controllers
 {
     public class OrgManagerController : BaseController
     {
-        public OrgManagerApp OrgApp { get; set; }
-
+       
         //
         // GET: /OrgManager/
-        [Authenticate]
+        //[Authenticate]
         public ActionResult Index()
         {
             return View();

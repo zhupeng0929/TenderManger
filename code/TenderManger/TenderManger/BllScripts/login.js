@@ -9,12 +9,12 @@
                     "/login/index",
                     data.field,
                     function(data) {
-                        var result = JSON.parse(data);
-                        if (result.Status) {
-                            location.href = result.Result;
-                        } else {
-                            layer.msg(result.Message);
-                        }
+                        //var result = JSON.parse(data);
+                        //if (result.Status) {
+                        //    location.href = result.Result;
+                        //} else {
+                        //    layer.msg(result.Message);
+                        //}
                     });
                 return false;
             });

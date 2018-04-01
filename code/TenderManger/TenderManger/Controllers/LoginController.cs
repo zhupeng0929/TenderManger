@@ -63,7 +63,7 @@ namespace TenderManger.Mvc.Controllers
         {
             Session[CommonHelper.SessionUserKey] = null;
             CookieHelper.ClearCookie(CommonHelper.Md5(CommonHelper.COOKIE_KEY_USERINFO));
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
     }
 }
