@@ -154,3 +154,4 @@ D:\Git\TenderManger\code\TenderManger\TenderManger\bin\zh-Hans\System.Web.WebPag
 D:\Git\TenderManger\code\TenderManger\TenderManger\obj\Debug\TenderManger.csproj.CoreCompileInputs.cache
 D:\Git\TenderManger\code\TenderManger\TenderManger\obj\Debug\TenderManger.dll
 D:\Git\TenderManger\code\TenderManger\TenderManger\obj\Debug\TenderManger.pdb
+D:\Git\TenderManger\code\TenderManger\TenderManger\obj\Debug\TenderManger.csprojResolveAssemblyReference.cache
