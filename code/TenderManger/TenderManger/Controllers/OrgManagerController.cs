@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
-using TenderManger.Mvc.Controllers;
+using TenderManger.Models;
+
 
 namespace TenderManger.Mvc.Controllers
 {
     public class OrgManagerController : BaseController
     {
-       
+
         //
         // GET: /OrgManager/
         //[Authenticate]
@@ -23,46 +24,42 @@ namespace TenderManger.Mvc.Controllers
 
         public JsonResult LoadOrg()
         {
-            //return JsonHelper.Serialize(AuthUtil.GetCurrentUser().Orgs);
-            return Json("");
+            var Orgs = orgService.GetOrgsQuery(UserInfo.Id);
+            return Json(Orgs, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult LoadForUser(Guid firstId)
         {
-            //var orgs = OrgApp.LoadForUser(firstId);
-            //return JsonHelper.Instance.Serialize(orgs);
-            return Json("");
+            var orgs = orgService.LoadForUser(firstId);
+            return Json(orgs, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult LoadForRole(Guid firstId)
         {
-            //var orgs = OrgApp.LoadForRole(firstId);
-            //return JsonHelper.Instance.Serialize(orgs);
-            return Json("");
+            var orgs = orgService.LoadForRole(firstId);
+            return Json(orgs, JsonRequestBehavior.AllowGet);
         }
 
 
         //添加组织提交
         [HttpPost]
-        public JsonResult AddOrg(/*Org org*/)
+        public JsonResult AddOrg(OrgEntity org)
         {
-            //try
-            //{
-            //    OrgApp.AddOrUpdate(org);
-            //}
-            //catch (Exception ex)
-            //{
-            //     Result.Status = false;
-            //    Result.Message = ex.Message;
-            //}
-            //return JsonHelper.Instance.Serialize(Result);
-            return Json("");
+            try
+            {
+                orgService.AddOrUpdate(org);
+            }
+            catch (Exception ex)
+            {
+                Result.Status = false;
+                Result.Message = ex.Message;
+            }
+            return Json(Result);
         }
-        
+
         public JsonResult LoadChildren(Guid id)
         {
-            //return JsonHelper.Instance.Serialize(OrgApp.LoadAllChildren(id));
-            return Json("");
+            return Json(orgService.LoadAllChildren(id),JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -73,18 +70,16 @@ namespace TenderManger.Mvc.Controllers
         [HttpPost]
         public JsonResult DelOrg(Guid[] ids)
         {
-            //try
-            //{
-            //    OrgApp.DelOrg(ids);
-            //}
-            //catch (Exception e)
-            //{
-            //     Result.Status = false;
-            //    Result.Message = e.Message;
-            //}
-
-            //return JsonHelper.Instance.Serialize(Result);
-            return Json("");
+            try
+            {
+                orgService.DelOrg(ids);
+            }
+            catch (Exception e)
+            {
+                Result.Status = false;
+                Result.Message = e.Message;
+            }
+            return Json(Result);
         }
     }
 }

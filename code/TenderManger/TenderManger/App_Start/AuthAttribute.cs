@@ -9,7 +9,7 @@ using TenderManger.Models;
 
 namespace TenderManger
 {
-    public class AuthAttribute: ActionFilterAttribute
+    public class AuthAttribute : ActionFilterAttribute
     {
         /// <summary> 
         /// 验证权限
@@ -18,8 +18,8 @@ namespace TenderManger
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             UserEntity userLogin = GetUserInfo(filterContext);
-           
-            if (userLogin == null || userLogin.Id == 0)
+
+            if (userLogin == null || userLogin.Id == Guid.Empty)
             {
                 string returnUrl = filterContext.HttpContext.Request.Url.PathAndQuery;
 

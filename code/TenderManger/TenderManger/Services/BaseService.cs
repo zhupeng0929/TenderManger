@@ -29,33 +29,33 @@ namespace TenderManger.Services
         /// <param name="conn"></param>
         /// <param name="trans"></param>
         /// <returns></returns>
-        public int Add(T model, IDbConnection conn = null, IDbTransaction trans = null)
+        public Guid Add(T model, IDbConnection conn = null, IDbTransaction trans = null)
         {
             if (conn == null)
             {
                 using (conn = new SqlConnection(GetConnstr))
                 {
-                    return conn.Insert<int>(model, trans);
+                    return conn.Insert<Guid>(model, trans);
                 }
             }
             else
             {
-                return conn.Insert<int>(model, trans);
+                return conn.Insert<Guid>(model, trans);
             }
         }
 
-        public Task<int> AddAsync(T model, IDbConnection conn = null, IDbTransaction trans = null)
+        public Task<Guid> AddAsync(T model, IDbConnection conn = null, IDbTransaction trans = null)
         {
             if (conn == null)
             {
                 using (conn = new SqlConnection(GetConnstr))
                 {
-                    return conn.InsertAsync<int>(model, trans);
+                    return conn.InsertAsync<Guid>(model, trans);
                 }
             }
             else
             {
-                return conn.InsertAsync<int>(model, trans);
+                return conn.InsertAsync<Guid>(model, trans);
             }
         }
         /// <summary>
@@ -85,7 +85,7 @@ namespace TenderManger.Services
         /// </summary>
         /// <param name="id">主键id</param>
         /// <returns></returns>
-        public T GetSingle(int id)
+        public T GetSingle(Guid id)
         {
             using (IDbConnection conn = new SqlConnection(GetConnstr))
             {
@@ -133,6 +133,6 @@ namespace TenderManger.Services
             }
         }
 
-
+        
     }
 }

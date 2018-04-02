@@ -1,23 +1,15 @@
-﻿using Infrastructure;
-using Tender.App;
-using Tender.App.SSO;
-using Tender.App.ViewModel;
-using Tender.Domain;
-using Tender.Mvc.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-
-namespace Tender.Mvc.Controllers
+using TenderManger.Models;
+namespace TenderManger.Mvc.Controllers
 {
     public class ModuleManagerController : BaseController
     {
-        public ModuleManagerApp App { get; set; }
 
-        // GET: /ModuleManager/
-        [Authenticate]
         public ActionResult Index()
         {
             return View();
@@ -28,8 +20,8 @@ namespace Tender.Mvc.Controllers
             ViewBag.FirstId = firstId;
             ViewBag.ModuleType = key;
 
-            var moduleWithChildren = AuthUtil.GetCurrentUser().ModuleWithChildren;
-            var modules = key == "UserModule" ? App.LoadForUser(firstId) : App.LoadForRole(firstId);
+            var moduleWithChildren = GetAccessedControls().ModuleWithChildren;
+            var modules = key == "UserModule" ? moduleService.LoadForUser(firstId) : moduleService.LoadForRole(firstId);
 
             CheckModule(moduleWithChildren, modules);
 
@@ -38,7 +30,7 @@ namespace Tender.Mvc.Controllers
             return View();
         }
 
-        private void CheckModule(IEnumerable<TreeItem<ModuleView>> moduleWithChildren, List<Module> modules)
+        private void CheckModule(IEnumerable<TreeItem<ModuleView>> moduleWithChildren, List<ModuleEntity> modules)
         {
             foreach (var module in moduleWithChildren)
             {
@@ -47,7 +39,7 @@ namespace Tender.Mvc.Controllers
                     CheckModule(module.Children, modules);
                 }
 
-                if (modules.Select(u => u.Id).Contains(module.Item.Id))
+                if (modules.Select(u => u.Id).Contains(module.Item.moduleEntity.Id))
                 {
                     module.Item.Checked = true;
                 }
@@ -64,8 +56,8 @@ namespace Tender.Mvc.Controllers
                 {
                     sb.Append("<fieldset class=\"layui-elem-field\">\r\n");
                     sb.Append("<legend>");
-                              BuildCheckbox(sb, moduleView);
-                              sb.Append("</legend>\r\n");
+                    BuildCheckbox(sb, moduleView);
+                    sb.Append("</legend>\r\n");
                     sb.Append("<div class=\"layui-field-box\">\r\n");
                     sb.Append(BuilderModules(moduleView.Children));
                     sb.Append("</div>\r\n");
@@ -88,7 +80,7 @@ namespace Tender.Mvc.Controllers
 
         private void BuildCheckbox(StringBuilder sb, TreeItem<ModuleView> moduleView)
         {
-            sb.Append("<input type=\"checkbox\" value=\"" + moduleView.Item.Id + "\" title=\"" + moduleView.Item.Name + "\"");
+            sb.Append("<input type=\"checkbox\" value=\"" + moduleView.Item.moduleEntity.Id + "\" title=\"" + moduleView.Item.moduleEntity.Name + "\"");
             if (moduleView.Item.Checked)
             {
                 sb.Append(" checked");
@@ -101,7 +93,7 @@ namespace Tender.Mvc.Controllers
         /// </summary>
         public string Load(Guid orgId, int page = 1, int rows = 30)
         {
-            return JsonHelper.Instance.Serialize(App.Load(orgId, page, rows));
+            return JsonHelper.SerializerObject(moduleService.Load(UserInfo.Id, orgId, page, rows));
         }
 
         /// <summary>
@@ -111,8 +103,8 @@ namespace Tender.Mvc.Controllers
         /// <returns>System.String.</returns>
         public string LoadForUser(Guid firstId)
         {
-            var orgs = App.LoadForUser(firstId);
-            return JsonHelper.Instance.Serialize(orgs);
+            var orgs = moduleService.LoadForUser(firstId);
+            return JsonHelper.SerializerObject(orgs);
         }
 
         /// <summary>
@@ -122,32 +114,33 @@ namespace Tender.Mvc.Controllers
         /// <returns>System.String.</returns>
         public string LoadForRole(Guid firstId)
         {
-            var orgs = App.LoadForRole(firstId);
-            return JsonHelper.Instance.Serialize(orgs);
+            var orgs = moduleService.LoadForRole(firstId);
+            return JsonHelper.SerializerObject(orgs);
         }
 
         public string LoadModule()
         {
-            var orgs = AuthUtil.GetCurrentUser().Modules.MapToList<ModuleView>();
-            return JsonHelper.Instance.Serialize(orgs);
+            var orgs = moduleService.GetModulesQuery(UserInfo.Id);
+           
+            return JsonHelper.SerializerObject(orgs);
         }
 
         #region 添加编辑模块
 
         //添加或修改模块
         [HttpPost]
-        public string Add(Module model)
+        public string Add(ModuleEntity model)
         {
             try
             {
-                App.AddOrUpdate(model);
+                moduleService.AddOrUpdate(model);
             }
             catch (Exception ex)
             {
                 Result.Status = false;
                 Result.Message = ex.Message;
             }
-            return JsonHelper.Instance.Serialize(Result);
+            return JsonHelper.SerializerObject(Result);
         }
 
         [HttpPost]
@@ -157,7 +150,7 @@ namespace Tender.Mvc.Controllers
             {
                 foreach (var obj in ids)
                 {
-                    App.Delete(obj);
+                    moduleService.Delete(obj);
                 }
             }
             catch (Exception e)
@@ -166,7 +159,7 @@ namespace Tender.Mvc.Controllers
                 Result.Message = e.Message;
             }
 
-            return JsonHelper.Instance.Serialize(Result);
+            return JsonHelper.SerializerObject(Result);
         }
 
         #endregion 添加编辑模块

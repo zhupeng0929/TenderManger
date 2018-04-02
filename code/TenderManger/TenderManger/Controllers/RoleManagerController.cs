@@ -1,39 +1,35 @@
-﻿using Infrastructure;
-using Tender.App;
+﻿
 using System;
-using System.Web.Http;
+
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
-using Tender.Mvc.Models;
 
-namespace Tender.Mvc.Controllers
+
+namespace TenderManger.Mvc.Controllers
 {
     public class RoleManagerController : BaseController
     {
-        public RoleManagerApp App { get; set; }
+       
 
-        //
-        // GET: /RoleManager/
-        [Authenticate]
         public ActionResult Index()
         {
             return View();
         }
 
         //添加或修改角色
-        [System.Web.Mvc.HttpPost]
-        public string Add([FromBody]JObject obj)
+        [HttpPost]
+        public string Add(JObject obj)
         {
             try
             {
-                App.AddOrUpdate(obj);
+                roleService.AddOrUpdate(obj);
             }
             catch (Exception ex)
             {
                  Result.Status = false;
                 Result.Message = ex.Message;
             }
-            return JsonHelper.Instance.Serialize(Result);
+            return JsonHelper.SerializerObject(Result);
         }
 
         /// <summary>
@@ -41,7 +37,7 @@ namespace Tender.Mvc.Controllers
         /// </summary>
         public string Load(Guid orgId, int pageCurrent = 1, int pageSize = 30)
         {
-            return JsonHelper.Instance.Serialize(App.Load(orgId, pageCurrent, pageSize));
+            return JsonHelper.SerializerObject(roleService.Load(orgId, pageCurrent, pageSize));
         }
 
         [System.Web.Mvc.HttpPost]
@@ -51,7 +47,7 @@ namespace Tender.Mvc.Controllers
             {
                 foreach (var obj in ids)
                 {
-                    App.Delete(obj);
+                    roleService.Delete(obj);
                 }
             }
             catch (Exception e)
@@ -60,7 +56,7 @@ namespace Tender.Mvc.Controllers
                 Result.Message = e.Message;
             }
 
-            return JsonHelper.Instance.Serialize(Result);
+            return JsonHelper.SerializerObject(Result);
         }
 
         #region 为用户设置角色界面
@@ -73,7 +69,7 @@ namespace Tender.Mvc.Controllers
 
         public string LoadForOrgAndUser(Guid orgId, Guid userId)
         {
-            return JsonHelper.Instance.Serialize(App.LoadForOrgAndUser(orgId, userId));
+            return JsonHelper.SerializerObject(roleService.LoadForOrgAndUser(orgId, userId));
         }
 
         #endregion 为用户设置角色界面

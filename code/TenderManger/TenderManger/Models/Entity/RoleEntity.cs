@@ -1,60 +1,38 @@
-﻿using Dapper;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Web;
+using Dapper;
 
 namespace TenderManger.Models
 {
     /// <summary>
-    /// 实体
+    /// 角色表实体
     /// </summary>
-    [Table("UserInfo")]
-    public partial class UserEntity
+    [Table("Role")]
+    public partial class RoleEntity
     {
         private Guid _id = Guid.Empty;
-        private string _account = String.Empty;
-        private string _password = String.Empty;
         private string _name = String.Empty;
         private int _status = 0;
+        private int _type = 0;
         private DateTime _createTime = DateTime.Parse("1900-1-1");
+        private string _createId = String.Empty;
 
 
         /// <summary>
-        /// 
+        /// 流水号
         /// </summary>
         [Key]
-        [Description("")]
+        [Description("流水号")]
         public Guid Id
         {
             get { return _id; }
             set { _id = value; }
         }
-        /// <summary>
-        /// 账号
-        /// </summary>
-        [Description("账号")]
-        public string Account
-        {
-            get { return _account; }
-            set { _account = value; }
-        }
 
         /// <summary>
-        /// 密码
+        /// 角色名称
         /// </summary>
-        [Description("密码")]
-        public string Password
-        {
-            get { return _password; }
-            set { _password = value; }
-        }
-
-        /// <summary>
-        /// 名称
-        /// </summary>
-        [Description("名称")]
+        [Description("角色名称")]
         public string Name
         {
             get { return _name; }
@@ -62,9 +40,9 @@ namespace TenderManger.Models
         }
 
         /// <summary>
-        /// 状态
+        /// 当前状态
         /// </summary>
-        [Description("状态")]
+        [Description("当前状态")]
         public int Status
         {
             get { return _status; }
@@ -72,15 +50,35 @@ namespace TenderManger.Models
         }
 
         /// <summary>
-        /// 添加时间
+        /// 角色类型
         /// </summary>
-        [Description("添加时间")]
-        [IgnoreUpdate]
+        [Description("角色类型")]
+        public int Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        [Description("创建时间")]
         [IgnoreInsert]
+        [IgnoreUpdate]
         public DateTime CreateTime
         {
             get { return _createTime; }
             set { _createTime = value; }
+        }
+
+        /// <summary>
+        /// 创建人ID
+        /// </summary>
+        [Description("创建人ID")]
+        public string CreateId
+        {
+            get { return _createId; }
+            set { _createId = value; }
         }
 
 

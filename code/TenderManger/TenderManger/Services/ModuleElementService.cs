@@ -9,14 +9,12 @@ using TenderManger.Models;
 
 namespace TenderManger.Services
 {
-    public class UserService: BaseService<UserEntity>
+    public class ModuleElementService : BaseService<ModuleElementEntity>
     {
-        
-       
         /// <summary>
         /// 新增实体
         /// </summary>
-        public bool AddUserInfo(UserEntity model)
+        public bool AddModuleElement(ModuleElementEntity model)
         {
             using (IDbConnection conn = new SqlConnection(GetConnstr))
             {
@@ -29,7 +27,7 @@ namespace TenderManger.Services
         /// <summary>
         /// 新增实体--事物
         /// </summary>
-        public bool AddUserInfo(UserEntity model, IDbConnection conn, IDbTransaction trans)
+        public bool AddModuleElement(ModuleElementEntity model, IDbConnection conn, IDbTransaction trans)
         {
             var result = conn.Insert<Guid>(model, trans);
             if (result!=Guid.Empty)
@@ -42,13 +40,13 @@ namespace TenderManger.Services
         /// </summary>
         /// <param name="id">主键id</param>
         /// <returns></returns>
-        public bool DelUserInfo(int id)
+        public bool DelModuleElement(int id)
         {
             if (id > 0)
             {
                 using (IDbConnection conn = new SqlConnection(GetConnstr))
                 {
-                    string strSql = "delete from UserInfo where Id=@Id";
+                    string strSql = "delete from ModuleElement where Id=@Id";
                     var param = new { Id = id };
                     var result = conn.Execute(strSql, param);
                     if (result > 0)
@@ -62,13 +60,13 @@ namespace TenderManger.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool DelUserInfoBatch(int[] ids)
+        public bool DelModuleElementBatch(int[] ids)
         {
             if (ids.Length > 0)
             {
                 using (IDbConnection conn = new SqlConnection(GetConnstr))
                 {
-                    string strSql = "delete from  UserInfo where Id in @Id ";
+                    string strSql = "delete from  ModuleElement where Id in @Id ";
 
                     DynamicParameters param = new DynamicParameters();
                     param.Add("Id", ids);
@@ -83,12 +81,12 @@ namespace TenderManger.Services
         /// 获取类别实体根据ID
         /// </summary>
         /// <returns></returns>
-        public UserEntity GetUserInfo(int id)
+        public ModuleElementEntity GetModuleElement(int id)
         {
-            var mResult = new UserEntity();
+            var mResult = new ModuleElementEntity();
             using (IDbConnection conn = new SqlConnection(GetConnstr))
             {
-                mResult = conn.Get<UserEntity>(id);
+                mResult = conn.Get<ModuleElementEntity>(id);
             }
             return mResult;
         }
@@ -96,12 +94,12 @@ namespace TenderManger.Services
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<UserEntity> GetUserInfoList()
+        public List<ModuleElementEntity> GetModuleElementList()
         {
-            var mResult = new List<UserEntity>();
+            var mResult = new List<ModuleElementEntity>();
             using (IDbConnection conn = new SqlConnection(GetConnstr))
             {
-                mResult = conn.GetList<UserEntity>().ToList();
+                mResult = conn.GetList<ModuleElementEntity>().ToList();
             }
             return mResult;
         }
@@ -109,7 +107,7 @@ namespace TenderManger.Services
         /// 更新实体列表
         /// </summary>
         /// <returns></returns>
-        public bool UpdateUserInfo(UserEntity entity)
+        public bool UpdateModuleElement(ModuleElementEntity entity)
         {
             int row;
             using (IDbConnection conn = new SqlConnection(GetConnstr))
@@ -122,23 +120,11 @@ namespace TenderManger.Services
         /// 更新实体列表--事物
         /// </summary>
         /// <returns></returns>
-        public bool UpdateUserInfo(UserEntity entity, IDbConnection conn, IDbTransaction trans)
+        public bool UpdateModuleElement(ModuleElementEntity entity, IDbConnection conn, IDbTransaction trans)
         {
             int row;
             row = conn.Update(entity, trans);
             return row > 0;
-        }
-
-        public UserEntity GetUser(string userName)
-        {
-            var mResult = new UserEntity();
-            using (IDbConnection conn = new SqlConnection(GetConnstr))
-            {
-                string strSql = "Select * from UserInfo where Account=@name";
-                var param = new { name = userName };
-                mResult = conn.Query<UserEntity>(strSql, param).FirstOrDefault();
-            }
-            return mResult;
         }
     }
 }
