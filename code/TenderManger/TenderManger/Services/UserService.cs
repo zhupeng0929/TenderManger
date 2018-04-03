@@ -9,10 +9,12 @@ using TenderManger.Models;
 
 namespace TenderManger.Services
 {
-    public class UserService: BaseService<UserEntity>
+    public class UserService : BaseService<UserEntity>
     {
-        
-       
+        RelevanceService relevanceService = new RelevanceService();
+        OrgService orgService = new OrgService();
+        #region 基础方法
+
         /// <summary>
         /// 新增实体
         /// </summary>
@@ -21,7 +23,7 @@ namespace TenderManger.Services
             using (IDbConnection conn = new SqlConnection(GetConnstr))
             {
                 var result = conn.Insert<Guid>(model);
-                if (result!=Guid.Empty)
+                if (result != Guid.Empty)
                     return true;
             }
             return false;
@@ -32,7 +34,7 @@ namespace TenderManger.Services
         public bool AddUserInfo(UserEntity model, IDbConnection conn, IDbTransaction trans)
         {
             var result = conn.Insert<Guid>(model, trans);
-            if (result!=Guid.Empty)
+            if (result != Guid.Empty)
                 return true;
             else
                 return false;
@@ -140,5 +142,135 @@ namespace TenderManger.Services
             }
             return mResult;
         }
+        #endregion
+
+        #region 扩展方法
+        public void AddOrUpdate(UserView view)
+        {
+            if (string.IsNullOrEmpty(view.OrganizationIds))
+                throw new Exception("请为用户分配机构");
+            UserEntity user = EntityHelper.CopyEntity<UserView, UserEntity>(view);
+            if (user.Id == Guid.Empty)
+            {
+                if (GetUser(view.Account) != null)
+                {
+                    throw new Exception("用户账号已存在");
+                }
+                user.CreateTime = DateTime.Now;
+                user.Password = CommonHelper.Md5(user.Password) ; //初始密码与账号相同
+                Add(user);
+                view.Id = user.Id;   //要把保存后的ID存入view
+            }
+            else
+            {
+                Update(user);
+            }
+            Guid[] orgIds = view.OrganizationIds.Split(',').Select(id => Guid.Parse(id)).ToArray();
+
+            relevanceService.DeleteBy("UserOrg", user.Id);
+            relevanceService.AddRelevance("UserOrg", orgIds.ToLookup(u => user.Id));
+        }
+
+        /// <summary>
+        /// 加载一个部门及子部门全部用户
+        /// </summary>
+        public GridData Load(Guid orgId, int pageindex, int pagesize)
+        {
+            if (pageindex < 1) pageindex = 1;
+            IEnumerable<UserEntity> users;
+            int records = 0;
+            if (orgId == Guid.Empty)
+            {
+                users = LoadUsers(pageindex, pagesize);
+                records = GetCount();
+            }
+            else
+            {
+                var ids = GetSubOrgIds(orgId);
+                users = LoadInOrgs(pageindex, pagesize, ids);
+                records = GetUserCntInOrgs(ids);
+            }
+            var userviews = new List<UserView>();
+            foreach (var user in users)
+            {
+                UserView uv = EntityHelper.CopyEntity<UserEntity, UserView>(user);
+                var orgs = orgService.LoadByUser(user.Id);
+                uv.Organizations = string.Join(",", orgs.Select(u => u.Name).ToList());
+                uv.OrganizationIds = string.Join(",", orgs.Select(u => u.Id).ToList());
+                userviews.Add(uv);
+            }
+
+            return new GridData
+            {
+                records = records,
+                total = (int)Math.Ceiling((double)records / pagesize),
+                rows = userviews,
+                page = pageindex
+            };
+        }
+        public IEnumerable<UserEntity> LoadUsers(int pageindex, int pagesize)
+        {
+            using (IDbConnection conn = new SqlConnection(GetConnstr))
+            {
+                return conn.GetListPaged<UserEntity>(pageindex, pagesize, "", "Id").ToList();
+            }
+        }
+
+        public int GetCount()
+        {
+            using (IDbConnection conn = new SqlConnection(GetConnstr))
+            {
+                return conn.RecordCount<UserEntity>();
+            }
+        }
+
+        /// <summary>
+        /// 获取当前组织的所有下级组织
+        /// </summary>
+        private Guid[] GetSubOrgIds(Guid orgId)
+        {
+            var org = orgService.GetSingle(orgId);
+            var orgs = orgService.GetList().Where(u => u.CascadeId.Contains(org.CascadeId)).Select(u => u.Id).ToArray();
+            return orgs;
+        }
+
+        public IEnumerable<UserEntity> LoadInOrgs(int pageindex, int pagesize, params Guid[] orgIds)
+        {
+            return LoadInOrgs(orgIds).OrderBy(u => u.Id).Skip((pageindex - 1) * pagesize).Take(pagesize);
+        }
+        public IEnumerable<UserEntity> LoadInOrgs(params Guid[] orgId)
+        {
+            var result = from user in GetList()
+                         where (
+                             relevanceService.GetList().Where(uo => orgId.Contains(uo.SecondId) && uo.Key == "UserOrg")
+                             .Select(u => u.FirstId)
+                             .Distinct()
+                         )
+                         .Contains(user.Id)
+                         select user;
+            return result;
+
+        }
+        public int GetUserCntInOrgs(params Guid[] orgIds)
+        {
+            return LoadInOrgs(orgIds).Count();
+        }
+
+        public void Delete(Guid[] ids)
+        {
+            DeleteBy(ids);
+            relevanceService.DeleteBy("UserOrg", ids);
+            relevanceService.DeleteBy("UserModule", ids);
+            relevanceService.DeleteBy("UserRole", ids);
+        }
+
+        public void DeleteBy(Guid[] ids)
+        {
+            using (IDbConnection conn = new SqlConnection(GetConnstr))
+            {
+                conn.DeleteList<UserEntity>("where [Id] in  @Ids ", new { Ids = ids });
+            }
+        }
+        #endregion
     }
 }

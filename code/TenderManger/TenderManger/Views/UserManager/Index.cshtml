@@ -57,28 +57,33 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for=""> 账号 </label>
                 <div class="col-sm-9">
-                    <input type="text" id="Account" v-model="Account"/>
+                    <input type="text" id="Account" v-model="Account" />
                 </div>
             </div>
-
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for=""> 密码 </label>
+                <div class="col-sm-9">
+                    <input type="password" id="Password" v-model="Password" />
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for=""> 姓名 </label>
                 <div class="col-sm-9">
-                    <input type="text" id="Name" v-model="Name"/>
+                    <input type="text" id="Name" v-model="Name" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for=""> 性别 </label>
                 <div class="col-sm-9">
-                    <input type="text" id="Sex" v-model="Sex"/>
+                    <input type="text" id="Sex" v-model="Sex" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for=""> 所属机构</label>
                 <div class="col-sm-9">
-                    <input id="Organizations" type="text" v-model="Organizations"/>
-                    <input id="OrganizationIds" type="hidden" v-model="OrganizationIds"/>
+                    <input id="Organizations" type="text" v-model="Organizations" />
+                    <input id="OrganizationIds" type="hidden" v-model="OrganizationIds" />
                     <div id="menuContent" class="menuContent" style="display: none;">
                         <ul id="org" class="ztree"></ul>
                     </div>

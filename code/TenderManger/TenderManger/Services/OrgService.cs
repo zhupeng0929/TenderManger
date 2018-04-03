@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using TenderManger.Models;
 
@@ -271,16 +272,42 @@ namespace TenderManger.Services
         /// </summary>
         public IEnumerable<OrgEntity> LoadByRole(Guid roleId)
         {
-            var relevances = relevanceService.GetList();
-            var orgs = this.GetList();
-
-            var result = from userorg in relevances
-                         join org in orgs on userorg.SecondId equals org.Id
-                         where userorg.FirstId == roleId && userorg.Key == "RoleOrg"
-                         select org;
-            return result;
+            return GetOrgByUserOrRole("RoleOrg", roleId);
 
         }
+
+        /// <summary>
+        /// 加载用户的所有机构
+        /// </summary>
+        public IEnumerable<OrgEntity> LoadByUser(Guid userId)
+        {
+            //var result = from userorg in Context.Relevances
+            //             join org in Context.Orgs on userorg.SecondId equals org.Id
+            //             where userorg.FirstId == userId && userorg.Key == "UserOrg"
+            //             select org;
+            return GetOrgByUserOrRole("UserOrg",userId);
+
+        }
+        /// <summary>
+        /// 获取用户或角色关联信息
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public IEnumerable<OrgEntity> GetOrgByUserOrRole(string key, Guid Id)
+        {
+            var str = new StringBuilder();
+            str.Append(" select o.* from [dbo].[Org] o with(nolock) join [dbo].[Relevance]  r with(nolock)on r.SecondId = o.id ");
+            str.Append(" where r.[Key] = @key and r.FirstId = @roleId ");
+            var mResult = new List<OrgEntity>();
+            using (IDbConnection conn = new SqlConnection(GetConnstr))
+            {
+                mResult = conn.Query<OrgEntity>(str.ToString(), new { key = key, roleId = Id }).ToList();
+            }
+            return mResult;
+
+        }
+
 
         #region 私有方法
 

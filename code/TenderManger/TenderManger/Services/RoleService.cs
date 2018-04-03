@@ -47,7 +47,17 @@ namespace TenderManger.Services
         }
         public IEnumerable<RoleEntity> LoadRoles(int pageindex, int pagesize)
         {
-            return this.GetList().OrderBy(u => u.Id).Skip((pageindex - 1) * pagesize).Take(pagesize);
+            using (IDbConnection conn = new SqlConnection(GetConnstr))
+            {
+                return conn.GetListPaged<RoleEntity>(pageindex, pagesize, "", "Id").ToList();
+            }
+        }
+        public int Getcount()
+        {
+            using (IDbConnection conn = new SqlConnection(GetConnstr))
+            {
+                return conn.RecordCount<RoleEntity>();
+            }
         }
         /// <summary>
         /// 加载一个部门及子部门全部Roles
@@ -60,7 +70,7 @@ namespace TenderManger.Services
             if (orgId == Guid.Empty)
             {
                 roles = LoadRoles(pageindex, pagesize);
-                total = this.GetList().Count;
+                total = Getcount();
             }
             else
             {
@@ -71,7 +81,7 @@ namespace TenderManger.Services
             var rolevms = new List<RoleVM>();
             foreach (var role in roles)
             {
-                RoleVM rolevm = role;
+                RoleVM rolevm = EntityHelper.CopyEntity<RoleEntity, RoleVM>(role);
                 var orgs = orgService.LoadByRole(role.Id);
                 rolevm.Organizations = string.Join(",", orgs.Select(u => u.Name).ToList());
                 rolevm.OrganizationIds = string.Join(",", orgs.Select(u => u.Id).ToList());
@@ -158,7 +168,7 @@ namespace TenderManger.Services
             var rolevms = new List<RoleVM>();
             foreach (var role in orgroles)
             {
-                RoleVM rolevm = role;
+                RoleVM rolevm = EntityHelper.CopyEntity<RoleEntity, RoleVM>(role);
                 rolevm.Checked = userroles.Any(u => u.Id == role.Id);
                 var orgs = orgService.LoadByRole(role.Id);
                 rolevm.Organizations = string.Join(",", orgs.Select(u => u.Name).ToList());
@@ -186,6 +196,12 @@ namespace TenderManger.Services
 
             return relevanceService.GetList().Where(u => u.Key == "UserRole"
                        && u.SecondId == role.Id).Select(u => u.FirstId).ToList();
+        }
+
+        public List<RoleEntity> GetRolesQuery(Guid userid)
+        {
+            var _userRoleIds = relevanceService.GetList().Where(u => u.FirstId == userid && u.Key == "UserRole").Select(u => u.SecondId).ToList();
+            return GetList().Where(u => _userRoleIds.Contains(u.Id)).ToList();
         }
     }
 }

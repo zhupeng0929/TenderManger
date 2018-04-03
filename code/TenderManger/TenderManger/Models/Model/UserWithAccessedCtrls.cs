@@ -22,12 +22,12 @@ namespace TenderManger.Models
         //用户可以访问的资源
         //public List<Resource> Resources { get; set; }
 
-        ///// <summary>
-        /////  用户所属机构
-        ///// </summary>
-        //public List<Org> Orgs { get; set; }
+        /// <summary>
+        ///  用户所属机构
+        /// </summary>
+        public List<OrgEntity> Orgs { get; set; }
 
 
-        //public List<Role> Roles { get; set; }
+        public List<RoleEntity> Roles { get; set; }
     }
 }

@@ -9,13 +9,13 @@ using TenderManger.Models;
 
 namespace TenderManger
 {
-    public class AuthAttribute : ActionFilterAttribute
+    public class AuthAttribute : AuthorizeAttribute
     {
         /// <summary> 
         /// 验证权限
         /// </summary> 
         /// <param name="filterContext"></param> 
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public override void OnAuthorization(AuthorizationContext filterContext)
         {
             UserEntity userLogin = GetUserInfo(filterContext);
 
@@ -37,14 +37,14 @@ namespace TenderManger
             //    filterContext.Result = new ContentResult() { Content = "无访问此页面权限！" };
 
         }
-        private UserEntity GetUserInfo(ActionExecutingContext filterContext)
+        private UserEntity GetUserInfo(AuthorizationContext filterContext)
         {
             if (filterContext.HttpContext.Session[CommonHelper.SessionUserKey] != null)
                 return filterContext.HttpContext.Session[CommonHelper.SessionUserKey] as UserEntity;
 
             return GetUser(filterContext);
         }
-        private UserEntity GetUser(ActionExecutingContext filterContext)
+        private UserEntity GetUser(AuthorizationContext filterContext)
         {
             string key = CommonHelper.Md5(CommonHelper.COOKIE_KEY_USERINFO);
             string data = CookieHelper.GetCookieValue(key);

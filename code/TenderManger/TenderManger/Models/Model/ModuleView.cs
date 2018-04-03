@@ -17,14 +17,14 @@ namespace TenderManger.Models
         /// </summary>
         public List<ModuleElementEntity> Elements = new List<ModuleElementEntity>();
 
-        public static implicit operator ModuleView(ModuleEntity module)
-        {
-            return module;
-        }
+        //public static implicit operator ModuleView(ModuleEntity module)
+        //{
+        //    return module;
+        //}
 
-        public static implicit operator ModuleEntity(ModuleView view)
-        {
-            return view;
-        }
+        //public static implicit operator ModuleEntity(ModuleView view)
+        //{
+        //    return view;
+        //}
     }
 }

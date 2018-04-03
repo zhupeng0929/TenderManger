@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Infrastructure;
-using Tender.App;
-using Tender.App.ViewModel;
-using Tender.Mvc.Models;
+using TenderManger.Models;
 
-namespace Tender.Mvc.Controllers
+namespace TenderManger.Mvc.Controllers
 {
     public class UserManagerController : BaseController
     {
-        public UserManagerApp App { get; set; }
-
-        //
-        // GET: /UserManager/
-        [Authenticate]
+       
         public ActionResult Index()
         {
             return View();
@@ -26,7 +19,7 @@ namespace Tender.Mvc.Controllers
         {
             try
             {
-                App.AddOrUpdate(view);
+                _userService.AddOrUpdate(view);
                 
             }
             catch (Exception ex)
@@ -34,7 +27,7 @@ namespace Tender.Mvc.Controllers
                  Result.Status = false;
                 Result.Message = ex.Message;
             }
-            return JsonHelper.Instance.Serialize(Result);
+            return JsonHelper.SerializerObject(Result);
         }
 
         /// <summary>
@@ -42,7 +35,7 @@ namespace Tender.Mvc.Controllers
         /// </summary>
         public string Load(Guid orgId, int page = 1, int rows = 30)
         {
-            return JsonHelper.Instance.Serialize(App.Load(orgId, page, rows));
+            return JsonHelper.SerializerObject(_userService.Load(orgId, page, rows));
         }
 
         [HttpPost]
@@ -50,7 +43,7 @@ namespace Tender.Mvc.Controllers
         {
             try
             {
-                App.Delete(ids);
+                _userService.Delete(ids);
             }
             catch (Exception e)
             {
@@ -58,7 +51,7 @@ namespace Tender.Mvc.Controllers
                 Result.Message = e.Message;
             }
 
-            return JsonHelper.Instance.Serialize(Result);
+            return JsonHelper.SerializerObject(Result);
         }
 
         #region 获取权限数据
@@ -69,7 +62,7 @@ namespace Tender.Mvc.Controllers
         /// </summary>
         public string GetAccessedUsers()
         {
-            IEnumerable<UserView> users =  App.Load(Guid.Empty, 1, 10).rows;
+            IEnumerable<UserView> users = _userService.Load(Guid.Empty, 1, 10).rows;
             var result = new Dictionary<string , object>();
             foreach (var user in users)
             {
@@ -87,7 +80,7 @@ namespace Tender.Mvc.Controllers
                 result.Add(user.Id.ToString(), item);
             }
 
-            return JsonHelper.Instance.Serialize(result);
+            return JsonHelper.SerializerObject(result);
         }
         #endregion
     }

@@ -136,6 +136,7 @@ var editDlg = function () {
                     if (data.Status) {
                         list.reload();
                         ztree.reload();
+                        layer.close(index);
                     }
                 }, "json");
             },

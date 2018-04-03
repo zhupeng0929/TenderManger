@@ -44,14 +44,14 @@ namespace TenderManger.Models
         /// </summary>
         public bool Checked { get; set; }
 
-        public static implicit operator RoleVM(RoleEntity role)
-        {
-            return role;
-        }
+        //public static implicit operator RoleVM(RoleEntity role)
+        //{
+        //    return role;
+        //}
 
-        public static implicit operator RoleEntity(RoleVM rolevm)
-        {
-            return rolevm;
-        }
+        //public static implicit operator RoleEntity(RoleVM rolevm)
+        //{
+        //    return rolevm;
+        //}
     }
 }

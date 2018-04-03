@@ -64,6 +64,10 @@ namespace TenderManger.Mvc.Controllers
                     return null;
                 }
             }
+            else
+            {
+                new RedirectResult("/Login/index");
+            }
             return null;
         }
         public UserService _userService = new UserService();
@@ -81,7 +85,7 @@ namespace TenderManger.Mvc.Controllers
             base.OnActionExecuting(filterContext);
 
 
-
+            ViewBag.UserName = UserInfo.Name;
             Controllername = Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
             Actionname = filterContext.ActionDescriptor.ActionName.ToLower();
 
@@ -103,15 +107,18 @@ namespace TenderManger.Mvc.Controllers
 
         public UserWithAccessedCtrls GetAccessedControls()
         {
+
             var baseuser = _userService.GetUser(UserInfo.Account);
             var baseModule = moduleService.GetModulesQuery(UserInfo.Id);
+            var orgs = orgService.GetOrgsQuery(UserInfo.Id);
+            var roles = roleService.GetRolesQuery(UserInfo.Id);
             var user = new UserWithAccessedCtrls
             {
                 User = baseuser,
-                //Orgs = service.Orgs,
+                Orgs = orgs,
                 Modules = new List<ModuleView>(),
                 //Resources = service.Resources,
-                //Roles = service.Roles
+                Roles = roles
             };
             baseModule.ForEach(m =>
             {
@@ -120,7 +127,7 @@ namespace TenderManger.Mvc.Controllers
             foreach (var moduleView in user.Modules)
             {
                 moduleView.Elements =
-                   moduleElementService.GetList().Where(u => u.ModuleId == moduleView.moduleEntity.Id).OrderBy(u => u.Sort).ToList();
+                   moduleElementService.GetModuleElementsQuery(UserInfo.Id).Where(u => u.ModuleId == moduleView.moduleEntity.Id).OrderBy(u => u.Sort).ToList();
             }
 
             user.ModuleWithChildren = user.Modules.GenerateTree(c => c.moduleEntity.Id, c => c.moduleEntity.ParentId);

@@ -43,7 +43,13 @@ namespace TenderManger.Services
                 return conn.Insert<Guid>(model, trans);
             }
         }
-
+        public Guid Add(T model)
+        {
+            using (var conn = new SqlConnection(GetConnstr))
+            {
+                return conn.Insert<Guid>(model);
+            }
+        }
         public Task<Guid> AddAsync(T model, IDbConnection conn = null, IDbTransaction trans = null)
         {
             if (conn == null)
@@ -130,6 +136,13 @@ namespace TenderManger.Services
             else
             {
                 return conn.Update(entity, trans) > 0;
+            }
+        }
+        public bool Update(T entity)
+        {
+            using (var conn = new SqlConnection(GetConnstr))
+            {
+                return conn.Update(entity) > 0;
             }
         }
 

@@ -178,6 +178,7 @@ namespace TenderManger.Services
         {
             using (var conn = new SqlConnection(GetConnstr))
             {
+                conn.Open();
                 using (var trans = conn.BeginTransaction())
                 {
                     try
@@ -198,6 +199,16 @@ namespace TenderManger.Services
 
             }
 
+        }
+
+        /// <summary>
+        /// 用户角色
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public List<Guid> GetuserRoleIds(Guid userid)
+        {
+            return GetList().Where(u => u.FirstId == userid && u.Key == "UserRole").Select(u => u.SecondId).ToList();
         }
     }
 }

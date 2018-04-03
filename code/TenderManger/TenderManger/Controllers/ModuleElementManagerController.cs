@@ -1,30 +1,12 @@
-﻿// ***********************************************************************
-// Assembly         : Tender.Mvc
-// Author           : Yubao Li
-// Created          : 12-02-2015
-//
-// Last Modified By : Yubao Li
-// Last Modified On : 12-02-2015
-// ***********************************************************************
-// <copyright file="ModuleElementManagerController.cs" company="">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary>模块元素管理，无需权限控制</summary>
-// ***********************************************************************
-
-using Infrastructure;
-using Tender.App;
-using Tender.Domain;
-using Tender.Mvc.Models;
+﻿
+using TenderManger.Models;
 using System;
-using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
-namespace Tender.Mvc.Controllers
+namespace TenderManger.Mvc.Controllers
 {
     public class ModuleElementManagerController : BaseController
     {
-        public ModuleElementManagerApp App { get; set; }
 
         public ActionResult Index(Guid id)
         {
@@ -33,35 +15,35 @@ namespace Tender.Mvc.Controllers
         }
         public ActionResult Get(Guid moduleId)
         {
-            return Json(App.LoadByModuleId(moduleId), JsonRequestBehavior.AllowGet);
+            return Json(moduleElementService.LoadByModuleId(moduleId, UserInfo.Id), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public string AddOrEditButton(ModuleElement button)
+        public string AddOrEditButton(ModuleElementEntity button)
         {
             try
             {
-                App.AddOrUpdate(button);
+                moduleElementService.AddOrUpdate(button);
             }
-            catch (DbEntityValidationException e)
+            catch (Exception e)
             {
-                
-                 Result.Status=false;
-                 Result.Message = e.Message;
+
+                Result.Status = false;
+                Result.Message = e.Message;
             }
-            return JsonHelper.Instance.Serialize( Result);
+            return JsonHelper.SerializerObject(Result);
         }
         public string Del(Guid[] ids)
         {
             try
             {
-                App.Delete(ids);
+                moduleElementService.DelModuleElementBatch(ids);
             }
             catch (Exception e)
             {
-                 Result.Status=false;
-                 Result.Message = e.Message;
+                Result.Status = false;
+                Result.Message = e.Message;
             }
-            return JsonHelper.Instance.Serialize( Result);
+            return JsonHelper.SerializerObject(Result);
         }
 
         /// <summary>
@@ -79,7 +61,7 @@ namespace Tender.Mvc.Controllers
         }
         public string LoadWithAccess(Guid tId, Guid firstId, string key)
         {
-            return JsonHelper.Instance.Serialize(App.LoadWithAccess(key, firstId, tId));
+            return JsonHelper.SerializerObject(moduleElementService.LoadWithAccess(UserInfo.Id, key, firstId, tId));
         }
     }
 }
