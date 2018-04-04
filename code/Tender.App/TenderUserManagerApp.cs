@@ -25,7 +25,27 @@ namespace Tender.App
             _orgRepository = orgRepository;
             _relevanceRepository = relevanceRepository;
         }
+        /// <summary>
+        /// 加载一个部门及子部门全部用户
+        /// </summary>
+        public GridData Load(int pageindex, int pagesize)
+        {
+            if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
+            IEnumerable<TenderUser> tendetusers = new List<TenderUser>();
+            int records = 0;
+            tendetusers=_repository.Find(pageindex, pagesize, "id");
+            records = _repository.GetCount();
+            var userviews = new List<UserView>();
+            
 
-        
+            return new GridData
+            {
+                records = records,
+                total = (int)Math.Ceiling((double)records / pagesize),
+                rows = tendetusers,
+                page = pageindex
+            };
+        }
+
     }
 }

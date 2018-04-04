@@ -20,5 +20,11 @@ namespace Tender.Mvc.Controllers
             return View();
         }
 
+        public string Load(int pageCurrent = 1, int pageSize = 30)
+        {
+            var list = App.Load(pageCurrent, pageSize);
+            return JsonHelper.Instance.Serialize(list);
+        }
+
     }
 }

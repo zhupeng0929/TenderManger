@@ -45,7 +45,7 @@ namespace Tender.Repository.Models
         public System.Data.Entity.DbSet<WFProcessTransitionHistory> WFProcessTransitionHistories { get; set; }
         public System.Data.Entity.DbSet<WFSchemeContent> WFSchemeContents { get; set; }
         public System.Data.Entity.DbSet<WFSchemeInfo> WFSchemeInfos { get; set; }
-
+        public System.Data.Entity.DbSet<TenderUser> TenderUsers { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CategoryMap());
@@ -66,6 +66,7 @@ namespace Tender.Repository.Models
             modelBuilder.Configurations.Add(new WFProcessTransitionHistoryMap());
             modelBuilder.Configurations.Add(new WFSchemeContentMap());
             modelBuilder.Configurations.Add(new WFSchemeInfoMap());
+            modelBuilder.Configurations.Add(new TenderUserMap());
         }
     }
 }
