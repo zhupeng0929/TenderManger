@@ -2,14 +2,13 @@
 using System;
 
 using System.Web.Mvc;
-using Newtonsoft.Json.Linq;
-
+using TenderManger.Models;
 
 namespace TenderManger.Mvc.Controllers
 {
     public class RoleManagerController : BaseController
     {
-       
+
 
         public ActionResult Index()
         {
@@ -18,7 +17,7 @@ namespace TenderManger.Mvc.Controllers
 
         //添加或修改角色
         [HttpPost]
-        public string Add(JObject obj)
+        public ActionResult Add(RoleVM obj)
         {
             try
             {
@@ -26,10 +25,10 @@ namespace TenderManger.Mvc.Controllers
             }
             catch (Exception ex)
             {
-                 Result.Status = false;
+                Result.Status = false;
                 Result.Message = ex.Message;
             }
-            return JsonHelper.SerializerObject(Result);
+            return Json(Result);
         }
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace TenderManger.Mvc.Controllers
             }
             catch (Exception e)
             {
-                 Result.Status = false;
+                Result.Status = false;
                 Result.Message = e.Message;
             }
 

@@ -55,7 +55,7 @@ namespace Tender.Mvc
             builder.RegisterModelBinderProvider();
 
             // OPTIONAL: Register web abstractions like HttpContextBase.
-            //builder.RegisterModule<AutofacWebTypesModule>();
+            builder.RegisterModule<AutofacWebTypesModule>();
 
             // OPTIONAL: Enable property injection in view pages.
             builder.RegisterSource(new ViewRegistrationSource());

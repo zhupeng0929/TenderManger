@@ -62,6 +62,7 @@
     <Compile Include="Models\Mapping\WFProcessTransitionHistoryMap.cs" />
     <Compile Include="Models\Mapping\WFSchemeContentMap.cs" />
     <Compile Include="Models\Mapping\WFSchemeInfoMap.cs" />
+    <Compile Include="TenderUserRepository.cs" />
     <Compile Include="UnitWork.cs" />
     <Compile Include="BaseRepository.cs" />
     <Compile Include="Models\Mapping\CategoryMap.cs" />

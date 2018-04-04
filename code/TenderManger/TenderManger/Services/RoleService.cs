@@ -129,9 +129,11 @@ namespace TenderManger.Services
 
         }
 
-        public void AddOrUpdate(JObject obj)
+        public void AddOrUpdate(RoleVM obj)
         {
-            var role = obj.ToObject<RoleEntity>();
+            var role = EntityHelper.CopyEntity<RoleVM, RoleEntity>(obj);
+
+
             if (role.Id == Guid.Empty)
             {
                 role.CreateTime = DateTime.Now;
@@ -142,7 +144,7 @@ namespace TenderManger.Services
                 Update(role);
             }
 
-            Guid[] orgIds = obj["OrganizationIds"].ToString().Split(',').Select(id => Guid.Parse(id)).ToArray();
+            Guid[] orgIds = obj.OrganizationIds.ToString().Split(',').Select(id => Guid.Parse(id)).ToArray();
 
             relevanceService.DeleteBy("RoleOrg", role.Id);
             relevanceService.AddRelevance("RoleOrg", orgIds.ToLookup(u => role.Id));

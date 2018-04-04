@@ -20,7 +20,10 @@ namespace Tender.App.ViewModel
         /// <returns></returns>
         public string Account { get; set; }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Password { get; set; }
         /// <summary>
         /// 组织名称
         /// </summary>

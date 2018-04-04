@@ -210,5 +210,7 @@ namespace TenderManger.Services
         {
             return GetList().Where(u => u.FirstId == userid && u.Key == "UserRole").Select(u => u.SecondId).ToList();
         }
+
+        
     }
 }

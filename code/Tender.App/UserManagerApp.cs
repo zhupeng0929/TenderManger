@@ -4,7 +4,7 @@ using Tender.Domain.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Infrastructure;
 
 namespace Tender.App
 {
@@ -23,7 +23,7 @@ namespace Tender.App
             _relevanceRepository = relevanceRepository;
         }
 
-        public User Get(string  account)
+        public User Get(string account)
         {
             return _repository.FindSingle(u => u.Account == account);
         }
@@ -48,7 +48,7 @@ namespace Tender.App
             if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
             IEnumerable<User> users;
             int records = 0;
-            if (orgId ==Guid.Empty)
+            if (orgId == Guid.Empty)
             {
                 users = _repository.LoadUsers(pageindex, pagesize);
                 records = _repository.GetCount();
@@ -124,7 +124,7 @@ namespace Tender.App
                     throw new Exception("用户账号已存在");
                 }
                 user.CreateTime = DateTime.Now;
-                user.Password = user.Account; //初始密码与账号相同
+                user.Password = Md5.Encrypt(user.Password);
                 _repository.Add(user);
                 view.Id = user.Id;   //要把保存后的ID存入view
             }
@@ -133,6 +133,7 @@ namespace Tender.App
                 _repository.Update(u => u.Id == view.Id, u => new User
                 {
                     Account = user.Account,
+                    //Password = Md5.Encrypt(user.Password),
                     BizCode = user.BizCode,
                     Name = user.Name,
                     Sex = user.Sex,

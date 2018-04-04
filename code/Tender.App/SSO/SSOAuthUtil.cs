@@ -11,7 +11,7 @@ namespace Tender.App.SSO
 {
     public class SSOAuthUtil
     {
-        public static  LoginResult Parse(PassportLoginRequest model)
+        public static LoginResult Parse(PassportLoginRequest model)
         {
             var result = new LoginResult();
             try
@@ -21,7 +21,7 @@ namespace Tender.App.SSO
                 var appInfo = new AppInfoService().Get(model.AppKey);
                 if (appInfo == null)
                 {
-                    throw  new Exception("应用不存在");
+                    throw new Exception("应用不存在");
                 }
                 //获取用户信息
                 User userInfo = null;
@@ -31,8 +31,8 @@ namespace Tender.App.SSO
                     {
                         Id = Guid.Empty,
                         Account = "System",
-                        Name ="超级管理员",
-                        Password = "123456"
+                        Name = "超级管理员",
+                        Password = "E1ADC3949BA59ABBE56E057F2F883E"
                     };
                 }
                 else
@@ -40,12 +40,12 @@ namespace Tender.App.SSO
                     var usermanager = (UserManagerApp)DependencyResolver.Current.GetService(typeof(UserManagerApp));
                     userInfo = usermanager.Get(model.UserName);
                 }
-               
+
                 if (userInfo == null)
                 {
                     throw new Exception("用户不存在");
                 }
-                if (userInfo.Password != model.Password)
+                if (userInfo.Password != Md5.Encrypt(model.Password))
                 {
                     throw new Exception("密码错误");
                 }

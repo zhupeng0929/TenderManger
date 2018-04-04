@@ -1312,6 +1312,7 @@
     <Compile Include="Controllers\ModuleElementManagerController.cs" />
     <Compile Include="Controllers\ModuleManagerController.cs" />
     <Compile Include="Controllers\OrgManagerController.cs" />
+    <Compile Include="Controllers\RelevanceManagerController.cs" />
     <Compile Include="Controllers\RoleManagerController.cs" />
     <Compile Include="Controllers\UserManagerController.cs" />
     <Compile Include="Global.asax.cs">

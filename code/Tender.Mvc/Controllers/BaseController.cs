@@ -21,6 +21,7 @@ using System.Web.Mvc;
 using Infrastructure;
 using Tender.App.SSO;
 using Tender.App.ViewModel;
+using Tender.App;
 
 namespace Tender.Mvc.Controllers
 {
@@ -35,7 +36,11 @@ namespace Tender.Mvc.Controllers
         protected ModuleView CurrentModule;
         protected string Controllername;   //当前控制器小写名称
         protected string Actionname;        //当前Action小写名称
-
+        private AuthorizeApp _app;
+        public BaseController()
+        {
+            _app = AutofacExt.GetFromFac<AuthorizeApp>();
+        }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
@@ -64,6 +69,17 @@ namespace Tender.Mvc.Controllers
                 throw new HttpException(400, "演示版本，不能进行该操作，当前模块:" + Controllername + "/" + Actionname);
             }
 
+        }
+
+        public UserWithAccessedCtrls GetUser(string token, string requestid = "")
+        {
+            string userName = AuthUtil.GetUserName(token, requestid);
+            if (!string.IsNullOrEmpty(userName))
+            {
+                return _app.GetAccessedControls(userName);
+            }
+
+            return null;
         }
     }
 }

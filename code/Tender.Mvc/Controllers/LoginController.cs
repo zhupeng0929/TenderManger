@@ -3,13 +3,14 @@ using System.Configuration;
 using System.Web.Mvc;
 using Infrastructure;
 using Tender.App.SSO;
+using Infrastructure.Cache;
 
 namespace Tender.Mvc.Controllers
 {
     public class LoginController : Controller
     {
         private string _appKey = ConfigurationManager.AppSettings["SSOAppKey"];
-
+        private ObjCacheProvider<UserAuthSession> _objCacheProvider = new ObjCacheProvider<UserAuthSession>();
         // GET: Login
         public ActionResult Index()
         {
@@ -69,6 +70,7 @@ namespace Tender.Mvc.Controllers
         {
 
             AuthUtil.Logout();
+
             return RedirectToAction("Index", "Login");
         }
     }

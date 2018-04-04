@@ -161,6 +161,7 @@
     <Compile Include="Controllers\ResourceManagerController.cs" />
     <Compile Include="Controllers\RoleManagerController.cs" />
     <Compile Include="Controllers\StockManagerController.cs" />
+    <Compile Include="Controllers\TenderUserManagerController.cs" />
     <Compile Include="Controllers\UserManagerController.cs" />
     <Compile Include="Models\JobjectModelBinder.cs" />
     <Compile Include="Global.asax.cs">
@@ -1133,6 +1134,7 @@
     <Folder Include="Areas\FlowManage\Models\" />
     <Folder Include="Areas\FlowManage\Views\Shared\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\TenderUserManager\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -1190,7 +1192,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56813</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56814/</IISUrl>
+          <IISUrl>http://localhost:56824/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
