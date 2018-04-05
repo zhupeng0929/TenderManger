@@ -13,14 +13,17 @@ namespace Tender.App
         private IUserRepository _repository;
         private IOrgRepository _orgRepository;
         private IRelevanceRepository _relevanceRepository;
+        private ITenderUserRepository _tenderUserRepository;
 
         public UserManagerApp(IUserRepository repository,
             IOrgRepository orgRepository,
-            IRelevanceRepository relevanceRepository)
+            IRelevanceRepository relevanceRepository,
+            ITenderUserRepository tenderUserRepository)
         {
             _repository = repository;
             _orgRepository = orgRepository;
             _relevanceRepository = relevanceRepository;
+            _tenderUserRepository = tenderUserRepository;
         }
 
         public User Get(string account)
@@ -110,6 +113,7 @@ namespace Tender.App
             _relevanceRepository.DeleteBy("UserOrg", ids);
             _relevanceRepository.DeleteBy("UserModule", ids);
             _relevanceRepository.DeleteBy("UserRole", ids);
+            _tenderUserRepository.Delete(u => ids.Contains(u.Id));
         }
 
         public void AddOrUpdate(UserView view)

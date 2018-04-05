@@ -12,5 +12,10 @@ namespace Tender.Repository
 {
     public class TenderUserRepository : BaseRepository<TenderUser>, ITenderUserRepository
     {
+        public void Addentity(TenderUser entity)
+        {
+            Context.Set<TenderUser>().Add(entity);
+            Save();
+        }
     }
 }

@@ -45,3 +45,7 @@ code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/storage.ide-wal
 code/TenderManger/TenderManger/obj/Debug/TenderManger.csproj.CoreCompileInputs.cache
 code/TenderManger/TenderManger/bin/TenderManger.dll
 code/TenderManger/TenderManger/bin/TenderManger.pdb
+/code/Infrastructure/bin/Debug/Infrastructure.dll
+*.dll
+/code/*/bin
+

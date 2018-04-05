@@ -12,11 +12,11 @@
 // <summary>单击文本框弹出的选择列表</summary>
 // ***********************************************************************
 
-function ParentTree(url, name, id) {
+function ParentTree(url, name, id, text = 'Name', key = 'Id') {
     var zTreeObj;
     var options = {
-        text: 'Name',
-        key: 'Id',
+        text: text,
+        key: key,
         parentKey: 'ParentId',
         nameDOM: name,   //显示的文本框ID，如："#catetoryName"
         idDOM: id   //隐藏的文本框，如："#categoryId"
