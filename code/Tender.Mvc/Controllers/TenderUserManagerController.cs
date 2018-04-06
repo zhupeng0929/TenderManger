@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using Infrastructure;
 using Tender.App;
@@ -31,10 +32,18 @@ namespace Tender.Mvc.Controllers
         }
         //添加或修改组织
         [HttpPost]
-        public string Add(TenderUser view)
+        public string Add(TenderUser view, HttpPostedFileBase Filedata)
         {
+            if(Filedata!=null)
+            {
+                Result = Addfile(Filedata);
+            }
             try
             {
+                if (Result.Status&&!string.IsNullOrEmpty(Result.Result))
+                {
+                    view.BusinessLicense = Result.Result;
+                }
                 App.AddOrUpdate(view);
 
             }

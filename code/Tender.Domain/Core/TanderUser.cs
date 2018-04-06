@@ -43,7 +43,13 @@ namespace Tender.Domain
         /// 营业执照
         /// </summary>
         public string BusinessLicense { get; set; }
-
+        public string psth
+        {
+            get
+            {
+                return "upload/" + BusinessLicense;
+            }
+        }
         /// <summary>
         /// 保证金
         /// </summary>

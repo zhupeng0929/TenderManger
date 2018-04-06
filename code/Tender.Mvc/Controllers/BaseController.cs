@@ -22,6 +22,7 @@ using Infrastructure;
 using Tender.App.SSO;
 using Tender.App.ViewModel;
 using Tender.App;
+using System.IO;
 
 namespace Tender.Mvc.Controllers
 {
@@ -71,15 +72,72 @@ namespace Tender.Mvc.Controllers
 
         }
 
-        public UserWithAccessedCtrls GetUser(string token, string requestid = "")
+        protected Response Addfile(HttpPostedFileBase Filedata)
         {
-            string userName = AuthUtil.GetUserName(token, requestid);
-            if (!string.IsNullOrEmpty(userName))
+            if (Filedata != null && Filedata.ContentLength > 0 && Filedata.ContentLength < 10485760)
             {
-                return _app.GetAccessedControls(userName);
+                using (var binaryReader = new BinaryReader(Filedata.InputStream))
+                {
+                    var fileName = Path.GetFileName(Filedata.FileName);
+                    var data = binaryReader.ReadBytes(Filedata.ContentLength);
+                    var result = UploadFile(fileName, data, string.Empty);
+                    Result.Result = result;
+                }
+            }
+            else
+            {
+                Result.Message = "文件过大";
+                Result.Status = false;
+            }
+            return Result;
+        }
+
+        private string UploadFile(string fileName, byte[] fileBuffers, string folder)
+        {
+            if (string.IsNullOrEmpty(folder))
+            {
+                folder = DateTime.Now.ToString("yyyy_MM_dd");
             }
 
-            return null;
+            //判断文件是否为空
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new Exception("文件名不能为空");
+            }
+
+            //判断文件是否为空
+            if (fileBuffers.Length < 1)
+            {
+                throw new Exception("文件不能为空");
+            }
+
+
+            var filePath = Server.MapPath("upload");
+            var uploadPath = filePath + "\\" + folder + "\\";
+            var ext = Path.GetExtension(fileName);
+            var newName = Guid.NewGuid().ToString("N") + ext;
+
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+            using (var fs = new FileStream(uploadPath + newName, FileMode.Create))
+            {
+                fs.Write(fileBuffers, 0, fileBuffers.Length);
+                fs.Close();
+                return folder + "/" + newName;
+            }
+
         }
+        //public UserWithAccessedCtrls GetUser(string token, string requestid = "")
+        //{
+        //    string userName = AuthUtil.GetUserName(token, requestid);
+        //    if (!string.IsNullOrEmpty(userName))
+        //    {
+        //        return _app.GetAccessedControls(userName);
+        //    }
+
+        //    return null;
+        //}
     }
 }

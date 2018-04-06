@@ -870,6 +870,7 @@
     <Content Include="Scripts\ace.js" />
     <Content Include="Scripts\ext-searchbox.js" />
     <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\json5.js" />
     <Content Include="Scripts\kinetic-v5.1.0.min.js" />
