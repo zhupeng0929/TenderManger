@@ -1,6 +1,0 @@
-2018-03-31 14:08:17,987 [1] INFO  log4net [(null)] - 启动Web
-2018-03-31 14:15:06,537 [1] INFO  log4net [(null)] - 启动Web
-2018-03-31 14:23:21,378 [1] INFO  log4net [(null)] - 启动Web
-2018-03-31 14:34:09,777 [1] INFO  log4net [(null)] - 启动Web
-2018-03-31 14:39:32,611 [1] INFO  log4net [(null)] - 启动Web
-2018-03-31 15:17:59,094 [37] INFO  log4net [(null)] - 启动Web
