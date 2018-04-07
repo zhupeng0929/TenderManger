@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : Infrastructure
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 06-21-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 06-22-2016
 // Contact : 
 // File: UriUtil.cs

@@ -1,9 +1,9 @@
 // ***********************************************************************
 // Assembly         : Tender.App
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 07-08-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 07-08-2016
 // Contact : Microsoft
 // File: AuthUtil.cs

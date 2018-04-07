@@ -1,11 +1,11 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.Mvc
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 04-19-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 05-26-2016
-// Contact : www.cnblogs.com/yubaolee
+// Contact : www.cnblogs.com/zhu.peng
 // File: assignModuleElement.js
 //Description: 分配模块菜单（按钮）
 // ***********************************************************************

@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.Mvc
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 04-07-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 04-07-2016
 // ***********************************************************************
-// <copyright file="moduleElementMan.js" company="www.cnblogs.com/yubaolee">
+// <copyright file="moduleElementMan.js" company="www.cnblogs.com/zhu.peng">
 //     模块按钮管理
 // </copyright>
 // <summary></summary>

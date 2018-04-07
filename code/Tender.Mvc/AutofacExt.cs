@@ -1,13 +1,13 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.Mvc
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 10-26-2015
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 10-26-2015
 // ***********************************************************************
-// <copyright file="AutofacExt.cs" company="www.cnblogs.com/yubaolee">
-//     Copyright (c) www.cnblogs.com/yubaolee. All rights reserved.
+// <copyright file="AutofacExt.cs" company="www.cnblogs.com/zhu.peng">
+//     Copyright (c) www.cnblogs.com/zhu.peng. All rights reserved.
 // </copyright>
 // <summary>IOC扩展</summary>
 // ***********************************************************************

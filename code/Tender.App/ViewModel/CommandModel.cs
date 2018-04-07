@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.App
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 09-05-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 09-05-2016
 // Contact : Microsoft
 // File: CommandModel.cs
