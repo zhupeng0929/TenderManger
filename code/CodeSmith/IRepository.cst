@@ -12,7 +12,7 @@ Description: Create a list of properties from a database table
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenAuth.Domain.Interface
+namespace Tender.Domain.Interface
 {
     public interface I<%=ModuleName%>Repository :IRepository<<%=ModuleName%>>
     {

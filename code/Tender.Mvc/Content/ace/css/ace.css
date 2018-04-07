@@ -5401,7 +5401,7 @@ body.mob-safari .sidebar.sidebar-fixed {
   color: #FFF !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-image: none !important;
-  border: 5px solid #FFF;
+  border: 1px solid #FFF;
   border-radius: 0;
   box-shadow: none !important;
   -webkit-transition: background-color 0.15s, border-color 0.15s, opacity 0.15s;
@@ -9663,7 +9663,7 @@ input.ace + .lbl.padding-0::before {
   top: 0;
   left: 0;
   right: 0;
-  height: 30px;
+  height: 34px;
   background-color: #FFF;
   border: 1px solid #D5D5D5;
   cursor: pointer;
@@ -10051,7 +10051,7 @@ input.ace + .lbl.padding-0::before {
 .form-group input[type="search"],
 .form-group input[type="tel"],
 .form-group input[type="color"] {
-  background: #FFF;
+  background-color: #FFF;
 }
 .form-group.has-success input,
 .form-group.has-success select,
@@ -20427,3 +20427,12 @@ input.typeahead.scrollable ~ .tt-menu {
     display: none !important;
   }
 }
+
+.input-datepicker {
+    background: url(../../images/datepicker_icon.png) right 0 no-repeat #FFF;
+}
+
+.input-wdatepicker {
+    background: url(../../images/datepicker_icon.png) right 0 no-repeat #FFF;
+}
+

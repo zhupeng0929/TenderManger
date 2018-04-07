@@ -95,7 +95,7 @@ var vm = new Vue({
 });
 //上级机构选择框
 var parent = new ParentTree("/TenderUserManager/LoadForTree", "Account", "Id", "Account");
-ParentTree
+
 //删除
 function del() {
     list.del("Id", "/TenderUserManager/Delete", function () {

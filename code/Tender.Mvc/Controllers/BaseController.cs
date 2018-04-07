@@ -96,7 +96,7 @@ namespace Tender.Mvc.Controllers
         {
             if (string.IsNullOrEmpty(folder))
             {
-                folder = DateTime.Now.ToString("yyyy_MM_dd");
+                folder = DateTime.Now.ToString("yyyyMMdd");
             }
 
             //判断文件是否为空
@@ -112,7 +112,7 @@ namespace Tender.Mvc.Controllers
             }
 
 
-            var filePath = Server.MapPath("upload");
+            var filePath = Server.MapPath("~/uploadfile");
             var uploadPath = filePath + "\\" + folder + "\\";
             var ext = Path.GetExtension(fileName);
             var newName = Guid.NewGuid().ToString("N") + ext;
@@ -125,7 +125,7 @@ namespace Tender.Mvc.Controllers
             {
                 fs.Write(fileBuffers, 0, fileBuffers.Length);
                 fs.Close();
-                return folder + "/" + newName;
+                return "/uploadfile/" + folder + "/" + newName;
             }
 
         }

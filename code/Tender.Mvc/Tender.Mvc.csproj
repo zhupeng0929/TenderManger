@@ -161,6 +161,7 @@
     <Compile Include="Controllers\ResourceManagerController.cs" />
     <Compile Include="Controllers\RoleManagerController.cs" />
     <Compile Include="Controllers\StockManagerController.cs" />
+    <Compile Include="Controllers\TenderInfoManagerController.cs" />
     <Compile Include="Controllers\TenderUserManagerController.cs" />
     <Compile Include="Controllers\UserManagerController.cs" />
     <Compile Include="Models\JobjectModelBinder.cs" />
@@ -174,6 +175,7 @@
     <Content Include="BllScripts\assignModule.js" />
     <Content Include="BllScripts\assignModuleElement.js" />
     <Content Include="BllScripts\categoryManager.js" />
+    <Content Include="BllScripts\tenderInfo.js" />
     <Content Include="BllScripts\tenderUser.js" />
     <Content Include="BllScripts\formDesign.js" />
     <Content Include="BllScripts\jqEvent.js" />
@@ -388,6 +390,8 @@
     <Content Include="Content\scripts\jqGrid\jquery.jqGrid.src.js" />
     <Content Include="Content\scripts\jqGrid\ui.jqgrid.css" />
     <Content Include="Content\scripts\jquery\jQuery-2.1.4.min.js" />
+    <Content Include="Content\scripts\plugins\bootstrap-multiselect\css\bootstrap-multiselect.css" />
+    <Content Include="Content\scripts\plugins\bootstrap-multiselect\js\bootstrap-multiselect.js" />
     <Content Include="Content\scripts\plugins\flow-ui\img\gooflow_bg.png" />
     <Content Include="Content\scripts\plugins\flow-ui\img\gooflow_btn_bg.png" />
     <Content Include="Content\scripts\plugins\flow-ui\img\gooflow_icon.png" />
@@ -1104,6 +1108,7 @@
     <Content Include="Areas\FlowManage\Views\FormDesign\Index.cshtml" />
     <Content Include="Areas\FlowManage\Views\FormDesign\FormPreview.cshtml" />
     <Content Include="Areas\FlowManage\Views\FormDesign\FrmBuider.cshtml" />
+    <Content Include="Content\scripts\plugins\bootstrap-multiselect\less\bootstrap-multiselect.less" />
     <None Include="Properties\PublishProfiles\default.pubxml" />
     <None Include="Views\Error\NoAccess.cshtml" />
     <Content Include="Views\Home\git.cshtml" />
@@ -1131,6 +1136,8 @@
     <Content Include="Views\Shared\_FlowForm.cshtml" />
     <Content Include="Views\Shared\_Form.cshtml" />
     <Content Include="Views\TenderUserManager\Index.cshtml" />
+    <Content Include="Views\TenderInfoManager\Index.cshtml" />
+    <Content Include="Views\TenderInfoManager\GetFiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

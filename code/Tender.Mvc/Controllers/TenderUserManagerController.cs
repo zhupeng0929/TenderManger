@@ -25,9 +25,9 @@ namespace Tender.Mvc.Controllers
         {
             return JsonHelper.Instance.Serialize(App.LoadAll());
         }
-        public string Load(int pageCurrent = 1, int pageSize = 30)
+        public string Load(int page = 1, int rows = 30)
         {
-            var list = App.Load(pageCurrent, pageSize);
+            var list = App.Load(page, rows);
             return JsonHelper.Instance.Serialize(list);
         }
         //添加或修改组织
