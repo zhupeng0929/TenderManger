@@ -10,6 +10,6 @@ namespace Tender.Domain.Interface
 
 
         void Delete(Guid id);
-        void AddTrans(TenderInfo tenderInfo, List<Enclosure> list);
+        void AddTrans(TenderInfo tenderInfo, List<Enclosure> list, List<Guid> tenderuser);
     }
 }

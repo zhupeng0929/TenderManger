@@ -4,7 +4,6 @@ E:\xxx招标系统\code\Tender.Domain\obj\Debug\Tender.Domain.dll
 E:\xxx招标系统\code\Tender.Domain\obj\Debug\Tender.Domain.pdb
 E:\xxx招标系统\TenderManger\code\Tender.Domain\bin\Debug\Tender.Domain.dll
 E:\xxx招标系统\TenderManger\code\Tender.Domain\bin\Debug\Tender.Domain.pdb
-E:\xxx招标系统\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.csprojResolveAssemblyReference.cache
 E:\xxx招标系统\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.dll
 E:\xxx招标系统\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.pdb
 D:\Git\TenderManger\code\Tender.Domain\bin\Debug\Tender.Domain.dll
@@ -12,3 +11,4 @@ D:\Git\TenderManger\code\Tender.Domain\bin\Debug\Tender.Domain.pdb
 D:\Git\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.csproj.CoreCompileInputs.cache
 D:\Git\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.dll
 D:\Git\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.pdb
+E:\xxx招标系统\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.csprojResolveAssemblyReference.cache

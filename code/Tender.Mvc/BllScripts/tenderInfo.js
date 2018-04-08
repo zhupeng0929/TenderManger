@@ -23,7 +23,7 @@ $(function () {
         //onchange:''
         //
     });
-    $('#food').multiselect({
+    $('#TenderUser').multiselect({
         enableFiltering: true,
         enableHTML: true,
         buttonClass: 'btn btn-white btn-primary',
@@ -31,13 +31,9 @@ $(function () {
         nonSelectedText: '请选择参投人员', //默认展示文本
         selectAllText: '全选',  //全选文本
         includeSelectAllOption: true
-    });   
-});
-
-
+    });
 
-
-
+});
 
 //grid列表模块
 function MainGrid() {
@@ -88,12 +84,11 @@ function MainGrid() {
                     align: 'center',
                 },
 
-                //{
-                //    name: 'FirstUser',
-                //    index: 'FirstUser',
-                //    label: '第一开标人',
-                //    width: 100
-                //},
+                {
+                    name: 'SelectUser',
+                    index: 'SelectUser',
+                    hidden: true
+                },
                 //{
                 //    name: 'SecondUser',
                 //    index: 'SecondUser',
@@ -115,8 +110,8 @@ function MainGrid() {
             pager: "#grid-pager",
             altRows: true,
             height: 'auto',
-            multiselect: false,
-            multiboxonly: false,
+            multiselect: true,
+            multiboxonly: true,
 
             loadComplete: function () {
                 var table = this;
@@ -184,32 +179,27 @@ var editDlg = function () {
             show();
             vm.$set('$data',
                 {
+                    Id: '00000000-0000-0000-0000-000000000000',
                     isSelect: 'ok'
                 });
+            $('#TenderUser').multiselect('refresh');
         },
         update: function (ret) {  //弹出编辑框
             update = true;
             show();
             vm.$set('$data', ret);
+            eval('var ret=' + ret.SelectUser);
+            //console.log(ret);
+            $("#TenderUser").multiselect('dataprovider', ret);
+            $('#TenderUser').multiselect('refresh');
         }
     };
 }();
 
 //删除
 function del() {
-    //var selected = list.getSelectedObj();
-    //if (selected == null) return;
 
-    //$.getJSON('/TenderInfoManager/Delete?Id=' + selected.Id, function (data) {
-    //    if (data.statusCode == "200") {
-    //        list.reload();
-
-    //    }
-    //    else {
-    //        $(this).alertmsg('warn', data.message);
-    //    }
-    //});
-    list.del("Id", "/TenderUserManager/Delete", function () {
+    list.del("Id", "/TenderInfoManager/Delete", function () {
         list.reload();
     });
 }
@@ -218,6 +208,10 @@ function del() {
 function edit() {
     var selected = list.getSelectedObj();
     if (selected == null) {
+        return;
+    }
+    if (selected.State=="1") {
+        layer.msg('已开标禁止修改！');
         return;
     }
     editDlg.update(selected);
@@ -236,17 +230,37 @@ function editFile() {
     if (selected == null) {
         return;
     }
-    
+
     layer.open({
-            type: 2,
-            skin: 'layui-layer-rim', //加上边框
-            title: "用户管理", //不显示标题
-            area: ['700px', '600px'], //宽高
-            maxmin: true, //开启最大化最小化按钮
-            content: "/TenderInfoManager/GetFiles?id="+ selected.Id,
+        type: 2,
+        skin: 'layui-layer-rim', //加上边框
+        title: "用户管理", //不显示标题
+        area: ['700px', '600px'], //宽高
+        maxmin: true, //开启最大化最小化按钮
+        content: "/TenderInfoManager/GetFiles?id=" + selected.Id,
 
-        });
-   
+    });
+
 }
-
+function publish() {
+    var selected = list.getSelectedObj();
+    if (selected == null) {
+        return;
+    }
+    var lid = layer.confirm("确定要开标？开标后不可编辑",
+        null,
+        function () {
+            layer.close(lid);
+            $.post("/TenderInfoManager/PublishTender",
+                { id: selected.Id },
+                function (data) {
+                    if (data.Status) {
+                        list.reload();
+                    } else {
+                        layer.msg(data.Message);
+                    }
+                },
+                "json");
+        });
+}
 //@@ sourceURL=TenderInfo.js

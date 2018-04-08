@@ -31,22 +31,49 @@ namespace Tender.Repository
 
         }
 
-        public void AddTrans(TenderInfo tenderInfo, List<Enclosure> list)
+        public void AddTenderUser(Guid tenderid, List<Guid> tenderuser)
+        {
+            if (tenderuser != null & tenderid != Guid.Empty)
+            {
+                tenderuser.ForEach(t =>
+                {
+                    Context.Set<Relevance>().Add(new Relevance() { FirstId = tenderid, SecondId = t, Key = "TenderUser" });
+                });
+            }
+        }
+        //public void UpdataTenderUser(Guid tenderid, List<Guid> tenderuser)
+        //{
+        //    using (var tarans = Context.Database.BeginTransaction())
+        //    {
+        //        try
+        //        {
+        //            Delete(t => tenderuser.Contains(t.Id));
+        //            Add
+        //        }
+        //        catch
+        //        {
+
+        //        }
+        //    }
+        //}
+
+        public void AddTrans(TenderInfo tenderInfo, List<Enclosure> list, List<Guid> tenderuser)
         {
             using (var tarans = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var id = AddTrans(tenderInfo);
+                    var id = AddTrans(tenderInfo);//添加基本标书信息
                     if (list != null)
                     {
                         list.ForEach(e =>
                         {
                             e.RelationId = id;
                             AddEnclosureTrans(e);
-                        });
+                        });//添加附件
 
                     }
+                    AddTenderUser(id, tenderuser);//添加参与投标人
                     Context.SaveChanges();
                     tarans.Commit();
                 }

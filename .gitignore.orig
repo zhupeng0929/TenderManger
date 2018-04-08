@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-code/TenderManger/.vs/TenderManger/v15/.suo
-code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/db.lock
-code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/storage.ide
-code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/storage.ide-shm
-code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/storage.ide-wal
-code/TenderManger/TenderManger/obj/Debug/TenderManger.csproj.CoreCompileInputs.cache
-=======
 /code/TenderManger/.vs/TenderManger/v15/.suo
 /code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/db.lock
 /code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/storage.ide
@@ -45,4 +37,21 @@ _ReSharper*/
 packages/
 bin/
 obj/
->>>>>>> b78ace822a3d26e2dd3bf51a2a059d35393d4990
+code/TenderManger/.vs/TenderManger/v15/.suo
+code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/db.lock
+code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/storage.ide
+code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/storage.ide-shm
+code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/storage.ide-wal
+code/TenderManger/TenderManger/obj/Debug/TenderManger.csproj.CoreCompileInputs.cache
+code/TenderManger/TenderManger/bin/TenderManger.dll
+code/TenderManger/TenderManger/bin/TenderManger.pdb
+<<<<<<< HEAD
+code/.vs/Tender/v14/.suo
+code/.vs/Tender/v15/.suo
+code/.vs/Tender/v15/Server/sqlite3/storage.ide
+=======
+/code/Infrastructure/bin/Debug/Infrastructure.dll
+*.dll
+/code/*/bin
+
+>>>>>>> 906618ed74495d90ded75f60efeb551a41e7b7fe

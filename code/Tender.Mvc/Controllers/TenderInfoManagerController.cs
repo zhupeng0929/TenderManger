@@ -64,16 +64,25 @@ namespace Tender.Mvc.Controllers
 
                 }
             }
-            try
-            {
-                _app.AddOrUpdate(model);
-
-            }
-            catch (Exception ex)
+            if (model.State == 1)
             {
                 Result.Status = false;
-                Result.Message = ex.Message;
+                Result.Message = "已开标禁止修改";
             }
+            else
+            {
+                try
+                {
+                    _app.AddOrUpdate(model);
+
+                }
+                catch (Exception ex)
+                {
+                    Result.Status = false;
+                    Result.Message = ex.Message;
+                }
+            }
+
             return JsonHelper.Instance.Serialize(Result);
         }
 
@@ -85,12 +94,12 @@ namespace Tender.Mvc.Controllers
             return JsonHelper.Instance.Serialize(_app.Load(page, rows));
         }
 
-
-        public string Delete(Guid Id)
+        [HttpPost]
+        public string Delete(Guid[] ids)
         {
             try
             {
-                _app.Delete(Id);
+                _app.Delete(ids);
             }
             catch (Exception ex)
             {
@@ -113,6 +122,22 @@ namespace Tender.Mvc.Controllers
             try
             {
                 _app.DeleteFile(id);
+            }
+            catch (Exception ex)
+            {
+                Result.Status = false;
+                Result.Message = ex.Message;
+            }
+
+            return JsonHelper.Instance.Serialize(Result);
+        }
+
+        [HttpPost]
+        public string PublishTender(Guid id)
+        {
+            try
+            {
+                _app.PublishTender(id);
             }
             catch (Exception ex)
             {
