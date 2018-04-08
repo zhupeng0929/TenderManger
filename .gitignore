@@ -35,8 +35,8 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
-bin/
-obj/
+*/bin
+*/obj
 code/TenderManger/.vs/TenderManger/v15/.suo
 code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/db.lock
 code/TenderManger/.vs/TenderManger/v15/Server/sqlite3/storage.ide
@@ -51,4 +51,4 @@ code/TenderManger/TenderManger/bin/TenderManger.pdb
 code/.vs/Tender/v14/.suo
 code/.vs/Tender/v15/.suo
 code/.vs/Tender/v15/Server/sqlite3/storage.ide
-
+/code/.vs
