@@ -1,11 +1,11 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.Mvc
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 04-13-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 04-14-2016
-// Contact me       : www.cnblogs.com/yubaolee
+// Contact me       : www.cnblogs.com/zhu.peng
 // ***********************************************************************
 // File: categoryManager.js
 // <summary>分类管理</summary>

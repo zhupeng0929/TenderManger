@@ -43,12 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Category.cs" />
-    <Compile Include="Core\TanderUser.cs" />
+    <Compile Include="Core\Enclosure.cs" />
+    <Compile Include="Core\TenderInfo.cs" />
+    <Compile Include="Core\TenderUser.cs" />
     <Compile Include="Core\UserExt.cs" />
     <Compile Include="Core\DicDetail.cs" />
     <Compile Include="Core\DicIndex.cs" />
     <Compile Include="Core\Entity.cs" />
     <Compile Include="Interface\ICategoryRepository.cs" />
+    <Compile Include="Interface\IEnclosureRepository.cs" />
     <Compile Include="Interface\IModuleRepository.cs" />
     <Compile Include="Interface\IOrgRepository.cs" />
     <Compile Include="Interface\IRepository.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="Interface\IRoleRepository.cs" />
     <Compile Include="Interface\IRelevanceRepository.cs" />
     <Compile Include="Interface\IStockRepository.cs" />
+    <Compile Include="Interface\ITenderInfoRepository.cs" />
     <Compile Include="Interface\ITenderUserRepository.cs" />
     <Compile Include="Interface\IUnitWork.cs" />
     <Compile Include="Interface\IUserRepository.cs" />

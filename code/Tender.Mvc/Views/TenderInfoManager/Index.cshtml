@@ -1,0 +1,132 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/scripts/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" />
+<style>
+    .input-group{
+        display:table;
+    }
+</style>
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">投标单信息</a>
+        </li>
+        <li class="active">列表</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-box widget-color-blue">
+                <div class="widget-header">
+                    @Html.Action("MenuHeader", "Home", new { area = "" })
+                </div>
+                <div class="widget-body gridwidth">
+                    <div class="widget-main">
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <table id="maingrid"></table>
+                                <div id="grid-pager"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.page-content -->
+<!--编辑对话框-->
+<div id="editDlg" style="display: none;margin-top:10px;">
+    <div class="col-xs-12">
+        <form action="/TenderInfoManager/Add" method="post" class="form-horizontal" enctype="multipart/form-data" id="editForm">
+
+
+            @*<div class="form-group">
+                    <label for="Id" class="col-sm-3 control-label no-padding-right">Id：</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="Id" name="Id" value="" />
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <label for="Description" class="col-sm-3 control-label no-padding-right">描述：</label>
+                <div class="col-sm-7">
+
+                    <textarea id="Description" name="Description" v-model="Description" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="StartTime" class="col-sm-3 control-label no-padding-right">开始时间：</label>
+                <div class="col-sm-7">
+                    <input type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control input-datepicker" id="StartTime" name="StartTime" v-model="StartTime" value="" data-toggle="datepicker" />
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="EndTime" class="col-sm-3 control-label no-padding-right">结束时间：</label>
+                <div class="col-sm-7">
+                    <input type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control input-datepicker" id="EndTime" name="EndTime" v-model="EndTime" value="" data-toggle="datepicker" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Cycle" class="col-sm-3 control-label no-padding-right">提货周期：</label>
+                <div class="col-sm-7">
+                    <input type="text" id="Cycle" name="Cycle" v-model="Cycle" class="form-control" />
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    <label for="State" class="col-sm-3 control-label no-padding-right">状态：</label>
+                    <div class="col-sm-7">
+                        <select name="State" id="State" data-toggle="selectpicker" class="form-control" data-rule="required">
+                            <option value="0">未开标</option>
+                            <option value="1">已开标</option>
+                            <option value="2">已结束</option>
+                            <option value="3">已作废</option>
+                        </select>
+                    </div>
+                </div>*@
+            <div style="margin-left:-12px;margin-right:-12px;">
+                <label class="col-sm-3 control-label no-padding-right" for=""> 货物照片 </label>
+                <div class="col-sm-7">
+                    <input type="file" multiple="multiple" name="Filedata" id="Filedata" accept="image/*" />
+                </div>
+            </div>
+            <div style="margin-left:-12px;margin-right:-12px;padding-top: 50px;">
+                <label class="col-sm-3 control-label no-padding-right" for=""> 货物视频 </label>
+                <div class="col-sm-7">
+                    <input type="file" name="Filedatavideo" id="Filedatavideo" accept="video/*" />
+                </div>
+            </div>
+
+            <div class="form-group"style="margin-top: 50px;">
+                <label for="Cycle" class="col-sm-3 control-label no-padding-right">参投人员：</label>
+                <div class="col-sm-7">
+                    @Html.DropDownList("food", @ViewBag.userSelect as List<SelectListItem>,new { multiple = "multiple" })
+                    @*<select id="food"  multiple="multiple">
+                        <option value="cheese">Cheese</option>
+                        <option value="tomatoes">Tomatoes</option>
+                        <option value="mozarella">Mozzarella</option>
+                        <option value="mushrooms">Mushrooms</option>
+                        <option value="pepperoni">Pepperoni</option>
+                    </select>*@
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script src="~/Content/scripts/zTree/js/jquery.ztree.excheck.js"></script>
+<script src="~/BllScripts/grid.js"></script>
+<script src="~/BllScripts/parentTree.js"></script>
+<script src="~/BllScripts/jqEvent.js"></script>
+<script src="~/Content/scripts/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+<script src="~/BllScripts/TenderInfo.js"></script>

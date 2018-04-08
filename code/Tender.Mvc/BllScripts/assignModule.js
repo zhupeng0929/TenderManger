@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.Mvc
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 04-16-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 04-16-2016
 // ***********************************************************************
-// <copyright file="userRes.js" company="www.cnblogs.com/yubaolee">
+// <copyright file="userRes.js" company="www.cnblogs.com/zhu.peng">
 //     版权所有(C) 2015
 // </copyright>
 // <summary>分配组织</summary>

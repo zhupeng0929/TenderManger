@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.Mvc
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 04-13-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 04-13-2016
 // ***********************************************************************
-// <copyright file="userRoleManager.js" company="www.cnblogs.com/yubaolee">
+// <copyright file="userRoleManager.js" company="www.cnblogs.com/zhu.peng">
 //     版权所有(C) 2015
 // </copyright>
 // <summary>用户分配角色模块</summary>

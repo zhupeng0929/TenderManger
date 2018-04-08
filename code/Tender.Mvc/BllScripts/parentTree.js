@@ -1,22 +1,22 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.Mvc
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 10-16-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 10-16-2016
 // ***********************************************************************
-// <copyright file="parentTree.js" company="www.cnblogs.com/yubaolee">
+// <copyright file="parentTree.js" company="www.cnblogs.com/zhu.peng">
 //     版权所有(C) 2015
 // </copyright>
 // <summary>单击文本框弹出的选择列表</summary>
 // ***********************************************************************
 
-function ParentTree(url, name, id) {
+function ParentTree(url, name, id, text = 'Name', key = 'Id') {
     var zTreeObj;
     var options = {
-        text: 'Name',
-        key: 'Id',
+        text: text,
+        key: key,
         parentKey: 'ParentId',
         nameDOM: name,   //显示的文本框ID，如："#catetoryName"
         idDOM: id   //隐藏的文本框，如："#categoryId"

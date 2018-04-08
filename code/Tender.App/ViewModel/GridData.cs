@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : FundationAdmin
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 03-09-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 03-09-2016
 // ***********************************************************************
 // <copyright file="JqData.cs" company="Microsoft">

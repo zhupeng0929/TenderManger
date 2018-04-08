@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.Domain
-// Author           : yubaolee
+// Author           : zhu.peng
 // Created          : 05-27-2016
 //
-// Last Modified By : yubaolee
+// Last Modified By : zhu.peng
 // Last Modified On : 05-27-2016
 // Contact : Microsoft
 // File: ModuleManService.cs

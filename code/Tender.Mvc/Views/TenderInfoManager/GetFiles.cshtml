@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "GetFiles";
+    Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
+}
+@model List<Tender.Domain.Enclosure>
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <div>
+            <ul class="ace-thumbnails clearfix">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        if (item.Type == 0)
+                        {
+                            <li id="@item.Id">
+
+                                <img width="150" height="150" alt="150x150" src="@item.Path">
+                                <div class="tools  tools-bottom" onclick="delfile('@item.Id')">
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-times red"></i>
+                                    </a>
+                                </div>
+
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+            <ul class="ace-thumbnails clearfix">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        if (item.Type == 1)
+                        {
+                            <li id="@item.Id">
+
+                                <video controls="controls" src="@item.Path"></video>
+                                <div class="tools  tools-top" onclick="delfile('@item.Id')">
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-times red"></i>
+                                    </a>
+                                </div>
+
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div><!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div>
+<script type="text/javascript">
+    function delfile(id) {
+        $.post("/TenderInfoManager/DelFile", { id: id }, function (data) {
+            layer.msg(data.Message);
+            if (data.Status) {
+                $('#' + id).remove();
+            }
+        }, "json");
+    }
+</script>

@@ -1,17 +1,36 @@
-﻿//grid列表模块
+﻿$(function () {
+    $("#Account").on("click", function () {
+        parent.reload();
+    });
+    $('#Filedata').ace_file_input({
+        no_file: 'No File ...',
+        btn_choose: 'Choose',
+        btn_change: 'Change',
+        droppable: false,
+        onchange: null,
+        thumbnail: false //| true | large
+        //whitelist:'gif|png|jpg|jpeg'
+        //blacklist:'exe|php'
+        //onchange:''
+        //
+    });
+});
+
+//grid列表模块
 function MainGrid() {
     var url = '/TenderUserManager/Load';
     this.maingrid = $('#maingrid')
         .jqGrid({
             colModel: [
                 { label: '主键', name: 'Id', hidden: true },
+                { label: "账号", name: "Account", index: "Account" },
                 { label: '名称', name: 'Name', index: 'Name', width: 100, align: 'left' },
                 { label: '单位抬头', name: 'Company', index: 'Company', width: 150, align: 'left' },
-               
+
                 { label: '联系人', name: 'ContactPerson', index: 'ContactPerson', width: 180, align: 'left' },
-                { label: '联系方式', name: 'ContactNum', index: 'ContactNum'},
+                { label: '联系方式', name: 'ContactNum', index: 'ContactNum' },
                 {
-                    label: "保证金", name: "CashDeposit", index: "CashDeposit", width: 50, align: "center",
+                    label: "保证金", name: "CashDeposit", index: "CashDeposit", width: 50, align: "left",
                     //formatter: function (cellvalue, options, rowObject) {
                     //    if (rowObject.enabledmark == 1) {
                     //        return '<span  class=\"label label-success\">启用</span>';
@@ -22,12 +41,24 @@ function MainGrid() {
                     //    }
                     //}
                 },
-               
-                //{ label: "最近编辑用户", name: "ModifyUserName", index: "ModifyUserName", width: 90, align: "left" },
-                //{label: "最近编辑时间", name: "ModifyDate", index: "ModifyDate", width: 150, align: "left"},
+                {
+                    label: '营业执照', name: 'psth', index: 'psth',
+                    formatter: function (cellvalue, options, rowdata) {
+                        if (cellvalue) {
+                            return ' <img src="' + cellvalue + '" id="img' + rowdata.Id + '"  style="width:50px;height:50px;" />';
+                        }
+                        else {
+                            return'<span>暂无</span>'
+                        }
+                        
+                    }
+                },
+                {
+                    name: 'BusinessLicense', index: 'BusinessLicense', hidden: true
+                },
 
                 //{ label: "备注", name: "Description", index: "Description", width: 200, align: "left" }
-              
+
             ],
             url: url,
             datatype: "json",
@@ -59,13 +90,77 @@ function MainGrid() {
 };
 MainGrid.prototype = new Grid();
 var list = new MainGrid();
+var vm = new Vue({
+    el: '#editDlg',
+});
+//上级机构选择框
+var parent = new ParentTree("/TenderUserManager/LoadForTree", "Account", "Id", "Account");
 
 //删除
 function del() {
-    list.del("Id", "/FlowManage/FlowDesign/RemoveForm", function () {
+    list.del("Id", "/TenderUserManager/Delete", function () {
         list.reload();
     });
 }
+
+//添加（编辑）对话框
+var editDlg = function () {
+    var update = false;
+    var show = function () {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            title: "用户管理", //不显示标题
+            area: ['430px', '450px'], //宽高
+            content: $('#editDlg'), //捕获的元素
+            btn: ['保存', '关闭'],
+            yes: function (index, layero) {
+                $("#editForm").ajaxSubmit(
+                    {
+                        type: 'POST',
+                        url: '/TenderUserManager/Add',
+                        dataType: 'json',
+                        data: vm.$data,
+                        success: function (data) {
+                            layer.msg(data.Message);
+                            if (data.Status) {
+                                list.reload();
+                            }
+                        }
+
+                    }
+
+                )
+                //$.post("/TenderUserManager/Add", vm.$data, function (data) {
+                //    layer.msg(data.Message);
+                //    if (data.Status) {
+                //        list.reload();
+                //        //ztree.reload();
+                //    }
+                //}, "json");
+            },
+            cancel: function (index) {
+                layer.close(index);
+            }
+        });
+    }
+    return {
+        add: function () {  //弹出添加
+            update = false;
+            show();
+            vm.$set('$data',
+                {
+                    isSelect: 'ok'
+                });
+        },
+        update: function (ret) {  //弹出编辑框
+            update = true;
+            show();
+            vm.$set('$data', ret);
+        }
+    };
+}();
+
 
 //自定义的编辑按钮
 function edit() {
@@ -74,69 +169,13 @@ function edit() {
         return;
     }
 
-    layer.open({
-        type: 2,
-        title:selected.Code,
-        skin: 'layui-layer-rim', //加上边框
-        area: ['1200px', '700px'], //宽高
-        maxmin: true, //开启最大化最小化按钮
-        content: '/FlowManage/FlowDesign/FlowSchemeBuider?keyValue=' + selected.Id,
-        end: function () {
-            list.reload();
-        }
-    });
-
+    editDlg.update(selected);
 }
 
-//创建流程模版
 function add() {
-    layer.open({
-        type: 2,
-        skin: 'layui-layer-rim', //加上边框
-        area: ['1200px', '700px'], //宽高
-        maxmin: true, //开启最大化最小化按钮
-        content: '/FlowManage/FlowDesign/FlowSchemeBuider',
-        end: function() {
-            list.reload();
-        }
-    });
-}
-
-//预览
-function preview() {
-    var selected = list.getSelectedObj();
-    if (selected == null) {
-        return;
-    }
-
-    layer.open({
-        type: 2,
-        skin: 'layui-layer-rim', //加上边框
-        area: ['1200px', '700px'], //宽高
-        maxmin: true, //开启最大化最小化按钮
-        content: '/FlowManage/FlowDesign/PreviewIndex?keyValue=' + selected.Id + "&schemeVersion=" + selected.SchemeVersion,
-        end: function () {
-            list.reload();
-        }
-    });
+    editDlg.add();
 }
 
 
-//创建新实例
-function addInstance() {
-    var selected = list.getSelectedObj();
-    if (selected == null) {
-        return;
-    }
-
-    layer.open({
-        type: 2,
-        skin: 'layui-layer-rim', //加上边框
-        area: ['1200px', '700px'], //宽高
-        maxmin: true, //开启最大化最小化按钮
-        content: '/FlowManage/FlowInstances/FlowProcessNewForm?keyValue=' + selected.Id,
-    });
-}
 
 
- 
