@@ -60,7 +60,7 @@ namespace Tender.Domain
         /// </summary>
         public DateTime EndTime { get; set; }
         /// <summary>
-        /// 竞标状态
+        /// 竞标状态，0未中标，1中标，2作废
         /// </summary>
         public int State { get; set; }
     }
