@@ -103,9 +103,18 @@ namespace Tender.App
             return bidinfo;
         }
 
-        public void Delete(Guid id)
+        //public void Delete(Guid id)
+        //{
+        //    _repository.Delete(id);
+        //}
+        /// <summary>
+        /// 发布中标
+        /// </summary>
+        /// <param name="tenderid">标书id</param>
+        /// <param name="bidinfoid">竞标id</param>
+        public void UpdateBidinfoState(Guid tenderid, Guid bidinfoid)
         {
-            _repository.Delete(id);
+            _repository.UpdateBidinfoState(tenderid, bidinfoid);
         }
 
         public void AddOrUpdate(BidInfo model)
@@ -113,15 +122,15 @@ namespace Tender.App
             //BidInfo bidinfo = new BidInfo();
             //model.CopyTo(bidinfo);
 
-            if (model.Id == Guid.Empty)
-            {
-                _repository.Add(model);
-            }
-            else
-            {
-                _repository.Update(model);
-            }
-
+            //if (model.Id == Guid.Empty)
+            //{
+            //    _repository.Add(model);
+            //}
+            //else
+            //{
+            //    _repository.Update(model);
+            //}
+            _repository.Update(b => b.Id, model);
         }
 
 

@@ -25,5 +25,24 @@ namespace Tender.Repository
         {
             Delete(u => u.Id == id);
         }
+
+        public void UpdateBidinfoState(Guid tenderid, Guid bidinfoid)
+        {
+            using (var tarans = Context.Database.BeginTransaction())
+            {
+                try
+                {
+                    Update(b => b.TenderId == tenderid && b.Id == bidinfoid, b => new BidInfo { State = 1 });//跟新为中标
+                    Update(b => b.TenderId == tenderid && b.Id != bidinfoid, b => new BidInfo { State = 1 });//其他所有人更新成未中标
+                    Context.SaveChanges();
+                    tarans.Commit();
+                }
+                catch (Exception ex)
+                {
+                    tarans.Rollback();
+                    throw new Exception("发布失败");
+                }
+            }
+        }
     }
 }

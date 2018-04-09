@@ -25,6 +25,7 @@ namespace Tender.Domain
             this.TenderPrice = 0;
             this.CreateDate = DateTime.Now;
             this.EndTime = DateTime.Now;
+            this.State = 0;
         }
 
         /// <summary>
@@ -58,6 +59,9 @@ namespace Tender.Domain
         /// 标书结束时间
         /// </summary>
         public DateTime EndTime { get; set; }
-
+        /// <summary>
+        /// 竞标状态
+        /// </summary>
+        public int State { get; set; }
     }
 }

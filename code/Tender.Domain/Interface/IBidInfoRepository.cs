@@ -13,5 +13,7 @@ namespace Tender.Domain.Interface
 
         void Delete(Guid id);
 
+        void UpdateBidinfoState(Guid tenderid, Guid bidinfoid);
+
     }
 }

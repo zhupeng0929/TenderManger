@@ -160,6 +160,12 @@ namespace Tender.Mvc.Controllers
         [HttpPost]
         public string CheckDate(Guid id)
         {
+            var tenderinfo = _app.Find(id);
+            if (tenderinfo.EndTime >= DateTime.Now)//未截止招标
+            {
+                Result.Status = false;
+                Result.Result = "招标未截止前无法发布中标人！";
+            }
             return JsonHelper.Instance.Serialize(Result);
         }
     }

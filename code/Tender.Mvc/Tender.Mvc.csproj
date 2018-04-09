@@ -175,7 +175,7 @@
   <ItemGroup>
     <Content Include="BllScripts\assignModule.js" />
     <Content Include="BllScripts\assignModuleElement.js" />
-    <Content Include="BllScripts\BidInfo.js" />
+    <Content Include="BllScripts\bidInfo.js" />
     <Content Include="BllScripts\categoryManager.js" />
     <Content Include="BllScripts\tenderInfo.js" />
     <Content Include="BllScripts\tenderUser.js" />

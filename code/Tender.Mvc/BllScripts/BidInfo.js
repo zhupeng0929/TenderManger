@@ -207,6 +207,12 @@ function publishbid() {
         layer.msg('请先选择标书！');
         return;
     }
+    var selected = list.getSelectedObj();
+    if (selected == null) {
+        layer.msg('请先选择投标人！');
+        return;
+    }
+
     var lid = layer.confirm("确认改标书已截止招标",
         null,
         function () {
@@ -215,15 +221,17 @@ function publishbid() {
                 { id: selected[0].Id },
                 function (data) {
                     if (data.Status) {
-                        layer.open({
-                            type: 2,
-                            skin: 'layui-layer-rim', //加上边框
-                            title: "用户管理", //不显示标题
-                            area: ['700px', '600px'], //宽高
-                            maxmin: true, //开启最大化最小化按钮
-                            content: "/BidInfoManager/TenderUserList?tenderid=" + selected[0].Id,
 
-                        });
+                        $.post("/TenderInfoManager/CheckDate",
+                            { id: selected[0].Id },
+                            function (data) {
+                                if (data.Status) {
+                                    
+                                } else {
+                                    layer.msg(data.Message);
+                                }
+                            },
+                            "json");
                     } else {
                         layer.msg(data.Message);
                     }

@@ -92,10 +92,19 @@ namespace Tender.Mvc.Controllers
 
             return JsonHelper.Instance.Serialize(Result);
         }
-
-        public ActionResult TenderUserList(Guid tenderid)
+        [HttpPost]
+        public string UpdateBidinfoState(Guid tenderid,Guid bidinfoid)
         {
-            return View();
+            try
+            {
+                App.AddOrUpdate
+            }
+            catch
+            {
+                Result.Status = false;
+                Result.Result = "发布失败！";
+            }
+            return JsonHelper.Instance.Serialize(Result);
         }
     }
 }
