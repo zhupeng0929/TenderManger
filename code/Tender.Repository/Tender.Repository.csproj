@@ -57,7 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BidInfoRepository.cs" />
     <Compile Include="EnclosureRepository.cs" />
+    <Compile Include="Models\Mapping\BidInfoMap.cs" />
     <Compile Include="Models\Mapping\EnclosureMap.cs" />
     <Compile Include="Models\Mapping\TenderInfoMap.cs" />
     <Compile Include="Models\Mapping\TenderUserMap.cs" />

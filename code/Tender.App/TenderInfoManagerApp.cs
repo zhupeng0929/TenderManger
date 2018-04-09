@@ -7,6 +7,7 @@ using System.Linq;
 using Tender.App.ViewModel;
 using Infrastructure;
 using System.IO;
+using Tender.App.SSO;
 
 namespace Tender.App
 {
@@ -25,12 +26,20 @@ namespace Tender.App
             _enclosureRepository = enclosureRepository;
             _relevanceRepository = relevanceRepository;
         }
-        public GridData Load(int pageindex, int pagesize)
+        public GridData Load(Guid userid, int pageindex, int pagesize)
         {
             if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
             IEnumerable<TenderInfo> tenderinfos = new List<TenderInfo>();
             int records = 0;
-            tenderinfos = _repository.Find(pageindex, pagesize, "id");
+            if (userid == Guid.Empty)
+            {
+                tenderinfos = _repository.Find(pageindex, pagesize);
+            }
+            else
+            {
+                tenderinfos = _repository.LoadTenderInfos(userid, pageindex, pagesize);
+            }
+
             records = _repository.GetCount();
             var infoviews = new List<TenderInfoView>();
 
@@ -93,6 +102,8 @@ namespace Tender.App
 
             if (model.Id == Guid.Empty)
             {
+                var userid = AuthUtil.GetCurrentUser().User.Id;
+                model.CreateUser = userid;
                 AddTrans(model);
             }
             else

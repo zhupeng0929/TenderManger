@@ -48,6 +48,12 @@ function MainGrid() {
                     hidden: true
                 },
                 {
+                    name: 'Title',
+                    label: '标题',
+                    index: 'Title',
+                    width: 100
+                },
+                {
                     name: 'Description',
                     label: '描述',
                     index: 'Description',
@@ -100,6 +106,11 @@ function MainGrid() {
                     index: 'CreateDate',
                     label: '添加时间',
                     width: 100
+                },
+                {
+                    name: 'CreateUser',
+                    index: 'CreateUser',
+                    hidden: true
                 },
             ],
             url: url,
@@ -210,7 +221,7 @@ function edit() {
     if (selected == null) {
         return;
     }
-    if (selected.State=="1") {
+    if (selected.State == "1") {
         layer.msg('已开标禁止修改！');
         return;
     }

@@ -28,6 +28,7 @@ namespace Tender.Repository.Models
             : base(nameOrConnectionString)
         { }
 
+        public System.Data.Entity.DbSet<BidInfo> BidInfos { get; set; }
         public System.Data.Entity.DbSet<Category> Categories { get; set; }
         public System.Data.Entity.DbSet<DicDetail> DicDetails { get; set; }
         public System.Data.Entity.DbSet<DicIndex> DicIndices { get; set; }
@@ -52,6 +53,7 @@ namespace Tender.Repository.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new BidInfoMap());
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new DicDetailMap());
             modelBuilder.Configurations.Add(new DicIndexMap());

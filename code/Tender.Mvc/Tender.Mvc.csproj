@@ -149,6 +149,7 @@
     <Compile Include="Areas\FlowManage\FlowManageAreaRegistration.cs" />
     <Compile Include="AutofacExt.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BidInfoManagerController.cs" />
     <Compile Include="Controllers\CategoryManagerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Areas\FlowManage\Controllers\FlowInstancesController.cs" />
@@ -174,6 +175,7 @@
   <ItemGroup>
     <Content Include="BllScripts\assignModule.js" />
     <Content Include="BllScripts\assignModuleElement.js" />
+    <Content Include="BllScripts\BidInfo.js" />
     <Content Include="BllScripts\categoryManager.js" />
     <Content Include="BllScripts\tenderInfo.js" />
     <Content Include="BllScripts\tenderUser.js" />
@@ -1110,6 +1112,8 @@
     <Content Include="Areas\FlowManage\Views\FormDesign\FrmBuider.cshtml" />
     <Content Include="Content\scripts\plugins\bootstrap-multiselect\less\bootstrap-multiselect.less" />
     <None Include="Properties\PublishProfiles\default.pubxml" />
+    <Content Include="Views\BidInfoManager\Index.cshtml" />
+    <Content Include="Views\BidInfoManager\TenderUserList.cshtml" />
     <None Include="Views\Error\NoAccess.cshtml" />
     <Content Include="Views\Home\git.cshtml" />
     <Content Include="Web.config">

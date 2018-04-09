@@ -6,7 +6,7 @@ namespace Tender.Domain.Interface
 {
     public interface ITenderInfoRepository : IRepository<TenderInfo>
     {
-        IEnumerable<TenderInfo> LoadTenderInfos(int pageindex, int pagesize);
+        IEnumerable<TenderInfo> LoadTenderInfos(Guid userid, int pageindex, int pagesize);
 
 
         void Delete(Guid id);

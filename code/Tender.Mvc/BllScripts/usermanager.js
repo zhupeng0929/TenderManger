@@ -112,6 +112,7 @@ function MainGrid() {
 };
 MainGrid.prototype = new Grid();
 var list = new MainGrid();
+
 var vm = new Vue({
     el: '#editDlg'
 });

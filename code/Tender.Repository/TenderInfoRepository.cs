@@ -9,9 +9,9 @@ namespace Tender.Repository
     public class TenderInfoRepository : BaseRepository<TenderInfo>, ITenderInfoRepository
     {
 
-        public IEnumerable<TenderInfo> LoadTenderInfos(int pageindex, int pagesize)
+        public IEnumerable<TenderInfo> LoadTenderInfos(Guid userid, int pageindex, int pagesize)
         {
-            return Context.TenderInfos.OrderBy(u => u.Id).Skip((pageindex - 1) * pagesize).Take(pagesize);
+            return Context.TenderInfos.Where(u => u.CreateUser == userid).OrderBy(u => u.Id).Skip((pageindex - 1) * pagesize).Take(pagesize);
         }
 
         public void Delete(Guid id)

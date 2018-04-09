@@ -20,15 +20,22 @@ namespace Tender.Domain
     {
         public TenderInfo()
         {
-          this.Description= string.Empty;
-          this.StartTime= DateTime.Now;
-          this.EndTime= DateTime.Now;
-          this.Cycle= string.Empty;
-          this.State= 0;
-          this.FirstUser= string.Empty;
-          this.SecondUser= string.Empty;
-          this.CreateDate= DateTime.Now;
+            this.Title = string.Empty;
+            this.Description = string.Empty;
+            this.StartTime = DateTime.Now;
+            this.EndTime = DateTime.Now;
+            this.Cycle = string.Empty;
+            this.State = 0;
+            this.FirstUser = string.Empty;
+            this.SecondUser = string.Empty;
+            this.CreateDate = DateTime.Now;
+            this.CreateUser = Guid.Empty;
+            
         }
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string Title { get; set; }
 
         /// <summary>
 	    /// 描述
@@ -64,6 +71,11 @@ namespace Tender.Domain
 	    /// 添加时间
 	    /// </summary>
         public System.DateTime CreateDate { get; set; }
+
+        /// <summary>
+        /// 创建人
+        /// </summary>
+        public Guid CreateUser { get; set; }
 
     }
 }

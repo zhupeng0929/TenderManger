@@ -38,9 +38,12 @@ namespace Tender.Mvc.Controllers
         protected string Controllername;   //当前控制器小写名称
         protected string Actionname;        //当前Action小写名称
         private AuthorizeApp _app;
+
+        protected UserWithAccessedCtrls BaseUserInfo;
         public BaseController()
         {
             _app = AutofacExt.GetFromFac<AuthorizeApp>();
+            BaseUserInfo = AuthUtil.GetCurrentUser();
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {

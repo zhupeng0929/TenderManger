@@ -33,7 +33,7 @@ namespace Tender.App.SSO
     {
         //static HttpHelper _helper = new HttpHelper(ConfigurationManager.AppSettings["SSOPassport"]);
         private static ObjCacheProvider<UserAuthSession> _objCacheProvider = new ObjCacheProvider<UserAuthSession>();
-        private AuthorizeApp _app= (AuthorizeApp)DependencyResolver.Current.GetService(typeof(AuthorizeApp));
+        private AuthorizeApp _app = (AuthorizeApp)DependencyResolver.Current.GetService(typeof(AuthorizeApp));
         private static string GetToken()
         {
             string token = HttpContext.Current.Request.QueryString["Token"];
@@ -185,6 +185,12 @@ namespace Tender.App.SSO
             {
                 return new LoginResult() { Success = false, ErrorMsg = ex.Message };
             }
+        }
+
+        public static bool CheckUserPowerByKey(string key)
+        {
+            var user = GetCurrentUser();
+            return user.Resources.Exists(r => r.Key == key);
         }
 
         /// <summary>

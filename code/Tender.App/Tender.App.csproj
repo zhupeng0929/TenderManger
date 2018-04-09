@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BidInfoManagerApp.cs" />
     <Compile Include="CategoryManagerApp.cs" />
     <Compile Include="AuthorizeApp.cs" />
     <Compile Include="Extention\IWF_Runtime.cs" />

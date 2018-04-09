@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\BidInfo.cs" />
     <Compile Include="Core\Category.cs" />
     <Compile Include="Core\Enclosure.cs" />
     <Compile Include="Core\TenderInfo.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Core\DicDetail.cs" />
     <Compile Include="Core\DicIndex.cs" />
     <Compile Include="Core\Entity.cs" />
+    <Compile Include="Interface\IBidInfoRepository.cs" />
     <Compile Include="Interface\ICategoryRepository.cs" />
     <Compile Include="Interface\IEnclosureRepository.cs" />
     <Compile Include="Interface\IModuleRepository.cs" />

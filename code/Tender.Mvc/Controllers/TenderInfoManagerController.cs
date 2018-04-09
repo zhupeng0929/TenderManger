@@ -7,6 +7,7 @@ using Infrastructure;
 using Tender.App;
 using Tender.App.ViewModel;
 using Tender.Domain;
+using Tender.App.SSO;
 
 namespace Tender.Mvc.Controllers
 {
@@ -91,7 +92,15 @@ namespace Tender.Mvc.Controllers
         /// </summary>
         public string Load(int page = 1, int rows = 1)
         {
-            return JsonHelper.Instance.Serialize(_app.Load(page, rows));
+            if (AuthUtil.CheckUserPowerByKey("LOOK"))
+            {
+                return JsonHelper.Instance.Serialize(_app.Load(Guid.Empty, page, rows));
+            }
+            else
+            {
+                return JsonHelper.Instance.Serialize(_app.Load(BaseUserInfo.User.Id, page, rows));
+            }
+
         }
 
         [HttpPost]
@@ -145,6 +154,12 @@ namespace Tender.Mvc.Controllers
                 Result.Message = ex.Message;
             }
 
+            return JsonHelper.Instance.Serialize(Result);
+        }
+
+        [HttpPost]
+        public string CheckDate(Guid id)
+        {
             return JsonHelper.Instance.Serialize(Result);
         }
     }

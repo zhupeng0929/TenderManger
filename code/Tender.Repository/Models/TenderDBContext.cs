@@ -17,7 +17,7 @@ namespace Tender.Repository.Models
     {
         static  TenderDBContext()
         {
-            Database.SetInitializer< TenderDBContext>(null);
+            Database.SetInitializer<TenderDBContext>(null);
         }
         public TenderDBContext()
             :base("Name=TenderDBContext")
@@ -27,6 +27,7 @@ namespace Tender.Repository.Models
             : base(nameOrConnectionString)
         { }
 
+        public System.Data.Entity.DbSet<BidInfo> BidInfos { get; set; }
         public System.Data.Entity.DbSet<Category> Categories { get; set; }
         public System.Data.Entity.DbSet<DicDetail> DicDetails { get; set; }
         public System.Data.Entity.DbSet<DicIndex> DicIndices { get; set; }
@@ -50,6 +51,7 @@ namespace Tender.Repository.Models
         public System.Data.Entity.DbSet<TenderInfo> TenderInfos { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new BidInfoMap());
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new DicDetailMap());
             modelBuilder.Configurations.Add(new DicIndexMap());
