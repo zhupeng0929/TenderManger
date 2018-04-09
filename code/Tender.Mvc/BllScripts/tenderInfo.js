@@ -274,4 +274,25 @@ function publish() {
                 "json");
         });
 }
+function invalidtender() {
+    var selected = list.getSelectedObj();
+    if (selected == null) {
+        return;
+    }
+    var lid = layer.confirm("确定要作废？作废后已经参加的竞标都会设置成作废！",
+        null,
+        function () {
+            layer.close(lid);
+            $.post("/TenderInfoManager/InvalidTender",
+                { id: selected.Id },
+                function (data) {
+                    if (data.Status) {
+                        list.reload();
+                    } else {
+                        layer.msg(data.Message);
+                    }
+                },
+                "json");
+        });
+}
 //@@ sourceURL=TenderInfo.js

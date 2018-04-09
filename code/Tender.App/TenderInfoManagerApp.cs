@@ -17,14 +17,18 @@ namespace Tender.App
         private ITenderUserRepository _renderUserRepository;
         private IEnclosureRepository _enclosureRepository;
         private IRelevanceRepository _relevanceRepository;
+        private IBidInfoRepository _bidInfoRepository;
         public TenderInfoManagerApp(ITenderInfoRepository repository,
             ITenderUserRepository renderUserRepository,
-            IEnclosureRepository enclosureRepository, IRelevanceRepository relevanceRepository)
+            IEnclosureRepository enclosureRepository,
+            IRelevanceRepository relevanceRepository,
+            IBidInfoRepository bidInfoRepository)
         {
             _repository = repository;
             _renderUserRepository = renderUserRepository;
             _enclosureRepository = enclosureRepository;
             _relevanceRepository = relevanceRepository;
+            _bidInfoRepository = bidInfoRepository;
         }
         public GridData Load(Guid userid, int pageindex, int pagesize)
         {
@@ -161,5 +165,11 @@ namespace Tender.App
             //发送短信等通知
 
         }
+        public void InvalidTender(Guid id)
+        {
+            _repository.Update(u => u.Id == id, u => new TenderInfo { State = 3 });//作废标书
+            _bidInfoRepository.Update(u => u.TenderId == id, u => new BidInfo { State = 2 });//作废已参与竞标
+        }
+
     }
 }

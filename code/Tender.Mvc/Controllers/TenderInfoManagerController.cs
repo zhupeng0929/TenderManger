@@ -158,6 +158,22 @@ namespace Tender.Mvc.Controllers
         }
 
         [HttpPost]
+        public string InvalidTender(Guid id)
+        {
+            try
+            {
+                _app.InvalidTender(id);
+            }
+            catch (Exception ex)
+            {
+                Result.Status = false;
+                Result.Message = ex.Message;
+            }
+
+            return JsonHelper.Instance.Serialize(Result);
+        }
+        
+        [HttpPost]
         public string CheckDate(Guid id)
         {
             var tenderinfo = _app.Find(id);
