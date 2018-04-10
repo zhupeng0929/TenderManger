@@ -192,7 +192,6 @@ D:\Git\TenderManger\code\Tender.Mvc\bin\Enyim.Caching.xml
 D:\Git\TenderManger\code\Tender.Mvc\bin\AutoMapper.xml
 D:\Git\TenderManger\code\Tender.Mvc\bin\OptimaJet.Workflow.Core.xml
 D:\Git\TenderManger\code\Tender.Mvc\bin\EntityFramework.Extended.xml
-D:\Git\TenderManger\code\Tender.Mvc\bin\EntityFramework.Extended.dll.config
 D:\Git\TenderManger\code\Tender.Mvc\bin\zh-Hans\EntityFramework.resources.dll
 D:\Git\TenderManger\code\Tender.Mvc\bin\zh-Hans\EntityFramework.SqlServer.resources.dll
 D:\Git\TenderManger\code\Tender.Mvc\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
@@ -208,3 +207,4 @@ D:\Git\TenderManger\code\Tender.Mvc\obj\Debug\Tender.Mvc.csprojResolveAssemblyRe
 D:\Git\TenderManger\code\Tender.Mvc\obj\Debug\Tender.Mvc.csproj.CoreCompileInputs.cache
 D:\Git\TenderManger\code\Tender.Mvc\obj\Debug\Tender.Mvc.dll
 D:\Git\TenderManger\code\Tender.Mvc\obj\Debug\Tender.Mvc.pdb
+D:\Git\TenderManger\code\Tender.Mvc\bin\EntityFramework.Extended.dll.config

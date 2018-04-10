@@ -12,7 +12,7 @@ namespace Tender.Mvc.Controllers
 {
     public class StatisticsController : BaseController
     {
-        public TenderStatisticsService App { get; set; }
+        public TenderStatisticsApp App { get; set; }
         public ActionResult Index()
         {
             
@@ -23,7 +23,7 @@ namespace Tender.Mvc.Controllers
         /// </summary>
         public string Load()
         {
-            return JsonHelper.Instance.Serialize(App.Load(orgId, pageCurrent, pageSize));
+            return JsonHelper.Instance.Serialize(App.GetTenderStatistics());
         }
     }
 }
