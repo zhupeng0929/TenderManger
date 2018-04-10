@@ -142,17 +142,26 @@ namespace Tender.Mvc.Controllers
         }
 
         [HttpPost]
-        public string PublishTender(Guid id)
+        public string PublishTender(Guid id, string account, string password)
         {
-            try
+            if (account != BaseUserInfo.User.Account)
             {
-                _app.PublishTender(id);
+                try
+                {
+                    _app.PublishTender(id, account, password);
+                }
+                catch (Exception ex)
+                {
+                    Result.Status = false;
+                    Result.Message = ex.Message;
+                }
             }
-            catch (Exception ex)
+            else
             {
                 Result.Status = false;
-                Result.Message = ex.Message;
+                Result.Message = "该账号已登录请更换！";
             }
+
 
             return JsonHelper.Instance.Serialize(Result);
         }
@@ -172,7 +181,7 @@ namespace Tender.Mvc.Controllers
 
             return JsonHelper.Instance.Serialize(Result);
         }
-        
+
         [HttpPost]
         public string CheckDate(Guid id)
         {
@@ -180,7 +189,17 @@ namespace Tender.Mvc.Controllers
             if (tenderinfo.EndTime >= DateTime.Now)//未截止招标
             {
                 Result.Status = false;
-                Result.Result = "招标未截止前无法发布中标人！";
+                Result.Message = "招标未截止前无法发布中标人！";
+            }
+            if (tenderinfo.State == 0)//未截止招标
+            {
+                Result.Status = false;
+                Result.Message = "暂未开标";
+            }
+            if (tenderinfo.State > 1)//未截止招标
+            {
+                Result.Status = false;
+                Result.Message = "该标书已结束或已作废！";
             }
             return JsonHelper.Instance.Serialize(Result);
         }

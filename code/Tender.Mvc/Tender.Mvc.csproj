@@ -154,6 +154,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Areas\FlowManage\Controllers\FlowInstancesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModuleElementManagerController.cs" />
     <Compile Include="Controllers\ModuleManagerController.cs" />
@@ -177,6 +178,7 @@
     <Content Include="BllScripts\assignModuleElement.js" />
     <Content Include="BllScripts\bidInfo.js" />
     <Content Include="BllScripts\categoryManager.js" />
+    <Content Include="BllScripts\statistics.js" />
     <Content Include="BllScripts\tenderInfo.js" />
     <Content Include="BllScripts\tenderUser.js" />
     <Content Include="BllScripts\formDesign.js" />
@@ -1142,6 +1144,7 @@
     <Content Include="Views\TenderUserManager\Index.cshtml" />
     <Content Include="Views\TenderInfoManager\Index.cshtml" />
     <Content Include="Views\TenderInfoManager\GetFiles.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

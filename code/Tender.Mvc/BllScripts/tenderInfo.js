@@ -88,6 +88,17 @@ function MainGrid() {
                     index: 'StateDes',
                     width: 50,
                     align: 'center',
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (rowObject.State == 0) {
+                            return '<span  class=\"label label-info arrowed\">未开标</span>';
+                        } else if (rowObject.State == 1) {
+                            return '<span  class=\"label label-success arrowed-in\">已开标</span>';
+                        } else if (rowObject.State == 2) {
+                            return '<span  class=\"label label-pink\">已结束</span>';
+                        } else {
+                            return '<span  class=\"label label-grey\">已作废</span>';
+                        }
+                    }
                 },
 
                 {
@@ -170,6 +181,7 @@ var editDlg = function () {
                         success: function (data) {
                             layer.msg(data.Message);
                             if (data.Status) {
+                                layer.close(index);
                                 list.reload();
                             }
                         }
@@ -253,6 +265,7 @@ function editFile() {
     });
 
 }
+//发布
 function publish() {
     var selected = list.getSelectedObj();
     if (selected == null) {
@@ -262,18 +275,55 @@ function publish() {
         null,
         function () {
             layer.close(lid);
-            $.post("/TenderInfoManager/PublishTender",
-                { id: selected.Id },
-                function (data) {
-                    if (data.Status) {
-                        list.reload();
-                    } else {
-                        layer.msg(data.Message);
+            
+           
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                title: "开标验证", //不显示标题
+                area: ['300px', '220px'], //宽高
+                maxmin: false, //开启最大化最小化按钮
+                content: $('#userDlg'), //捕获的元素
+                btn: ['验证', '取消'],
+                yes: function (index, layero) {
+                    var data = $('#userForm').serializeArray();
+                    data.push({ name: "id", value: selected.Id });
+                    $.ajax(
+                    {
+                        type: 'POST',
+                        url: '/TenderInfoManager/PublishTender',
+                        dataType: 'json',
+                        data: data,
+                        success: function (data) {
+                            layer.msg(data.Message);
+                            if (data.Status) {
+                                layer.close(index);
+                                list.reload();
+                            }
+                        }
                     }
+                )
                 },
-                "json");
+                cancel: function (index) {
+                    layer.close(index);
+                }
+            });
+
+
+
+            //$.post("/TenderInfoManager/PublishTender",
+            //    { id: selected.Id },
+            //    function (data) {
+            //        if (data.Status) {
+            //            list.reload();
+            //        } else {
+            //            layer.msg(data.Message);
+            //        }
+            //    },
+            //    "json");
         });
 }
+//作废
 function invalidtender() {
     var selected = list.getSelectedObj();
     if (selected == null) {

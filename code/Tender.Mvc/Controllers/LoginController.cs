@@ -9,12 +9,12 @@ namespace Tender.Mvc.Controllers
 {
     public class LoginController : Controller
     {
-        private string _appKey = ConfigurationManager.AppSettings["SSOAppKey"];
+        //private string _appKey = ConfigurationManager.AppSettings["SSOAppKey"];
         private ObjCacheProvider<UserAuthSession> _objCacheProvider = new ObjCacheProvider<UserAuthSession>();
         // GET: Login
         public ActionResult Index()
         {
-            ViewBag.AppKey = _appKey;
+            //ViewBag.AppKey = _appKey;
             return View();
         }
 
@@ -24,7 +24,7 @@ namespace Tender.Mvc.Controllers
             var resp = new Response();
             try
             {
-                var result = AuthUtil.Login(_appKey, username, password);
+                var result = AuthUtil.Login( username, password);
                 resp.Status = result.Success;
                 if (result.Success)
                 {
@@ -50,7 +50,7 @@ namespace Tender.Mvc.Controllers
         {
             try
             {
-                var result = AuthUtil.Login(_appKey, "System","123456");
+                var result = AuthUtil.Login("System","123456");
                 if (result.Success)
                     return Redirect("/home/index?Token=" + result.Token);
                 else

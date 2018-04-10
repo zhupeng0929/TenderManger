@@ -4,8 +4,8 @@
 
 <link href="~/Content/scripts/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" />
 <style>
-    .input-group{
-        display:table;
+    .input-group {
+        display: table;
     }
 </style>
 <div class="breadcrumbs" id="breadcrumbs">
@@ -45,13 +45,13 @@
 
 
             @*<div class="form-group">
-                    <label for="Id" class="col-sm-3 control-label no-padding-right">Id：</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="Id" name="Id" value="" />
-                    </div>
-                </div>*@
+                <label for="Id" class="col-sm-3 control-label no-padding-right">Id：</label>
+                <div class="col-sm-9">
+                    <input type="text" id="Id" name="Id" value="" />
+                </div>
+            </div>*@
             <div class="form-group">
-                <label for="Description" class="col-sm-3 control-label no-padding-right">标题：</label>
+                <label for="Title" class="col-sm-3 control-label no-padding-right">标题：</label>
                 <div class="col-sm-7">
 
                     <input id="Title" name="Title" v-model="Title" class="form-control" />
@@ -88,16 +88,16 @@
             </div>
 
             @*<div class="form-group">
-                    <label for="State" class="col-sm-3 control-label no-padding-right">状态：</label>
-                    <div class="col-sm-7">
-                        <select name="State" id="State" data-toggle="selectpicker" class="form-control" data-rule="required">
-                            <option value="0">未开标</option>
-                            <option value="1">已开标</option>
-                            <option value="2">已结束</option>
-                            <option value="3">已作废</option>
-                        </select>
-                    </div>
-                </div>*@
+                <label for="State" class="col-sm-3 control-label no-padding-right">状态：</label>
+                <div class="col-sm-7">
+                    <select name="State" id="State" data-toggle="selectpicker" class="form-control" data-rule="required">
+                        <option value="0">未开标</option>
+                        <option value="1">已开标</option>
+                        <option value="2">已结束</option>
+                        <option value="3">已作废</option>
+                    </select>
+                </div>
+            </div>*@
             <div style="margin-left:-12px;margin-right:-12px;">
                 <label class="col-sm-3 control-label no-padding-right" for=""> 货物照片 </label>
                 <div class="col-sm-7">
@@ -105,19 +105,18 @@
                 </div>
             </div>
             <div style="margin-left:-12px;margin-right:-12px;padding-top: 50px;">
-                <label class="col-sm-3 control-label no-padding-right" for=""> 货物视频 </label>
+                <label class="col-sm-3 control-label no-padding-right" for="Filedatavideo"> 货物视频 </label>
                 <div class="col-sm-7">
                     <input type="file" name="Filedatavideo" id="Filedatavideo" accept="video/*" />
                 </div>
             </div>
 
-            <div class="form-group"style="margin-top: 50px;">
-                <label for="Cycle" class="col-sm-3 control-label no-padding-right">参投人员：</label>
+            <div class="form-group" style="margin-top: 50px;">
+                <label for="TenderUser" class="col-sm-3 control-label no-padding-right">参投人员：</label>
                 <div class="col-sm-7">
-                    @Html.DropDownList("TenderUser", @ViewBag.userSelect as List<SelectListItem>,new { multiple = "multiple" })
-                    @*<select id="TenderUser"  multiple="multiple">
-                       
-                    </select>*@
+                    @Html.DropDownList("TenderUser", @ViewBag.userSelect as List<SelectListItem>
+                        ,new { multiple = "multiple" })
+                        @*<select id="TenderUser" multiple="multiple"></select>*@
                 </div>
 
             </div>
@@ -125,7 +124,27 @@
     </div>
 
 </div>
+<div id="userDlg" style="display: none;margin-top:10px;">
+    <div class="col-xs-12">
+        <form action="/TenderInfoManager/PublishTender" method="post" class="form-horizontal" id="userForm">
 
+            <div class="form-group">
+                <label for="account" class="col-sm-3 control-label no-padding-right">账号：</label>
+                <div class="col-sm-7">
+                    <input id="account" name="account" autocomplete="new-password" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-3 control-label no-padding-right">密码：</label>
+                <div class="col-sm-7">
+                    <input type="password" id="password" autocomplete="new-password" name="password" class="form-control" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
 <script src="~/Content/scripts/zTree/js/jquery.ztree.excheck.js"></script>
 <script src="~/BllScripts/grid.js"></script>
 <script src="~/BllScripts/parentTree.js"></script>
