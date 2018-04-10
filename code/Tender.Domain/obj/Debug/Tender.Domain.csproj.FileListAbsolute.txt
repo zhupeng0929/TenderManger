@@ -12,3 +12,4 @@ D:\Git\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.csproj.CoreCompil
 D:\Git\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.dll
 D:\Git\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.pdb
 E:\xxx招标系统\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.csprojResolveAssemblyReference.cache
+D:\Git\TenderManger\code\Tender.Domain\obj\Debug\Tender.Domain.csprojResolveAssemblyReference.cache

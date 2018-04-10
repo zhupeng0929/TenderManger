@@ -72,6 +72,8 @@ namespace Tender.Repository.Models
             modelBuilder.Configurations.Add(new WFSchemeContentMap());
             modelBuilder.Configurations.Add(new WFSchemeInfoMap());
             modelBuilder.Configurations.Add(new TenderUserMap());
+            
+            modelBuilder.Entity<TenderInfo>().Ignore(p => p.StateDes);
             modelBuilder.Configurations.Add(new TenderInfoMap());
         }
     }

@@ -53,7 +53,6 @@ namespace Tender.Repository.Models.Mapping
             Property(t => t.CreateDate)
                 .HasColumnName("CreateDate")
                 .IsRequired();
-
             // Relationships
         }
     }

@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Tender.Domain
@@ -66,6 +67,7 @@ namespace Tender.Domain
         /// <summary>
         /// 投标状态，0竞标中，1中标，2未中标，3作废
         /// </summary>
+        [NotMapped]
         public string StateDes
         {
             get

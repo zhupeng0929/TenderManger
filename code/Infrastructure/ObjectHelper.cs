@@ -52,7 +52,15 @@ namespace Infrastructure
                     {
 
                     }
-                    target.GetType().InvokeMember(property.Name, BindingFlags.SetProperty, null, target, new object[] { propertyValue });
+                    if (source.GetType().GetProperty(property.Name).GetCustomAttributes(typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute), false).Length > 0)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        target.GetType().InvokeMember(property.Name, BindingFlags.SetProperty, null, target, new object[] { propertyValue });
+                    }
+                    
                 }
 
             }

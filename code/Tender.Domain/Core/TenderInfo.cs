@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Tender.Domain
@@ -57,7 +58,7 @@ namespace Tender.Domain
 	    /// 0未开标，1已开标，2已结束，3已作废
 	    /// </summary>
         public int State { get; set; }
-
+        [NotMapped]
         public string StateDes
         {
             get

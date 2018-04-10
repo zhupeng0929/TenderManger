@@ -7,7 +7,6 @@ function MainGrid() {
     this.maingrid = $('#maingrid')
         .jqGrid({
             colModel: [
-                
                 {
                     name: 'Title',
                     label: '标题',
@@ -18,13 +17,15 @@ function MainGrid() {
                     name: 'Persons',
                     label: '投标人数',
                     index: 'Persons',
-                    width: 100
+                    width: 100,
+                    sortable :true
                 },
                 {
                     name: 'Price',
                     index: 'Price',
                     label: '中标金额',
-                    width: 100
+                    width: 100,
+                    sortable: true
                 }
             ],
             url: url,
