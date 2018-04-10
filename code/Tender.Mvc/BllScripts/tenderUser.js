@@ -44,8 +44,8 @@ function MainGrid() {
                 {
                     label: '营业执照', name: 'psth', index: 'psth',
                     formatter: function (cellvalue, options, rowdata) {
-                        if (cellvalue) {
-                            return ' <img src="' + cellvalue + '" id="img' + rowdata.Id + '"  style="width:50px;height:50px;" />';
+                        if (rowdata.BusinessLicense) {
+                            return ' <img src="' + rowdata.BusinessLicense + '" id="img' + rowdata.Id + '"  style="width:50px;height:50px;" />';
                         }
                         else {
                             return'<span>暂无</span>'

@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">投标单信息</a>
+        </li>
+        <li class="active">列表</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-box widget-color-blue">
+                <div class="widget-header">
+                    @Html.Action("MenuHeader", "Home", new { area = "" })
+                </div>
+                <div class="widget-body gridwidth">
+                    <div class="widget-main">
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <table id="maingrid"></table>
+                                <div id="grid-pager"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.page-content -->
+
+<script src="~/Content/scripts/zTree/js/jquery.ztree.excheck.js"></script>
+<script src="~/BllScripts/grid.js"></script>
+<script src="~/BllScripts/parentTree.js"></script>
+<script src="~/BllScripts/jqEvent.js"></script>
+<script src="~/Content/scripts/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+<script src="~/BllScripts/statistics.js"></script>

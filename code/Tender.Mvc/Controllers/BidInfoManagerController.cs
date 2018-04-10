@@ -61,6 +61,7 @@ namespace Tender.Mvc.Controllers
             if (AuthUtil.CheckUserPowerByKey("LOOK"))
             {
                 models = App.LoadTenderInfoList(Guid.Empty);
+                models.ForEach(t => t.Title += "【" + t.StateDes + "】");
                 //添加根节点
                 models.Insert(0, new TenderInfo
                 {
@@ -73,8 +74,9 @@ namespace Tender.Mvc.Controllers
 
 
                 models = App.LoadTenderInfoList(BaseUserInfo.User.Id);
+                models.ForEach(t => t.Title += "【" + t.StateDes + "】");
             }
-
+            
             return JsonHelper.Instance.Serialize(models);
         }
 
@@ -93,16 +95,16 @@ namespace Tender.Mvc.Controllers
             return JsonHelper.Instance.Serialize(Result);
         }
         [HttpPost]
-        public string UpdateBidinfoState(Guid tenderid,Guid bidinfoid)
+        public string UpdateBidinfoState(Guid tenderid, Guid bidinfoid)
         {
             try
             {
-                App.AddOrUpdate
+                App.UpdateBidinfoState(tenderid, bidinfoid);
             }
             catch
             {
                 Result.Status = false;
-                Result.Result = "发布失败！";
+                Result.Message = "发布失败！";
             }
             return JsonHelper.Instance.Serialize(Result);
         }

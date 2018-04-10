@@ -8,7 +8,10 @@ $(function () {
 var ztree = function () {
     var url = '/BidInfoManager/LoadForTree';
     var setting = {
-        view: { selectedMulti: false },
+        view: {
+            selectedMulti: false,
+            fontCss: setFontCss
+        },
         data: {
             key: {
                 name: 'Title',
@@ -25,6 +28,14 @@ var ztree = function () {
             onClick: function (event, treeId, treeNode) {
                 list.reload(treeNode.Id);
             }
+        }
+    };
+    function setFontCss(treeId, treeNode) {
+        if (treeNode.State > 1) {
+            return { color: "red" } ;
+        }
+        if (treeNode.State == 1) {
+            return { color: "green" };
         }
     };
     var load = function () {
@@ -85,6 +96,28 @@ function MainGrid() {
                    index: 'CreateDate',
                    label: '投标时间',
                },
+               {
+                   name: 'State',
+                   index: 'State',
+                   hidden: true
+               },
+               {
+                   name: 'StateDes',
+                   index: 'StateDes',
+                   label: '竞标状态',
+                   formatter: function (cellvalue, options, rowObject) {
+                       if (rowObject.State == 0) {
+                           return '<span  class=\"label label-info arrowed\">竞标中</span>';
+                       } else if (rowObject.State == 1) {
+                           return '<span  class=\"label label-success arrowed-in\">已中标</span>';
+                       } else if (rowObject.State == 2) {
+                           return '<span  class=\"label label-pink\">未中标</span>';
+                       } else {
+                           return '<span  class=\"label label-grey\">已作废</span>';
+                       }
+                   }
+               },
+               
             ],
             url: url+ selectedId,
             datatype: "json",
@@ -202,8 +235,8 @@ function refresh() {
 
 //发布中标
 function publishbid() {
-    var selected = zTreeObj.getSelectedNodes();
-    if (selected.length == 0 || selected[0].Id == '00000000-0000-0000-0000-000000000000') {
+    var selectednode = zTreeObj.getSelectedNodes();
+    if (selectednode.length == 0 || selectednode[0].Id == '00000000-0000-0000-0000-000000000000') {
         layer.msg('请先选择标书！');
         return;
     }
@@ -213,20 +246,23 @@ function publishbid() {
         return;
     }
 
-    var lid = layer.confirm("确认改标书已截止招标",
+    var lid = layer.confirm("确认该标书已截止招标",
         null,
         function () {
             layer.close(lid);
             $.post("/TenderInfoManager/CheckDate",
-                { id: selected[0].Id },
+                { id: selectednode[0].Id },
                 function (data) {
                     if (data.Status) {
 
-                        $.post("/TenderInfoManager/CheckDate",
-                            { id: selected[0].Id },
+                        $.post("/BidInfoManager/UpdateBidinfoState",
+                            {
+                                bidinfoid: selected.Id,
+                                tenderid: selectednode[0].Id
+                            },
                             function (data) {
                                 if (data.Status) {
-                                    
+                                    list.reload();
                                 } else {
                                     layer.msg(data.Message);
                                 }

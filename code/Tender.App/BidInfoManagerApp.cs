@@ -103,10 +103,10 @@ namespace Tender.App
             return bidinfo;
         }
 
-        //public void Delete(Guid id)
-        //{
-        //    _repository.Delete(id);
-        //}
+        public void Delete(Guid id)
+        {
+            _repository.Delete(id);
+        }
         /// <summary>
         /// 发布中标
         /// </summary>

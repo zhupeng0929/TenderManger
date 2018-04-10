@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tender.Domain;
 using Tender.Domain.Interface;
-
+using EntityFramework.Extensions;
 namespace Tender.Repository
 {
     public class BidInfoRepository : BaseRepository<BidInfo>, IBidInfoRepository
@@ -33,7 +33,9 @@ namespace Tender.Repository
                 try
                 {
                     Update(b => b.TenderId == tenderid && b.Id == bidinfoid, b => new BidInfo { State = 1 });//跟新为中标
-                    Update(b => b.TenderId == tenderid && b.Id != bidinfoid, b => new BidInfo { State = 1 });//其他所有人更新成未中标
+                    Update(b => b.TenderId == tenderid && b.Id != bidinfoid, b => new BidInfo { State = 2 });//其他所有人更新成未中标
+                    Context.Set<TenderInfo>().Where(t => t.Id == tenderid).Update(t => new TenderInfo { State = 2 });//标书设置成结束
+
                     Context.SaveChanges();
                     tarans.Commit();
                 }

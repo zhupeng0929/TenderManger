@@ -25,20 +25,7 @@ namespace Tender.App.ViewModel
             get { return _enclosureVido; }
             set { _enclosureVido = value; }
         }
-        public string StateDes
-        {
-            get
-            {
-                switch (State)
-                {
-                    case 0: return "未开标";
-                    case 1: return "已开标";
-                    case 2: return "已结束";
-                    case 3: return "已作废";
-                    default: return "无效";
-                };
-            }
-        }
+
 
         public string SelectUser { get; set; }
 

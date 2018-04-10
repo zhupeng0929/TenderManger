@@ -33,7 +33,7 @@ namespace Tender.App.SSO
     {
         //static HttpHelper _helper = new HttpHelper(ConfigurationManager.AppSettings["SSOPassport"]);
         private static ObjCacheProvider<UserAuthSession> _objCacheProvider = new ObjCacheProvider<UserAuthSession>();
-        private AuthorizeApp _app = (AuthorizeApp)DependencyResolver.Current.GetService(typeof(AuthorizeApp));
+        private  AuthorizeApp _app = (AuthorizeApp)DependencyResolver.Current.GetService(typeof(AuthorizeApp));
         private static string GetToken()
         {
             string token = HttpContext.Current.Request.QueryString["Token"];
@@ -103,11 +103,8 @@ namespace Tender.App.SSO
         public static UserWithAccessedCtrls GetCurrentUser(string remark = "")
         {
 
-            //var requestUri = String.Format("/api/Check/GetUser?token={0}&requestid={1}", GetToken(), remark);
-
             try
             {
-                //var value = _helper.Get<UserWithAccessedCtrls>(null, requestUri);
                 var value = new AuthUtil().GetUser(GetToken(), remark);
                 return value;
             }
@@ -116,7 +113,7 @@ namespace Tender.App.SSO
                 throw ex;
             }
         }
-        private UserWithAccessedCtrls GetUser(string token, string requestid = "")
+        private  UserWithAccessedCtrls GetUser(string token, string requestid = "")
         {
             string userName = GetUserName(token, requestid);
             if (!string.IsNullOrEmpty(userName))
@@ -126,7 +123,14 @@ namespace Tender.App.SSO
 
             return null;
         }
-
+        public  UserWithAccessedCtrls GetUser(string userName)
+        {
+            if (!string.IsNullOrEmpty(userName))
+            {
+                return _app.GetAccessedControls(userName);
+            }
+            return null;
+        }
         /// <summary>
         /// 获取当前登录的用户名
         /// <para>通过URL中的Token参数或Cookie中的Token</para>
@@ -156,7 +160,7 @@ namespace Tender.App.SSO
         /// <param name="username">用户名</param>
         /// <param name="pwd">密码</param>
         /// <returns>System.String.</returns>
-        public static LoginResult Login(string appKey, string username, string pwd)
+        public static LoginResult Login(string username, string pwd)
         {
             //var requestUri = "/api/Check/Login";
 
@@ -170,7 +174,7 @@ namespace Tender.App.SSO
                 //}, requestUri);
                 var request = new PassportLoginRequest()
                 {
-                    AppKey = appKey,
+
                     UserName = username,
                     Password = pwd
                 };

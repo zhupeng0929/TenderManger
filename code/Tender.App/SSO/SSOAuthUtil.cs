@@ -18,11 +18,11 @@ namespace Tender.App.SSO
             {
                 model.Trim();
                 //获取应用信息
-                var appInfo = new AppInfoService().Get(model.AppKey);
-                if (appInfo == null)
-                {
-                    throw new Exception("应用不存在");
-                }
+                //var appInfo = new AppInfoService().Get(model.AppKey);
+                //if (appInfo == null)
+                //{
+                //    throw new Exception("应用不存在");
+                //}
                 //获取用户信息
                 User userInfo = null;
                 if (model.UserName == "System")
@@ -63,7 +63,7 @@ namespace Tender.App.SSO
                 new ObjCacheProvider<UserAuthSession>().Create(currentSession.Token, currentSession, DateTime.Now.AddDays(10));
 
                 result.Success = true;
-                result.ReturnUrl = appInfo.ReturnUrl;
+                result.ReturnUrl = "/home/index";
                 result.Token = currentSession.Token;
             }
             catch (Exception ex)

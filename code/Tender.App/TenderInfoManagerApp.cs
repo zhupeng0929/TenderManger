@@ -18,17 +18,20 @@ namespace Tender.App
         private IEnclosureRepository _enclosureRepository;
         private IRelevanceRepository _relevanceRepository;
         private IBidInfoRepository _bidInfoRepository;
+        private IUserRepository _userRepository;
         public TenderInfoManagerApp(ITenderInfoRepository repository,
             ITenderUserRepository renderUserRepository,
             IEnclosureRepository enclosureRepository,
             IRelevanceRepository relevanceRepository,
-            IBidInfoRepository bidInfoRepository)
+            IBidInfoRepository bidInfoRepository,
+            IUserRepository userRepository)
         {
             _repository = repository;
             _renderUserRepository = renderUserRepository;
             _enclosureRepository = enclosureRepository;
             _relevanceRepository = relevanceRepository;
             _bidInfoRepository = bidInfoRepository;
+            _userRepository = userRepository;
         }
         public GridData Load(Guid userid, int pageindex, int pagesize)
         {
@@ -158,9 +161,29 @@ namespace Tender.App
             return result;
         }
 
-        public void PublishTender(Guid id)
+        public void PublishTender(Guid id, string account, string password)
         {
-            _repository.Update(u => u.Id == id, u => new TenderInfo() { State = 1 });
+            //验证
+            //AuthUtil.Login
+            var user = _userRepository.FindSingle(u => u.Account == account);
+            if (user != null && user.Password == Md5.Encrypt(password))//账号正确
+            {
+                //验证有无权限
+                var userpower = new AuthUtil().GetUser(user.Name);
+                if (userpower.Modules.Exists(m => m.Elements.Exists(e => e.DomId == "btnPublish")))
+                {
+                    _repository.Update(u => u.Id == id, u => new TenderInfo() { State = 1 });
+                }
+                else
+                {
+                    throw new Exception("无此账号无发布权限！");
+                }
+            }
+            else
+            {
+                throw new Exception("无此账号或密码不正确！");
+            }
+            //_repository.Update(u => u.Id == id, u => new TenderInfo() { State = 1 });
             //todo
             //发送短信等通知
 
@@ -168,7 +191,7 @@ namespace Tender.App
         public void InvalidTender(Guid id)
         {
             _repository.Update(u => u.Id == id, u => new TenderInfo { State = 3 });//作废标书
-            _bidInfoRepository.Update(u => u.TenderId == id, u => new BidInfo { State = 2 });//作废已参与竞标
+            _bidInfoRepository.Update(u => u.TenderId == id, u => new BidInfo { State = 3 });//作废已参与竞标
         }
 
     }

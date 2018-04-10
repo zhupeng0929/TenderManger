@@ -60,8 +60,25 @@ namespace Tender.Domain
         /// </summary>
         public DateTime EndTime { get; set; }
         /// <summary>
-        /// 竞标状态，0未中标，1中标，2作废
+        /// 投标状态，0竞标中，1中标，2未中标，3作废
         /// </summary>
         public int State { get; set; }
+        /// <summary>
+        /// 投标状态，0竞标中，1中标，2未中标，3作废
+        /// </summary>
+        public string StateDes
+        {
+            get
+            {
+                switch (State)
+                {
+                    case 0: return "竞标中";
+                    case 1: return "中标";
+                    case 2: return "未中标";
+                    case 3: return "作废";
+                    default: return "未知";
+                }
+            }
+        }
     }
 }
