@@ -209,3 +209,5 @@ E:\xxx招标系统\TenderManger\code\Tender.Mvc\obj\Debug\Tender.Mvc.csprojResol
 E:\xxx招标系统\TenderManger\code\Tender.Mvc\obj\Debug\Tender.Mvc.dll
 E:\xxx招标系统\TenderManger\code\Tender.Mvc\obj\Debug\Tender.Mvc.pdb
 E:\xxx招标系统\TenderManger\code\Tender.Mvc\bin\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\Git\TenderManger\code\Tender.Mvc\bin\Infrastructure.dll.config
+D:\Git\TenderManger\code\Tender.Mvc\bin\Tender.App.dll.config

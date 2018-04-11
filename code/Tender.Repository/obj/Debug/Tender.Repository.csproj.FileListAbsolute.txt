@@ -79,3 +79,4 @@ E:\xxx招标系统\TenderManger\code\Tender.Repository\obj\Debug\Tender.Reposito
 E:\xxx招标系统\TenderManger\code\Tender.Repository\obj\Debug\Tender.Repository.dll
 E:\xxx招标系统\TenderManger\code\Tender.Repository\obj\Debug\Tender.Repository.pdb
 E:\xxx招标系统\TenderManger\code\Tender.Repository\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\Git\TenderManger\code\Tender.Repository\bin\Debug\Infrastructure.dll.config

@@ -56,7 +56,10 @@ namespace Tender.Domain.Service
         {
             get { return GetOrgsQuery().ToList(); }
         }
-
+        public List<TenderInfo> TenderInfos
+        {
+            get { return GetTenderInfoQuery().ToList(); }
+        }
         public User User
         {
             get { return _user; }
@@ -131,6 +134,14 @@ namespace Tender.Domain.Service
         public virtual IQueryable<Role> GetRolesQuery()
         {
             return _unitWork.Find<Role>(u => _userRoleIds.Contains(u.Id));
+        }
+
+        public virtual IQueryable<TenderInfo> GetTenderInfoQuery()
+        {
+            var tenderinfoIds = _unitWork.Find<Relevance>(
+                u =>
+                    (u.SecondId == _user.Id && u.Key == "TenderUser") ).Select(u => u.FirstId);
+            return _unitWork.Find<TenderInfo>(u => tenderinfoIds.Contains(u.Id));
         }
     }
 }

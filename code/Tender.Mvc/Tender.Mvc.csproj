@@ -147,6 +147,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Api\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Api\Controllers\TenderInfoController.cs" />
     <Compile Include="AutofacExt.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BidInfoManagerController.cs" />
@@ -1132,6 +1134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Api\Views\TenderInfo\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

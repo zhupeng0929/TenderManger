@@ -29,6 +29,8 @@ namespace Tender.App.ViewModel
 
 
         public List<Role> Roles { get; set; }
+
+        public List<TenderInfo> TenderInfos { get; set; }
     }
 
 }
