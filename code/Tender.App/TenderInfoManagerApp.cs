@@ -109,8 +109,9 @@ namespace Tender.App
 
             if (model.Id == Guid.Empty)
             {
-                var userid = AuthUtil.GetCurrentUser().User.Id;
-                model.CreateUser = userid;
+                var user = AuthUtil.GetCurrentUser().User;
+                model.CreateUser = user.Id;
+                model.FirstUser = user.Name;
                 AddTrans(model);
             }
             else
@@ -172,7 +173,7 @@ namespace Tender.App
                 var userpower = new AuthUtil().GetUser(user.Name);
                 if (userpower.Modules.Exists(m => m.Elements.Exists(e => e.DomId == "btnPublish")))
                 {
-                    _repository.Update(u => u.Id == id, u => new TenderInfo() { State = 1 });
+                    _repository.Update(u => u.Id == id, u => new TenderInfo() { State = 1, SecondUser = user.Name });
                 }
                 else
                 {
