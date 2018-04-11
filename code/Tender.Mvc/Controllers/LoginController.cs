@@ -29,10 +29,12 @@ namespace Tender.Mvc.Controllers
                 if (result.Success)
                 {
                     resp.Result = "/home/index?Token=" + result.Token;
+                    LogHelper.Info(new LogContent(Request.UserHostAddress, username, "登录系统", "登录成功"));
                 }
                 else
                 {
                     resp.Message = "登陆失败";
+                    LogHelper.Info(new LogContent(Request.UserHostAddress, username, "登录系统", "登陆失败"));
                 }
             }
             catch (Exception e)
@@ -43,28 +45,28 @@ namespace Tender.Mvc.Controllers
             return JsonHelper.Instance.Serialize(resp);
         }
 
-        /// <summary>
-        /// 开发者登陆
-        /// </summary>
-        public ActionResult LoginByDev()
-        {
-            try
-            {
-                var result = AuthUtil.Login("System","123456");
-                if (result.Success)
-                    return Redirect("/home/index?Token=" + result.Token);
-                else
-                {
-                    return RedirectToAction("Index", "Login");
+        ///// <summary>
+        ///// 开发者登陆
+        ///// </summary>
+        //public ActionResult LoginByDev()
+        //{
+        //    try
+        //    {
+        //        var result = AuthUtil.Login("System","123456");
+        //        if (result.Success)
+        //            return Redirect("/home/index?Token=" + result.Token);
+        //        else
+        //        {
+        //            return RedirectToAction("Index", "Login");
 
-                }
+        //        }
 
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return RedirectToAction("Index", "Login");
+        //    }
+        //}
 
         public ActionResult Logout()
         {

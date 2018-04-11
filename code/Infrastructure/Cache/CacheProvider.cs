@@ -5,7 +5,7 @@ namespace Infrastructure.Cache
 {
     /// <summary>
     /// 缓存工厂
-    /// <para>李玉宝新增于2016-11-09 9:42:52</para>
+    /// <para>ZhuPeng新增于2018-11-09 9:42:52</para>
     /// </summary>
     public abstract class CacheProvider : IDisposable
     {

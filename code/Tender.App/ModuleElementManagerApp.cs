@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : Tender.App
-// Author           : Yubao Li
+// Author           : ZhuPeng
 // Created          : 12-02-2015
 //
-// Last Modified By : Yubao Li
+// Last Modified By : ZhuPeng
 // Last Modified On : 12-02-2015
 // ***********************************************************************
 // <copyright file="ModuleElementManagerApp.cs" company="">

@@ -1,16 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Tender.Mvc
-// Author           : zhu.peng
-// Created          : 04-07-2016
-//
-// Last Modified By : zhu.peng
-// Last Modified On : 04-07-2016
-// ***********************************************************************
-// <copyright file="moduleElementMan.js" company="www.cnblogs.com/zhu.peng">
-//     模块按钮管理
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
+﻿
 
 var moduleId = $("#selectedModuleId").val();  //外部传递的moduleId
 

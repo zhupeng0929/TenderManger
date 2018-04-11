@@ -45,7 +45,7 @@ namespace Tender.Mvc.Controllers
                     view.BusinessLicense = Result.Result;
                 }
                 App.AddOrUpdate(view);
-
+                Log("添加或修改投标客户信息", JsonHelper.Instance.Serialize(view));
             }
             catch (Exception ex)
             {
@@ -54,13 +54,18 @@ namespace Tender.Mvc.Controllers
             }
             return JsonHelper.Instance.Serialize(Result);
         }
-
+        /// <summary>
+        /// 批量删除投标客户信息
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpPost]
         public string Delete(Guid[] ids)
         {
             try
             {
                 App.Delete(ids);
+                Log("批量删除投标客户信息", JsonHelper.Instance.Serialize(ids));
             }
             catch (Exception e)
             {

@@ -46,6 +46,7 @@
     <Compile Include="Core\BidInfo.cs" />
     <Compile Include="Core\Category.cs" />
     <Compile Include="Core\Enclosure.cs" />
+    <Compile Include="Core\LogDetails.cs" />
     <Compile Include="Core\TenderInfo.cs" />
     <Compile Include="Core\TenderUser.cs" />
     <Compile Include="Core\UserExt.cs" />
@@ -55,13 +56,13 @@
     <Compile Include="Interface\IBidInfoRepository.cs" />
     <Compile Include="Interface\ICategoryRepository.cs" />
     <Compile Include="Interface\IEnclosureRepository.cs" />
+    <Compile Include="Interface\ILogDetailsRepository.cs" />
     <Compile Include="Interface\IModuleRepository.cs" />
     <Compile Include="Interface\IOrgRepository.cs" />
     <Compile Include="Interface\IRepository.cs" />
     <Compile Include="Interface\IResourceRepository.cs" />
     <Compile Include="Interface\IRoleRepository.cs" />
     <Compile Include="Interface\IRelevanceRepository.cs" />
-    <Compile Include="Interface\IStockRepository.cs" />
     <Compile Include="Interface\ITenderInfoRepository.cs" />
     <Compile Include="Interface\ITenderUserRepository.cs" />
     <Compile Include="Interface\IUnitWork.cs" />
@@ -79,16 +80,7 @@
     <Compile Include="Service\ModuleEleManService.cs" />
     <Compile Include="Service\ModuleManService.cs" />
     <Compile Include="Service\ResManagerService.cs" />
-    <Compile Include="Service\StockManagerService.cs" />
-    <Compile Include="Core\Stock.cs" />
     <Compile Include="Core\User.cs" />
-    <Compile Include="Core\WFFrmMain.cs" />
-    <Compile Include="Core\WFProcessInstance.cs" />
-    <Compile Include="Core\WFProcessOperationHistory.cs" />
-    <Compile Include="Core\WFProcessScheme.cs" />
-    <Compile Include="Core\WFProcessTransitionHistory.cs" />
-    <Compile Include="Core\WFSchemeContent.cs" />
-    <Compile Include="Core\WFSchemeInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

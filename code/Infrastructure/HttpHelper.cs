@@ -97,7 +97,7 @@ namespace Infrastructure
         /// <summary>
         /// 提交字典类型的数据
         /// <para>最终以formurlencode的方式放置在http体中</para>
-        /// <para>李玉宝于2016-07-20 19:01:59</para>
+        /// <para>ZhuPeng于2016-07-20 19:01:59</para>
         /// </summary>
         /// <returns>System.String.</returns>
         public string PostDicObj(Dictionary<string, object> para, string requestUri)
@@ -127,7 +127,7 @@ namespace Infrastructure
         /// <summary>
         /// Post Dic数据
         /// <para>最终以formurlencode的方式放置在http体中</para>
-        /// <para>李玉宝于2016-07-15 15:28:41</para>
+        /// <para>ZhuPeng于2016-07-15 15:28:41</para>
         /// </summary>
         /// <returns>System.String.</returns>
         public string PostDic(Dictionary<string, string> temp, string requestUri)
@@ -152,7 +152,7 @@ namespace Infrastructure
 
         /// <summary>
         /// 把请求的URL相对路径组合成绝对路径
-        /// <para>李玉宝于2016-07-21 9:54:07</para>
+        /// <para>ZhuPeng于2016-07-21 9:54:07</para>
         /// </summary>
         private string ConcatURL(string requestUrl)
         {

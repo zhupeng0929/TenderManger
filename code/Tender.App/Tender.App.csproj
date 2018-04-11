@@ -87,15 +87,13 @@
     <Compile Include="Extention\WF_Runtime.cs" />
     <Compile Include="Extention\WF_RuntimeInitModel.cs" />
     <Compile Include="Extention\WF_RuntimeModel.cs" />
+    <Compile Include="LogDetailsManagerApp.cs" />
     <Compile Include="TenderInfoManagerApp.cs" />
     <Compile Include="TenderStatisticsApp.cs" />
     <Compile Include="TenderUserManagerApp.cs" />
     <Compile Include="ViewModel\TenderInfoView.cs" />
     <Compile Include="ViewModel\TenderStatistics.cs" />
     <Compile Include="ViewModel\TenderUserView.cs" />
-    <Compile Include="WFFormService.cs" />
-    <Compile Include="WFProcessInstanceService.cs" />
-    <Compile Include="WFSchemeService.cs" />
     <Compile Include="ModuleElementManagerApp.cs" />
     <Compile Include="ModuleManagerApp.cs" />
     <Compile Include="ResourceManagerApp.cs" />
@@ -110,7 +108,6 @@
     <Compile Include="SSO\LoginResult.cs" />
     <Compile Include="SSO\SSOAuthAttribute.cs" />
     <Compile Include="SSO\UserAuthSession.cs" />
-    <Compile Include="StockManagerApp.cs" />
     <Compile Include="UserManagerApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OrgManagerApp.cs" />
@@ -133,6 +130,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

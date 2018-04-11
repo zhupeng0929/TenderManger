@@ -61,6 +61,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
@@ -143,17 +147,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\FlowManage\Controllers\FileController.cs" />
-    <Compile Include="Areas\FlowManage\Controllers\FormDesignController.cs" />
-    <Compile Include="Areas\FlowManage\Controllers\FlowDesignController.cs" />
-    <Compile Include="Areas\FlowManage\FlowManageAreaRegistration.cs" />
     <Compile Include="AutofacExt.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BidInfoManagerController.cs" />
     <Compile Include="Controllers\CategoryManagerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Areas\FlowManage\Controllers\FlowInstancesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModuleElementManagerController.cs" />
@@ -162,7 +162,6 @@
     <Compile Include="Controllers\RelevanceManagerController.cs" />
     <Compile Include="Controllers\ResourceManagerController.cs" />
     <Compile Include="Controllers\RoleManagerController.cs" />
-    <Compile Include="Controllers\StockManagerController.cs" />
     <Compile Include="Controllers\TenderInfoManagerController.cs" />
     <Compile Include="Controllers\TenderUserManagerController.cs" />
     <Compile Include="Controllers\UserManagerController.cs" />
@@ -178,10 +177,10 @@
     <Content Include="BllScripts\assignModuleElement.js" />
     <Content Include="BllScripts\bidInfo.js" />
     <Content Include="BllScripts\categoryManager.js" />
+    <Content Include="BllScripts\logdetails.js" />
     <Content Include="BllScripts\statistics.js" />
     <Content Include="BllScripts\tenderInfo.js" />
     <Content Include="BllScripts\tenderUser.js" />
-    <Content Include="BllScripts\formDesign.js" />
     <Content Include="BllScripts\jqEvent.js" />
     <Content Include="BllScripts\login.js" />
     <Content Include="BllScripts\parentTreeMultiple.js" />
@@ -194,9 +193,6 @@
     <Content Include="BllScripts\queryString.js" />
     <Content Include="BllScripts\resourceManager.js" />
     <Content Include="BllScripts\roleManager.js" />
-    <Content Include="BllScripts\flowInstance.js" />
-    <Content Include="BllScripts\flowDesign.js" />
-    <Content Include="BllScripts\stockManager.js" />
     <Content Include="BllScripts\usermanager.js" />
     <Content Include="BllScripts\assignRes.js" />
     <Content Include="BllScripts\userRoleManager.js" />
@@ -1085,11 +1081,6 @@
     <Content Include="Content\scripts\layui\font\iconfont.eot" />
     <Content Include="Content\scripts\layui\font\iconfont.ttf" />
     <Content Include="Content\scripts\layui\font\iconfont.woff" />
-    <Content Include="Areas\FlowManage\Views\web.config" />
-    <Content Include="Areas\FlowManage\Views\FlowDesign\FlowLineForm.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FlowDesign\FlowNodeForm.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FlowDesign\FlowSchemeBuider.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FlowDesign\Index.cshtml" />
     <Content Include="Content\scripts\plugins\ckeditor\plugins\scayt\LICENSE.md" />
     <Content Include="Content\scripts\plugins\ckeditor\plugins\scayt\README.md" />
     <Content Include="Content\scripts\plugins\ckeditor\plugins\wsc\LICENSE.md" />
@@ -1105,19 +1096,12 @@
     <Content Include="Content\styles\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\styles\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\styles\fonts\FontAwesome.otf" />
-    <Content Include="Areas\FlowManage\Views\FlowInstances\ProcessLookForm.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FlowInstances\FlowProcessNewForm.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FlowDesign\PreviewIndex.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FlowInstances\VerificationForm.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FormDesign\Index.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FormDesign\FormPreview.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FormDesign\FrmBuider.cshtml" />
     <Content Include="Content\scripts\plugins\bootstrap-multiselect\less\bootstrap-multiselect.less" />
+    <Content Include="Log4Net.config" />
     <None Include="Properties\PublishProfiles\default.pubxml" />
     <Content Include="Views\BidInfoManager\Index.cshtml" />
     <Content Include="Views\BidInfoManager\TenderUserList.cshtml" />
     <None Include="Views\Error\NoAccess.cshtml" />
-    <Content Include="Views\Home\git.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1135,7 +1119,6 @@
     <Content Include="Views\ResourceManager\AssignRes.cshtml" />
     <Content Include="Views\StockManager\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\FlowManage\Views\FlowInstances\Index.cshtml" />
     <Content Include="Views\Home\Navbar.cshtml" />
     <Content Include="Views\Shared\Blank.cshtml" />
     <Content Include="Views\Shared\_LayoutNoHeader.cshtml" />
@@ -1145,11 +1128,10 @@
     <Content Include="Views\TenderInfoManager\Index.cshtml" />
     <Content Include="Views\TenderInfoManager\GetFiles.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\FlowManage\Models\" />
-    <Folder Include="Areas\FlowManage\Views\Shared\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,16 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Tender.Mvc
-// Author           : zhu.peng
-// Created          : 09-04-2016
-//
-// Last Modified By : zhu.peng
-// Last Modified On : 09-04-2016
-// ***********************************************************************
-// <copyright file="queryString.js" company="www.cnblogs.com/zhu.peng">
-//     版权所有(C) 2015
-// </copyright>
-// <summary>解析URL中的参数</summary>
-// ***********************************************************************
+﻿
 
 var QueryString = function () {
     // This function is anonymous, is executed immediately and 

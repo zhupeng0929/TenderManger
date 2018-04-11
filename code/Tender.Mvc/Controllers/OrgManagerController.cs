@@ -51,6 +51,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 OrgApp.AddOrUpdate(org);
+                Log("添加组织提交", JsonHelper.Instance.Serialize(org));
             }
             catch (Exception ex)
             {
@@ -76,6 +77,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 OrgApp.DelOrg(ids);
+                Log("删除指定ID的组织", JsonHelper.Instance.Serialize(ids));
             }
             catch (Exception e)
             {

@@ -8,6 +8,7 @@ using Tender.Mvc.Models;
 
 namespace Tender.Mvc.Controllers
 {
+
     public class UserManagerController : BaseController
     {
         public UserManagerApp App { get; set; }
@@ -27,7 +28,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 App.AddOrUpdate(view);
-                
+                Log("添加或修改系统用户信息", JsonHelper.Instance.Serialize(view));
             }
             catch (Exception ex)
             {
@@ -44,13 +45,18 @@ namespace Tender.Mvc.Controllers
         {
             return JsonHelper.Instance.Serialize(App.Load(orgId, page, rows));
         }
-
+        /// <summary>
+        /// 批量删除系统用户信息
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpPost]
         public string Delete(Guid[] ids)
         {
             try
             {
                 App.Delete(ids);
+                Log("批量删除系统用户信息", JsonHelper.Instance.Serialize(ids));
             }
             catch (Exception e)
             {
@@ -65,7 +71,7 @@ namespace Tender.Mvc.Controllers
 
         /// <summary>
         /// 获取用户可访问的账号
-        /// <para>李玉宝于2017-02-28 15:12:19</para>
+        /// <para>ZhuPeng于2017-02-28 15:12:19</para>
         /// </summary>
         public string GetAccessedUsers()
         {

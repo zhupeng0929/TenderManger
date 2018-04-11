@@ -59,17 +59,12 @@
   <ItemGroup>
     <Compile Include="BidInfoRepository.cs" />
     <Compile Include="EnclosureRepository.cs" />
+    <Compile Include="LogDetailsRepository.cs" />
     <Compile Include="Models\Mapping\BidInfoMap.cs" />
     <Compile Include="Models\Mapping\EnclosureMap.cs" />
+    <Compile Include="Models\Mapping\LogDetailsMap.cs" />
     <Compile Include="Models\Mapping\TenderInfoMap.cs" />
     <Compile Include="Models\Mapping\TenderUserMap.cs" />
-    <Compile Include="Models\Mapping\WFFrmMainMap.cs" />
-    <Compile Include="Models\Mapping\WFProcessInstanceMap.cs" />
-    <Compile Include="Models\Mapping\WFProcessOperationHistoryMap.cs" />
-    <Compile Include="Models\Mapping\WFProcessSchemeMap.cs" />
-    <Compile Include="Models\Mapping\WFProcessTransitionHistoryMap.cs" />
-    <Compile Include="Models\Mapping\WFSchemeContentMap.cs" />
-    <Compile Include="Models\Mapping\WFSchemeInfoMap.cs" />
     <Compile Include="TenderInfoRepository.cs" />
     <Compile Include="TenderUserRepository.cs" />
     <Compile Include="UnitWork.cs" />
@@ -83,7 +78,6 @@
     <Compile Include="Models\Mapping\RelevanceMap.cs" />
     <Compile Include="Models\Mapping\ResourceMap.cs" />
     <Compile Include="Models\Mapping\RoleMap.cs" />
-    <Compile Include="Models\Mapping\StockMap.cs" />
     <Compile Include="Models\Mapping\UserMap.cs" />
     <Compile Include="Models\TenderDBContext.cs" />
     <Compile Include="OrgRepository.cs" />
@@ -92,7 +86,6 @@
     <Compile Include="RoleRepository.cs" />
     <Compile Include="ResourceRepository.cs" />
     <Compile Include="CategoryRepository.cs" />
-    <Compile Include="StockRepository.cs" />
     <Compile Include="UserRepository.cs" />
     <Compile Include="RelevanceRepository.cs" />
   </ItemGroup>

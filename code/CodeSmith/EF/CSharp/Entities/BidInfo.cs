@@ -24,6 +24,8 @@ namespace Tender.Domain
           this.UserName= string.Empty;
           this.TenderPrice= 0;
           this.CreateDate= DateTime.Now;
+          this.EndTime= DateTime.Now;
+          this.State= 0;
         }
 
         /// <summary>
@@ -54,6 +56,14 @@ namespace Tender.Domain
 	    /// 投标时间
 	    /// </summary>
         public System.DateTime CreateDate { get; set; }
+        /// <summary>
+	    /// 
+	    /// </summary>
+        public System.DateTime EndTime { get; set; }
+        /// <summary>
+	    /// 投标状态，0竞标中，1中标，2未中标，3作废
+	    /// </summary>
+        public int State { get; set; }
 
     }
 }

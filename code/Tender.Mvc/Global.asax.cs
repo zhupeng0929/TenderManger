@@ -7,6 +7,7 @@ using Infrastructure;
 using Newtonsoft.Json.Linq;
 using Tender.Mvc.Controllers;
 using Tender.Mvc.Models;
+using log4net.Config;
 
 namespace Tender.Mvc
 {
@@ -24,9 +25,9 @@ namespace Tender.Mvc
 
             ModelBinders.Binders.Add(typeof(JObject), new JobjectModelBinder());
 
-            LogHelper.Log("启动Web");
+            //LogHelper.Log("启动Web");
         }
-
+      
 
         //protected void Application_Error(object sender, EventArgs e)
         //{

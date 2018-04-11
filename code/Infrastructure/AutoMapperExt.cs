@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : FairUtility
-// Author           : Yubao Li
+// Author           : ZhuPeng
 // Created          : 08-27-2015
 //
-// Last Modified By : Yubao Li
+// Last Modified By : ZhuPeng
 // Last Modified On : 08-27-2015
 // ***********************************************************************
 // <copyright file="AutoMapperExt.cs" company="">

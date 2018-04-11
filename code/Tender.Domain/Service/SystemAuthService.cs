@@ -24,7 +24,7 @@ namespace Tender.Domain.Service
     {
         public SystemAuthService(IUnitWork unitWork):base(unitWork)
         {
-            _user = new User { Account = "System", Id = Guid.Empty };
+            _user = new User { Account = "System", Id = Guid.Empty, Name = "System管理员" };
         }
 
        

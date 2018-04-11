@@ -8,6 +8,7 @@ using Tender.App.SSO;
 using Tender.App.ViewModel;
 using Tender.Mvc.Models;
 
+
 namespace Tender.Mvc.Controllers
 {
     public class HomeController : BaseController
@@ -15,6 +16,7 @@ namespace Tender.Mvc.Controllers
 
         public ActionResult Index()
         {
+           
             ViewBag.NavBar = GetNavBar();
             return View();
         }
@@ -62,11 +64,6 @@ namespace Tender.Mvc.Controllers
                 }
             }
             return sb.ToString();
-        }
-        
-        public ActionResult Git()
-        {
-            return View();
         }
 
         /// <summary>

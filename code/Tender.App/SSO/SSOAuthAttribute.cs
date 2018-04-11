@@ -6,7 +6,7 @@ namespace Tender.App.SSO
 {
     /// <summary>
     /// 采用Attribute的方式验证登陆
-    /// <para>李玉宝新增于2016-11-09 10:08:10</para>
+    /// <para>ZhuPeng新增于 10:08:10</para>
     /// </summary>
     public class SSOAuthAttribute : ActionFilterAttribute
     {

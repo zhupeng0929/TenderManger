@@ -1,14 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Tender.Mvc
-// Author           : zhu.peng
-// Created          : 07-11-2016
-//
-// Last Modified By : zhu.peng
-// Last Modified On : 07-19-2016
-// Contact : www.cnblogs.com/zhu.peng
-// File: BaseController.cs
-// ***********************************************************************
-
+﻿
 
 using Tender.Mvc.Models;
 using System;
@@ -29,7 +19,7 @@ namespace Tender.Mvc.Controllers
     /// <summary>
     /// 基础控制器
     /// <para>用于控制登录用户是否有权限访问指定的Action</para>
-    /// <para>李玉宝新增于2016-07-19 11:12:09</para>
+    /// <para>ZhuPeng新增于2018-07-19 11:12:09</para>
     /// </summary>
     public class BaseController : SSOController
     {
@@ -59,12 +49,21 @@ namespace Tender.Mvc.Controllers
                 throw new Exception("未能找到Action");
 
             var authorize = function.GetCustomAttribute(typeof(AuthenticateAttribute));
-            CurrentModule = AuthUtil.GetCurrentUser().Modules.FirstOrDefault(u => u.Url.ToLower().Contains(Controllername));
+            var user = AuthUtil.GetCurrentUser();
+            CurrentModule = user.Modules.FirstOrDefault(u => u.Url.ToLower().Contains(Controllername));
             //当前登录用户没有Action记录&&Action有authenticate标识
             if (authorize != null && CurrentModule == null)
             {
                 filterContext.Result = new RedirectResult("/Login/Index");
                 return;
+            }
+            if (CurrentModule == null)
+            {
+                LogHelper.Debug(new LogContent(filterContext.RequestContext.HttpContext.Request.UserHostAddress, user.User.Name, Controllername + Actionname, Controllername + Actionname));
+            }
+            else
+            {
+                LogHelper.Debug(new LogContent(filterContext.RequestContext.HttpContext.Request.UserHostAddress, user.User.Name, CurrentModule.Name, CurrentModule.Url));
             }
 
             var version = ConfigurationManager.AppSettings["version"];
@@ -132,15 +131,10 @@ namespace Tender.Mvc.Controllers
             }
 
         }
-        //public UserWithAccessedCtrls GetUser(string token, string requestid = "")
-        //{
-        //    string userName = AuthUtil.GetUserName(token, requestid);
-        //    if (!string.IsNullOrEmpty(userName))
-        //    {
-        //        return _app.GetAccessedControls(userName);
-        //    }
 
-        //    return null;
-        //}
+        public void Log(string action,string remark)
+        {
+            LogHelper.Info(new LogContent(Request.UserHostAddress, BaseUserInfo.User.Account, action, remark));
+        }
     }
 }

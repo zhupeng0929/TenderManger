@@ -29,7 +29,7 @@ namespace Tender.App
             {
                 result.Add(new TenderStatistics() { Title = t.Title, Persons = bid.Count(b => b.TenderId == t.Id), Price = bid.Where(b => b.TenderId == t.Id && b.State == 1).Sum(b => b.TenderPrice) });
             });
-            result.Add(new TenderStatistics() { Title = "总计:"+ result.Count, Persons = result.Sum(t => t.Persons), Price = result.Sum(t => t.Price) });
+            result.Add(new TenderStatistics() { Title = "总计:                   "+ result.Count, Persons = result.Sum(t => t.Persons), Price = result.Sum(t => t.Price) });
             return new GridData
             {
                 records = result.Count(),

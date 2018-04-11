@@ -8,20 +8,17 @@ using Tender.App;
 using Tender.App.ViewModel;
 using Tender.Domain;
 using Tender.App.SSO;
+using Tender.Mvc.Models;
 
 namespace Tender.Mvc.Controllers
 {
     public class TenderInfoManagerController : BaseController
     {
-        private TenderInfoManagerApp _app;
-
-        public TenderInfoManagerController()
-        {
-            _app = AutofacExt.GetFromFac<TenderInfoManagerApp>();
-        }
-
+        public TenderInfoManagerApp _app { get; set; }
+       
         //
         // GET: /UserManager/
+        [Authenticate]
         public ActionResult Index()
         {
             List<SelectListItem> userSelectlist = new List<SelectListItem>();
@@ -75,7 +72,7 @@ namespace Tender.Mvc.Controllers
                 try
                 {
                     _app.AddOrUpdate(model);
-
+                    Log("添加或修改投标客户信息", JsonHelper.Instance.Serialize(model));
                 }
                 catch (Exception ex)
                 {
@@ -102,13 +99,18 @@ namespace Tender.Mvc.Controllers
             }
 
         }
-
+        /// <summary>
+        /// 批量删除投标客户信息
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpPost]
         public string Delete(Guid[] ids)
         {
             try
             {
                 _app.Delete(ids);
+                Log("批量删除投标单信息", JsonHelper.Instance.Serialize(ids));
             }
             catch (Exception ex)
             {
@@ -124,6 +126,11 @@ namespace Tender.Mvc.Controllers
             var list = _app.GetFiles(id);
             return View(list);
         }
+        /// <summary>
+        /// 删除附件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public string DelFile(Guid id)
         {
@@ -131,6 +138,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 _app.DeleteFile(id);
+                Log("删除附件", JsonHelper.Instance.Serialize(id));
             }
             catch (Exception ex)
             {
@@ -140,7 +148,13 @@ namespace Tender.Mvc.Controllers
 
             return JsonHelper.Instance.Serialize(Result);
         }
-
+        /// <summary>
+        /// 发布招标
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="account"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         [HttpPost]
         public string PublishTender(Guid id, string account, string password)
         {
@@ -149,6 +163,7 @@ namespace Tender.Mvc.Controllers
                 try
                 {
                     _app.PublishTender(id, account, password);
+                    Log("发布招标", JsonHelper.Instance.Serialize(new { id = id, account = account }));
                 }
                 catch (Exception ex)
                 {
@@ -165,13 +180,18 @@ namespace Tender.Mvc.Controllers
 
             return JsonHelper.Instance.Serialize(Result);
         }
-
+        /// <summary>
+        /// 作废招标
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public string InvalidTender(Guid id)
         {
             try
             {
                 _app.InvalidTender(id);
+                Log("作废招标", JsonHelper.Instance.Serialize(id));
             }
             catch (Exception ex)
             {

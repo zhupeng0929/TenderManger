@@ -1,10 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Tender.Mvc
-// Author           : Yubao Li
-// Created          : 12-02-2015
-//
-// Last Modified By : Yubao Li
-// Last Modified On : 12-02-2015
+﻿
 // ***********************************************************************
 // <copyright file="ModuleElementManagerController.cs" company="">
 //     Copyright (c) . All rights reserved.
@@ -41,6 +35,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 App.AddOrUpdate(button);
+                Log("添加或修改模块按钮菜单", JsonHelper.Instance.Serialize(button));
             }
             catch (DbEntityValidationException e)
             {
@@ -55,6 +50,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 App.Delete(ids);
+                Log("删除模块按钮菜单", JsonHelper.Instance.Serialize(ids));
             }
             catch (Exception e)
             {

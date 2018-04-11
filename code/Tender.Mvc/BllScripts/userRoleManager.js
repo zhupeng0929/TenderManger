@@ -1,16 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Tender.Mvc
-// Author           : zhu.peng
-// Created          : 04-13-2016
-//
-// Last Modified By : zhu.peng
-// Last Modified On : 04-13-2016
-// ***********************************************************************
-// <copyright file="userRoleManager.js" company="www.cnblogs.com/zhu.peng">
-//     版权所有(C) 2015
-// </copyright>
-// <summary>用户分配角色模块</summary>
-// ***********************************************************************
+﻿
 function renderLayui() {
     layui.use(['layer', 'form'], function () {
         var form = layui.form();

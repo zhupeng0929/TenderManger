@@ -17,12 +17,7 @@ namespace Tender.App.SSO
             try
             {
                 model.Trim();
-                //获取应用信息
-                //var appInfo = new AppInfoService().Get(model.AppKey);
-                //if (appInfo == null)
-                //{
-                //    throw new Exception("应用不存在");
-                //}
+                
                 //获取用户信息
                 User userInfo = null;
                 if (model.UserName == "System")

@@ -40,7 +40,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 App.AddOrUpdate(model);
-                
+                Log("添加或修改分类", JsonHelper.Instance.Serialize(model));
             }
             catch (Exception ex)
             {
@@ -49,12 +49,18 @@ namespace Tender.Mvc.Controllers
             }
             return JsonHelper.Instance.Serialize(Result);
         }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpPost]
         public string Delete(Guid[] ids)
         {
             try
             {
                 App.Delete(ids);
+                Log("删除分类", JsonHelper.Instance.Serialize(ids));
             }
             catch (Exception e)
             {

@@ -6,6 +6,7 @@ using Tender.App;
 using Tender.Domain;
 using Tender.App.SSO;
 using System.Collections.Generic;
+using Tender.Mvc.Models;
 
 namespace Tender.Mvc.Controllers
 {
@@ -20,6 +21,7 @@ namespace Tender.Mvc.Controllers
 
         //
         // GET: /UserManager/
+        [Authenticate]
         public ActionResult Index()
         {
             return View();
@@ -80,26 +82,33 @@ namespace Tender.Mvc.Controllers
             return JsonHelper.Instance.Serialize(models);
         }
 
-        public string Delete(Guid Id)
-        {
-            try
-            {
-                App.Delete(Id);
-            }
-            catch (Exception ex)
-            {
-                Result.Status = false;
-                Result.Result = ex.Message;
-            }
+        //public string Delete(Guid Id)
+        //{
+        //    try
+        //    {
+        //        App.Delete(Id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Result.Status = false;
+        //        Result.Result = ex.Message;
+        //    }
 
-            return JsonHelper.Instance.Serialize(Result);
-        }
+        //    return JsonHelper.Instance.Serialize(Result);
+        //}
+        /// <summary>
+        /// 发布中标
+        /// </summary>
+        /// <param name="tenderid"></param>
+        /// <param name="bidinfoid"></param>
+        /// <returns></returns>
         [HttpPost]
-        public string UpdateBidinfoState(Guid tenderid, Guid bidinfoid)
+       public string UpdateBidinfoState(Guid tenderid, Guid bidinfoid)
         {
             try
             {
                 App.UpdateBidinfoState(tenderid, bidinfoid);
+                Log("发布中标", JsonHelper.Instance.Serialize(bidinfoid));
             }
             catch
             {

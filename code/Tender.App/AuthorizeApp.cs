@@ -7,7 +7,7 @@ namespace Tender.App
 {
     /// <summary>
     ///  加载用户所有可访问的资源/机构/模块
-    /// <para>李玉宝新增于2016-07-19 10:53:30</para>
+    /// <para>ZhuPeng新增于10:53:30</para>
     /// </summary>
     public class AuthorizeApp
     {

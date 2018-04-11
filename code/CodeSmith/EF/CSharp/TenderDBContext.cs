@@ -33,6 +33,7 @@ namespace Tender.Repository.Models
         public System.Data.Entity.DbSet<DicDetail> DicDetails { get; set; }
         public System.Data.Entity.DbSet<DicIndex> DicIndices { get; set; }
         public System.Data.Entity.DbSet<Enclosure> Enclosures { get; set; }
+        public System.Data.Entity.DbSet<LogDetails> LogDetails { get; set; }
         public System.Data.Entity.DbSet<Module> Modules { get; set; }
         public System.Data.Entity.DbSet<ModuleElement> ModuleElements { get; set; }
         public System.Data.Entity.DbSet<Org> Orgs { get; set; }
@@ -58,6 +59,7 @@ namespace Tender.Repository.Models
             modelBuilder.Configurations.Add(new DicDetailMap());
             modelBuilder.Configurations.Add(new DicIndexMap());
             modelBuilder.Configurations.Add(new EnclosureMap());
+            modelBuilder.Configurations.Add(new LogDetailsMap());
             modelBuilder.Configurations.Add(new ModuleMap());
             modelBuilder.Configurations.Add(new ModuleElementMap());
             modelBuilder.Configurations.Add(new OrgMap());

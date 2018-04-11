@@ -28,6 +28,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 App.AddOrUpdate(model);
+                Log("添加或修改资源", JsonHelper.Instance.Serialize(model));
             }
             catch (Exception ex)
             {
@@ -50,13 +51,18 @@ namespace Tender.Mvc.Controllers
             var models = App.LoadAll();
             return JsonHelper.Instance.Serialize(models);
         }
-
+        /// <summary>
+        /// 批量删除资源
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpPost]
         public string Delete(Guid[] ids)
         {
             try
             {
                 App.Delete(ids);
+                Log("批量删除资源", JsonHelper.Instance.Serialize(ids));
             }
             catch (Exception e)
             {

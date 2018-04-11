@@ -1,18 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Tender.Mvc
-// Author           : zhu.peng
-// Created          : 10-16-2016
-//
-// Last Modified By : zhu.peng
-// Last Modified On : 10-16-2016
-// ***********************************************************************
-// <copyright file="parentTree.js" company="www.cnblogs.com/zhu.peng">
-//     版权所有(C) 2015
-// </copyright>
-// <summary>单击文本框弹出的选择列表</summary>
-// ***********************************************************************
-
-function ParentTree(url, name, id, text = 'Name', key = 'Id') {
+﻿function ParentTree(url, name, id, text = 'Name', key = 'Id') {
     var zTreeObj;
     var options = {
         text: text,

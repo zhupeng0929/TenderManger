@@ -6,8 +6,8 @@
 // Last Modified By : zhu.peng
 // Last Modified On : 10-25-2015
 // ***********************************************************************
-// <copyright file="IRepository.cs" company="www.cnblogs.com/zhu.peng">
-//     Copyright (c) www.cnblogs.com/zhu.peng. All rights reserved.
+// <copyright file="IRepository.cs" company="/zhu.peng">
+//     Copyright (c) /zhu.peng. All rights reserved.
 // </copyright>
 // <summary>仓储接口</summary>
 // ***********************************************************************

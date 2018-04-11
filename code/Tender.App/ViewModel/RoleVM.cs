@@ -6,8 +6,8 @@
 // Last Modified By : zhu.peng
 // Last Modified On : 11-29-2015
 // ***********************************************************************
-// <copyright file="RoleVM.cs" company="www.cnblogs.com/zhu.peng">
-//     Copyright (c) www.cnblogs.com/zhu.peng. All rights reserved.
+// <copyright file="RoleVM.cs" company="/zhu.peng">
+//     Copyright (c) /zhu.peng. All rights reserved.
 // </copyright>
 // <summary>角色模型视图</summary>
 // ***********************************************************************

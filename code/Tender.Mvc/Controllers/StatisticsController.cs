@@ -13,6 +13,7 @@ namespace Tender.Mvc.Controllers
     public class StatisticsController : BaseController
     {
         public TenderStatisticsApp App { get; set; }
+        [Authenticate]
         public ActionResult Index()
         {
             

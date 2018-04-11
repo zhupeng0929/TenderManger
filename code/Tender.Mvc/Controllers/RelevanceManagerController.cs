@@ -20,10 +20,11 @@ namespace Tender.Mvc.Controllers
             try
             {
                 App.Assign(type, firstId, secIds);
+                Log("分配权限模块/菜单/资源", JsonHelper.Instance.Serialize(new { type = type, firstId = firstId, secIds = secIds }));
             }
             catch (Exception ex)
             {
-                 Result.Status = false;
+                Result.Status = false;
                 Result.Message = ex.Message;
             }
             return JsonHelper.Instance.Serialize(Result);
@@ -34,10 +35,11 @@ namespace Tender.Mvc.Controllers
             try
             {
                 App.UnAssign(type, firstId, secIds);
+                Log("取消权限模块/菜单/资源", JsonHelper.Instance.Serialize(new { type = type, firstId = firstId, secIds = secIds }));
             }
             catch (Exception ex)
             {
-                 Result.Status = false;
+                Result.Status = false;
                 Result.Message = ex.Message;
             }
             return JsonHelper.Instance.Serialize(Result);

@@ -33,7 +33,7 @@ namespace Infrastructure.Cache
 
         /// <summary>
         /// 根据失效时间获取缓存
-        /// <para>李玉宝于2016-11-08 16:54:04</para>
+        /// <para>ZhuPeng于2016-11-08 16:54:04</para>
         /// </summary>
         /// <param name="key">The key.</param>
         public T GetCache(string key)

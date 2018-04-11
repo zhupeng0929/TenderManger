@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : Infrastructure
-// Author           : Yubao Li
+// Author           : ZhuPeng
 // Created          : 09-07-2015
 //
-// Last Modified By : Yubao Li
+// Last Modified By : ZhuPeng
 // Last Modified On : 09-07-2015
 // ***********************************************************************
 // <copyright file="GuidConverter.cs" company="">

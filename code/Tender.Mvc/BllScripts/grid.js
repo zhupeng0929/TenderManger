@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Tender.Mvc
-// Author           : zhu.peng
-// Created          : 04-12-2016
-//
-// Last Modified By : zhu.peng
-// Last Modified On : 04-12-2016
-// ***********************************************************************
-// <copyright file="maingrid.js" company="www.cnblogs.com/zhu.peng">
-//     版权所有(C) 2015
-// </copyright>
-// <summary>maingrid基类</summary>
-// ***********************************************************************
-
+﻿
 function Grid() {}
 
 Grid.prototype.selectObjs = function() {

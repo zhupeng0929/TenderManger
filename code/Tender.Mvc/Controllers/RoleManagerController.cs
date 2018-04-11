@@ -27,6 +27,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 App.AddOrUpdate(obj);
+                Log("添加或修改角色", JsonHelper.Instance.Serialize(obj));
             }
             catch (Exception ex)
             {
@@ -53,6 +54,7 @@ namespace Tender.Mvc.Controllers
                 {
                     App.Delete(obj);
                 }
+                Log("删除角色", JsonHelper.Instance.Serialize(ids));
             }
             catch (Exception e)
             {

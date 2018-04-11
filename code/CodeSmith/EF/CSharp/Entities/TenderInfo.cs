@@ -28,6 +28,7 @@ namespace Tender.Domain
           this.FirstUser= string.Empty;
           this.SecondUser= string.Empty;
           this.CreateDate= DateTime.Now;
+          this.Title= string.Empty;
         }
 
         /// <summary>
@@ -66,6 +67,14 @@ namespace Tender.Domain
 	    /// 添加时间
 	    /// </summary>
         public System.DateTime CreateDate { get; set; }
+        /// <summary>
+	    /// 创建人
+	    /// </summary>
+        public System.Guid CreateUser { get; set; }
+        /// <summary>
+	    /// 
+	    /// </summary>
+        public string Title { get; set; }
 
     }
 }

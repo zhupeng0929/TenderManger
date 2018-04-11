@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("基于DDDLite的权限管理系统")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("www.cnblogs.com/zhu.peng")]
+[assembly: AssemblyCompany("/zhu.peng")]
 [assembly: AssemblyProduct("Tender.Mvc")]
 [assembly: AssemblyCopyright("版权所有(C) 2015")]
 [assembly: AssemblyTrademark("Tender.Net")]
@@ -33,3 +33,4 @@ using System.Runtime.InteropServices;
 // 方法是按如下所示使用 "*":
 [assembly: AssemblyVersion("1.1.0.0")]
 [assembly: AssemblyFileVersion("1.1.0.0")]
+

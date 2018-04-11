@@ -22,19 +22,25 @@ namespace Tender.Mvc.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 为用户或角色分配模块
+        /// </summary>
+        /// <param name="firstId"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public ActionResult Assign(Guid firstId, string key)
         {
             ViewBag.FirstId = firstId;
             ViewBag.ModuleType = key;
 
             var moduleWithChildren = AuthUtil.GetCurrentUser().ModuleWithChildren;
+
             var modules = key == "UserModule" ? App.LoadForUser(firstId) : App.LoadForRole(firstId);
 
             CheckModule(moduleWithChildren, modules);
 
             ViewBag.Modules = BuilderModules(moduleWithChildren);
-
+            Log("为用户或角色分配模块", JsonHelper.Instance.Serialize(firstId + "/" + key));
             return View();
         }
 
@@ -64,8 +70,8 @@ namespace Tender.Mvc.Controllers
                 {
                     sb.Append("<fieldset class=\"layui-elem-field\">\r\n");
                     sb.Append("<legend>");
-                              BuildCheckbox(sb, moduleView);
-                              sb.Append("</legend>\r\n");
+                    BuildCheckbox(sb, moduleView);
+                    sb.Append("</legend>\r\n");
                     sb.Append("<div class=\"layui-field-box\">\r\n");
                     sb.Append(BuilderModules(moduleView.Children));
                     sb.Append("</div>\r\n");
@@ -141,6 +147,7 @@ namespace Tender.Mvc.Controllers
             try
             {
                 App.AddOrUpdate(model);
+                Log("添加或修改模块", JsonHelper.Instance.Serialize(model));
             }
             catch (Exception ex)
             {
@@ -150,6 +157,11 @@ namespace Tender.Mvc.Controllers
             return JsonHelper.Instance.Serialize(Result);
         }
 
+        /// <summary>
+        /// 批量删除模块
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpPost]
         public string Delete(Guid[] ids)
         {
@@ -159,6 +171,7 @@ namespace Tender.Mvc.Controllers
                 {
                     App.Delete(obj);
                 }
+                Log("批量删除模块", JsonHelper.Instance.Serialize(ids));
             }
             catch (Exception e)
             {
