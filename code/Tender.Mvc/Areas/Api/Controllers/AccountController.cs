@@ -38,6 +38,32 @@ namespace Tender.Mvc.Areas.Api.Controllers
             }
             return JsonHelper.Instance.Serialize(resp);
         }
+        [HttpPost]
+        public string CheckLogin()
+        {
+            var resp = new Response();
+            var token = Request.Headers["Authorization"];
+            try
+            {
+                
+                if (AuthUtil.CheckLogin(token,""))
+                {
+                    resp.Status = true;
+                   
+                }
+                else
+                {
+                    resp.Status = false;
+                }
+            }
+            catch (Exception e)
+            {
+                resp.Status = false;
+                resp.Message = e.Message;
+            }
+            return JsonHelper.Instance.Serialize(resp);
+        }
+
         public bool Logout()
         {
             return AuthUtil.Logout();

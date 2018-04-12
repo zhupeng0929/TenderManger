@@ -40,7 +40,9 @@ namespace Tender.App.SSO
             if (!String.IsNullOrEmpty(token)) return token;
 
             var cookie = HttpContext.Current.Request.Cookies["Token"];
-            return cookie == null ? String.Empty : cookie.Value;
+            if (cookie != null) return cookie.Value;
+            var headertoken = HttpContext.Current.Request.Headers["Authorization"];
+            return string.IsNullOrWhiteSpace(headertoken) ? String.Empty : headertoken;
         }
 
         public static bool CheckLogin(string token, string remark = "")

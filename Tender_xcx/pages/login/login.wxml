@@ -1,0 +1,24 @@
+<view class='content'>
+
+  <view class='info'>
+    <image src='/images/login.jpg' style='width:100%' ></image>
+  </view>
+  <form bindsubmit="doLogin">
+    <view class='item border_bottom'>
+      <input class='input' value='{{account}}' maxlength="12" placeholder="账号" name="account" />
+    </view>
+    <view class='item'>
+      <input class='input' password maxlength="16" placeholder="密码" name='password' />
+    </view>
+
+
+    <button class='submit' form-type='submit'>登录</button>
+  </form>
+
+  
+  <!-- <button class='register' data-url='/pages/account/register/register' catchtap='navigateTo'>快速注册</button> -->
+</view>
+
+<view id="tip" wx:if="{{dialogTip}}">
+  <text>{{tipText}}</text>
+</view>

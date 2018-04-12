@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,11 +12,12 @@ namespace Tender.Mvc.Areas.Api.Controllers
     public class TenderInfoController : BaseController
     {
         // GET: Api/TenderInfo
-        public ActionResult GetTenderList()
+        public string GetTenderList()
         {
             var user = AuthUtil.GetCurrentUser();
             var list = user.TenderInfos;
-            return View();
+            Result.Result = list;
+            return JsonHelper.Instance.Serialize(Result);
         }
     }
 }
