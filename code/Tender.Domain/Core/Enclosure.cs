@@ -23,7 +23,7 @@ namespace Tender.Domain
             this.Path = string.Empty;
             this.Type = 0;
         }
-
+        private string _path = string.Empty;
         /// <summary>
 	    /// 关联id
 	    /// </summary>
@@ -31,7 +31,11 @@ namespace Tender.Domain
         /// <summary>
 	    /// 附件路径
 	    /// </summary>
-        public string Path { get; set; }
+        public string Path
+        {
+            get { return "http://192.168.1.6:9100" + _path; }
+            set { _path = value; }
+        }
         /// <summary>
 	    /// 附件类型0图片，1视频
 	    /// </summary>

@@ -8,7 +8,7 @@ namespace Tender.App.ViewModel
     {
 
         private List<Enclosure> _enclosurePic = new List<Enclosure>();
-        private Enclosure _enclosureVido = new Enclosure();
+        //private Enclosure _enclosureVido = new Enclosure();
         /// <summary>
         /// 图片附件
         /// </summary>
@@ -17,14 +17,14 @@ namespace Tender.App.ViewModel
             get { return _enclosurePic; }
             set { _enclosurePic = value; }
         }
-        /// <summary>
-        /// 视频资源
-        /// </summary>
-        public Enclosure EnclosureVido
-        {
-            get { return _enclosureVido; }
-            set { _enclosureVido = value; }
-        }
+        ///// <summary>
+        ///// 视频资源
+        ///// </summary>
+        //public Enclosure EnclosureVido
+        //{
+        //    get { return _enclosureVido; }
+        //    set { _enclosureVido = value; }
+        //}
 
 
         public string SelectUser { get; set; }

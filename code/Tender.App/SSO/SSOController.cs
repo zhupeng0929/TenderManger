@@ -45,7 +45,10 @@ namespace Tender.App.SSO
             {
                 token = request.Cookies[Token].Value;
             }
-
+            else if (request.Headers[Token] != null)  //从Cookie读取Token
+            {
+                token = request.Headers[Token];
+            }
             if (string.IsNullOrEmpty(token))
             {
                 //直接登录

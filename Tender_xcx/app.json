@@ -1,6 +1,8 @@
 {
   "pages": [
+   
     "pages/login/login",
+    "pages/tenderlist/tenderlist",
     "pages/index/index",
     "pages/search/search",
     "pages/search/list/list",
@@ -24,6 +26,7 @@
     "pages/user/user",
     "pages/user/info/info",
     "pages/user/info/school/school"
+    
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

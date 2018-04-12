@@ -20,7 +20,7 @@ Page({
 
       if (res.Status) {
         wx.reLaunch({
-          url: '/pages/index/index'
+          url: '/pages/tenderlist/tenderlist'
         })
         return
       }
@@ -84,7 +84,7 @@ Page({
             //   delta: 1
             // })
             wx.reLaunch({
-              url: '/pages/index/index'
+              url: '/pages/tenderlist/tenderlist'
             })
           }, 1100)
 

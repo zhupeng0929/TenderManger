@@ -41,7 +41,7 @@ namespace Tender.App.SSO
 
             var cookie = HttpContext.Current.Request.Cookies["Token"];
             if (cookie != null) return cookie.Value;
-            var headertoken = HttpContext.Current.Request.Headers["Authorization"];
+            var headertoken = HttpContext.Current.Request.Headers["Token"];
             return string.IsNullOrWhiteSpace(headertoken) ? String.Empty : headertoken;
         }
 

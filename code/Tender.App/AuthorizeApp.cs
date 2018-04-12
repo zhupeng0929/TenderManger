@@ -27,7 +27,8 @@ namespace Tender.App
                 Orgs = service.Orgs,
                 Modules = service.Modules.OrderBy(u => u.SortNo).ToList().MapToList<ModuleView>(),
                 Resources = service.Resources,
-                Roles = service.Roles
+                Roles = service.Roles,
+                TenderInfos=service.TenderInfos
             };
 
             foreach (var moduleView in user.Modules)

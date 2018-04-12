@@ -49,8 +49,8 @@ namespace Tender.Mvc.Controllers
                 throw new Exception("未能找到Action");
 
             var authorize = function.GetCustomAttribute(typeof(AuthenticateAttribute));
-            var user = AuthUtil.GetCurrentUser();
-            CurrentModule = user.Modules.FirstOrDefault(u => u.Url.ToLower().Contains(Controllername));
+            //var user = AuthUtil.GetCurrentUser();
+            CurrentModule = BaseUserInfo.Modules.FirstOrDefault(u => u.Url.ToLower().Contains(Controllername));
             //当前登录用户没有Action记录&&Action有authenticate标识
             if (authorize != null && CurrentModule == null)
             {
@@ -59,11 +59,11 @@ namespace Tender.Mvc.Controllers
             }
             if (CurrentModule == null)
             {
-                LogHelper.Debug(new LogContent(filterContext.RequestContext.HttpContext.Request.UserHostAddress, user.User.Name, Controllername + Actionname, Controllername + Actionname));
+                LogHelper.Debug(new LogContent(filterContext.RequestContext.HttpContext.Request.UserHostAddress, BaseUserInfo.User.Name, Controllername + Actionname, Controllername + Actionname));
             }
             else
             {
-                LogHelper.Debug(new LogContent(filterContext.RequestContext.HttpContext.Request.UserHostAddress, user.User.Name, CurrentModule.Name, CurrentModule.Url));
+                LogHelper.Debug(new LogContent(filterContext.RequestContext.HttpContext.Request.UserHostAddress, BaseUserInfo.User.Name, CurrentModule.Name, CurrentModule.Url));
             }
 
             var version = ConfigurationManager.AppSettings["version"];

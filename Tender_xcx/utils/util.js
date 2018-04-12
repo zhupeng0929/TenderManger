@@ -1,7 +1,7 @@
 function http(params) {
   wx.showNavigationBarLoading()
 
-  let baseUrl = 'http://192.168.1.207:9100/Api/'  //  接口基础
+  let baseUrl = 'http://192.168.1.6:9100/Api/'  //  接口基础
 
   let url = typeof params === 'string' ? baseUrl + params : baseUrl + params.url  //  如果只传一个字符串则该字符串为 URL
 
@@ -14,10 +14,13 @@ function http(params) {
   // 判断是否需要验证 token，注册登录等不需要验证token的非get请求
   let needToken = true
 
-  if ((method === 'get' && params.token === undefined) || (params.token === false)) {
+  // if ((method === 'get' && params.token === undefined) || (params.token === false)) {
+  //   needToken = false
+  // }
+
+  if (params.token === false) {
     needToken = false
   }
-
   // get参数拼接  
   if (method == "get" && data !== null) {
 
@@ -38,7 +41,7 @@ function http(params) {
       // jwt = JSON.parse(jwt)
 
       // header = { Authorization: 'Bearer ' + jwt.token }
-      header = { Authorization: jwt }
+      header = { Token: jwt }
     } else {
       // 用户未登录
       return new Promise(
