@@ -166,6 +166,15 @@ namespace Tender.App
         {
             //验证
             //AuthUtil.Login
+            var tenderinfo = _repository.FindSingle(t => t.Id == id);
+            if (tenderinfo == null)
+            {
+                throw new Exception("未获取到该标书信息！");
+            }
+            if (tenderinfo.StartTime >= DateTime.Now)
+            {
+                throw new Exception("未到开标时间禁止开标！");
+            }
             var user = _userRepository.FindSingle(u => u.Account == account);
             if (user != null && user.Password == Md5.Encrypt(password))//账号正确
             {
@@ -173,6 +182,7 @@ namespace Tender.App
                 var userpower = new AuthUtil().GetUser(user.Name);
                 if (userpower.Modules.Exists(m => m.Elements.Exists(e => e.DomId == "btnPublish")))
                 {
+
                     _repository.Update(u => u.Id == id, u => new TenderInfo() { State = 1, SecondUser = user.Name });
                 }
                 else

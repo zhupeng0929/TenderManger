@@ -28,7 +28,6 @@ namespace Tender.Repository.Models.Mapping
                 .IsRequired();
             Property(t => t.Description)
                 .HasColumnName("Description")
-                .HasMaxLength(16)
                 .IsRequired();
             Property(t => t.StartTime)
                 .HasColumnName("StartTime")

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using Tender.Domain;
 using Tender.Domain.Interface;
@@ -77,7 +78,7 @@ namespace Tender.Repository
                     Context.SaveChanges();
                     tarans.Commit();
                 }
-                catch (Exception ex)
+                catch (DbEntityValidationException ex)
                 {
                     tarans.Rollback();
                     throw new Exception("ÃÌº” ß∞‹");

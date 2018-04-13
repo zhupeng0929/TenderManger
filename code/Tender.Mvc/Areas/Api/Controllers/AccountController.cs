@@ -42,7 +42,7 @@ namespace Tender.Mvc.Areas.Api.Controllers
         public string CheckLogin()
         {
             var resp = new Response();
-            var token = Request.Headers["Authorization"];
+            var token = Request.Headers["Token"];
             try
             {
                 

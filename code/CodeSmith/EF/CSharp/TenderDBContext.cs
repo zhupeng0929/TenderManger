@@ -40,17 +40,9 @@ namespace Tender.Repository.Models
         public System.Data.Entity.DbSet<Relevance> Relevances { get; set; }
         public System.Data.Entity.DbSet<Resource> Resources { get; set; }
         public System.Data.Entity.DbSet<Role> Roles { get; set; }
-        public System.Data.Entity.DbSet<Stock> Stocks { get; set; }
         public System.Data.Entity.DbSet<TenderInfo> TenderInfos { get; set; }
         public System.Data.Entity.DbSet<TenderUser> TenderUsers { get; set; }
         public System.Data.Entity.DbSet<User> Users { get; set; }
-        public System.Data.Entity.DbSet<WFFrmMain> WFFrmMains { get; set; }
-        public System.Data.Entity.DbSet<WFProcessInstance> WFProcessInstances { get; set; }
-        public System.Data.Entity.DbSet<WFProcessOperationHistory> WFProcessOperationHistories { get; set; }
-        public System.Data.Entity.DbSet<WFProcessScheme> WFProcessSchemes { get; set; }
-        public System.Data.Entity.DbSet<WFProcessTransitionHistory> WFProcessTransitionHistories { get; set; }
-        public System.Data.Entity.DbSet<WFSchemeContent> WFSchemeContents { get; set; }
-        public System.Data.Entity.DbSet<WFSchemeInfo> WFSchemeInfos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -66,17 +58,9 @@ namespace Tender.Repository.Models
             modelBuilder.Configurations.Add(new RelevanceMap());
             modelBuilder.Configurations.Add(new ResourceMap());
             modelBuilder.Configurations.Add(new RoleMap());
-            modelBuilder.Configurations.Add(new StockMap());
             modelBuilder.Configurations.Add(new TenderInfoMap());
             modelBuilder.Configurations.Add(new TenderUserMap());
             modelBuilder.Configurations.Add(new UserMap());
-            modelBuilder.Configurations.Add(new WFFrmMainMap());
-            modelBuilder.Configurations.Add(new WFProcessInstanceMap());
-            modelBuilder.Configurations.Add(new WFProcessOperationHistoryMap());
-            modelBuilder.Configurations.Add(new WFProcessSchemeMap());
-            modelBuilder.Configurations.Add(new WFProcessTransitionHistoryMap());
-            modelBuilder.Configurations.Add(new WFSchemeContentMap());
-            modelBuilder.Configurations.Add(new WFSchemeInfoMap());
 
             InitializeMapping(modelBuilder);
         }

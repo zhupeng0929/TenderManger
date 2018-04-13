@@ -270,13 +270,16 @@ function publish() {
     var selected = list.getSelectedObj();
     if (selected == null) {
         return;
+    } if (new Date(selected.StartTime) > new Date()) {
+        layer.msg("未到开标时间禁止开标！");
+        return;
     }
     var lid = layer.confirm("确定要开标？开标后不可编辑",
         null,
         function () {
             layer.close(lid);
-            
-           
+
+
             layer.open({
                 type: 1,
                 skin: 'layui-layer-rim', //加上边框
@@ -329,6 +332,7 @@ function invalidtender() {
     if (selected == null) {
         return;
     }
+
     var lid = layer.confirm("确定要作废？作废后已经参加的竞标都会设置成作废！",
         null,
         function () {

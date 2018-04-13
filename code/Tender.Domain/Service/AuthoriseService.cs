@@ -60,6 +60,10 @@ namespace Tender.Domain.Service
         {
             get { return GetTenderInfoQuery().ToList(); }
         }
+        public List<BidInfo> BidInfos
+        {
+            get { return GetBidInfoQuery().ToList(); }
+        }
         public User User
         {
             get { return _user; }
@@ -143,5 +147,10 @@ namespace Tender.Domain.Service
                     (u.SecondId == _user.Id && u.Key == "TenderUser") ).Select(u => u.FirstId);
             return _unitWork.Find<TenderInfo>(u => tenderinfoIds.Contains(u.Id));
         }
+        public virtual IQueryable<BidInfo> GetBidInfoQuery()
+        {
+            return _unitWork.Find<BidInfo>(u => u.UserId==_user.Id);
+        }
+        
     }
 }

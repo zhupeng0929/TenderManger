@@ -132,7 +132,25 @@ namespace Tender.App
             //}
             _repository.Update(b => b.Id, model);
         }
+        public void Add(Guid id, BidInfo bidinfo)
+        {
+            var tenderinfo = _tenderInfoRepository.FindSingle(t => t.Id == id);
+            if (tenderinfo==null)
+            {
+                throw new Exception("该标书不存在或已删除！");
+            }
+            if (tenderinfo.State!=1 )
+            {
+                throw new Exception("该状态下的标书禁止投标！");
+            }
+            bidinfo.CreateDate = DateTime.Now;
+            bidinfo.TenderId = tenderinfo.Id;
+            bidinfo.TenderTitle = tenderinfo.Title;
+            bidinfo.EndTime = tenderinfo.EndTime;
+            bidinfo.State = 0;
+            _repository.Add(bidinfo);
 
+        }
 
     }
 }

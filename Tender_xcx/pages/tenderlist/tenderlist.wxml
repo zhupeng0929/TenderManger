@@ -1,2 +1,53 @@
-<!--pages/tenderlist.wxml-->
-<text>pages/tenderlist.wxml</text>
+<view class='list-header'>
+  <view class='list-title'>
+    <text>未出价标书</text>
+  </view>
+</view>
+<view class='tenderlist'>
+  <block wx:for="{{TenderInfo}}" wx:key="">
+    <navigator wx:if="{{item.State==0}}" url='/pages/tenderlist/tenderdetail/tenderdetail?id={{item.Id}}'>
+      <view class='tenderinfo'>
+        <view class='title_v '>
+          <text class='title_t '>{{item.Title}}</text>
+        </view>
+        <view class='content_v '>
+          <image class='tenderimg' mode='aspectFill' src='{{item.EnclosurePic.length==0?"":baseurl+item.EnclosurePic[0].Path}}'></image>
+          <text class='ellipsis_line_4'>{{item.Description}}</text>
+        </view>
+        <view class='time_v'>截止时间：
+          <text class='time_t'>{{item.EndTime}}	</text>
+        </view>
+      </view>
+    </navigator>
+  </block>
+
+</view>
+<view class='list-header'>
+  <view class='list-title'>
+    <text>已出价标书</text>
+  </view>
+</view>
+<view class='tenderlist .active'>
+  <block wx:for="{{TenderInfo}}" wx:key="">
+    <navigator wx:if="{{item.State==1}}" url='/pages/tenderlist/tenderdetail/tenderdetail?id={{item.Id}}'>
+      <view class='tenderinfo'>
+        <view class='title_v '>
+          <text class='title_t '>{{item.Title}}</text>
+        </view>
+        <view class='content_v '>
+          <image class='tenderimg' mode='aspectFill' src='{{item.EnclosurePic.length==0?"":app.baseurl+item.EnclosurePic[0].Path}}'></image>
+          <text class='ellipsis_line_4'>{{item.Description}}</text>
+        </view>
+        <view class='remark'>
+          <view class='time_v'>截止时间：
+            <text class='time_t'>{{item.EndTime}}	</text>
+          </view>
+          <view class='time_v'>投标金额：{{item.TenderPrice}}
+            <text></text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </block>
+
+</view>

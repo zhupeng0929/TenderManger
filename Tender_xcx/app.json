@@ -1,6 +1,7 @@
 {
   "pages": [
-   
+
+    "pages/tenderlist/tenderdetail/tenderdetail",
     "pages/login/login",
     "pages/tenderlist/tenderlist",
     "pages/index/index",
@@ -26,7 +27,6 @@
     "pages/user/user",
     "pages/user/info/info",
     "pages/user/info/school/school"
-    
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -37,7 +37,7 @@
     "selectedColor": "#f7af0c",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/tenderlist/tenderlist",
         "text": "正在竞标",
         "iconPath": "/images/home.png",
         "selectedIconPath": "/images/home-actived.png"

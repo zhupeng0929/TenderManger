@@ -33,8 +33,8 @@ namespace Tender.Domain
 	    /// </summary>
         public string Path
         {
-            get { return "http://192.168.1.6:9100" + _path; }
-            set { _path = value; }
+            get { return _path; }
+            set { _path =  value; }
         }
         /// <summary>
 	    /// 附件类型0图片，1视频

@@ -1,4 +1,6 @@
 var { http, starToArray } = require('./utils/util.js')
+
+
 var colors = ['#f8a52d', '#ff9902', '#a570f3', '#479eff', '#9ACD32', '#912CEE', '#EE7942']
 var week = new Date().getDay()
 
@@ -19,7 +21,8 @@ App({
 
       }
     })
-  }
+  },
+  baseurl: 'http://192.168.1.207:9100/'
 
 })
 

@@ -25,7 +25,7 @@ namespace Tender.App.ViewModel
         //    get { return _enclosureVido; }
         //    set { _enclosureVido = value; }
         //}
-
+        public decimal TenderPrice { get; set; }
 
         public string SelectUser { get; set; }
 

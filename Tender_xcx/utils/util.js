@@ -1,7 +1,7 @@
 function http(params) {
   wx.showNavigationBarLoading()
 
-  let baseUrl = 'http://192.168.1.6:9100/Api/'  //  接口基础
+  let baseUrl = 'http://192.168.1.207:9100/Api/'  //  接口基础
 
   let url = typeof params === 'string' ? baseUrl + params : baseUrl + params.url  //  如果只传一个字符串则该字符串为 URL
 
