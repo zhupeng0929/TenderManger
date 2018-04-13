@@ -35,7 +35,7 @@
           <text class='title_t '>{{item.Title}}</text>
         </view>
         <view class='content_v '>
-          <image class='tenderimg' mode='aspectFill' src='{{item.EnclosurePic.length==0?"":app.baseurl+item.EnclosurePic[0].Path}}'></image>
+          <image class='tenderimg' mode='aspectFill' src='{{item.EnclosurePic.length==0?"":baseurl+item.EnclosurePic[0].Path}}'></image>
           <text class='ellipsis_line_4'>{{item.Description}}</text>
         </view>
         <view class='remark'>

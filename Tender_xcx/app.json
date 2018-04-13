@@ -1,8 +1,9 @@
 {
   "pages": [
-
-    "pages/tenderlist/tenderdetail/tenderdetail",
-    "pages/login/login",
+    
+"pages/login/login",
+   "pages/tenderlist/tenderdetail/tenderdetail",
+    
     "pages/tenderlist/tenderlist",
     "pages/index/index",
     "pages/search/search",

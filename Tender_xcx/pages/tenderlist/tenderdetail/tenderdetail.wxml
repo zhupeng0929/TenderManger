@@ -1,2 +1,37 @@
-<!--pages/tenderlist/tenderdetail/tenderdetail.wxml-->
-<text>pages/tenderlist/tenderdetail/tenderdetail.wxml</text>
+<view class='info'>
+  <view class='list-header'>
+    <view class='list-title'>
+      <text>详细信息</text>
+    </view>
+  </view>
+  <view class='jieshao'>
+    <text>开始时间：{{tenderinfo.StartTime}}</text>
+    <text>结束时间：{{tenderinfo.EndTime}}</text>
+    <text>提货周期：{{tenderinfo.Cycle}}</text>
+  </view>
+
+  <view class='content'>
+    <text>{{tenderinfo.Description}}</text>
+  </view>
+  <view class='list-header'>
+    <view class='list-title'>
+      <text>图片介绍</text>
+    </view>
+  </view>
+  <block wx:for="{{tenderinfo.EnclosurePic}}">
+    <view>
+      <image class='img' src='{{baseurl+item.Path}}' wx:if="{{item.Type==0}}"></image>
+    </view>
+  </block>
+
+  <view class='list-header'>
+    <view class='list-title'>
+      <text>视频介绍</text>
+    </view>
+  </view>
+    <block wx:for="{{tenderinfo.EnclosurePic}}">
+    <view>
+      <video class='img' src='{{baseurl+item.Path}}' wx:if="{{item.Type==1}}"></video>
+    </view>
+  </block>
+</view>

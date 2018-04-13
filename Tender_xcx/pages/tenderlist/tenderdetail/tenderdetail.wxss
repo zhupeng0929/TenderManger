@@ -1,1 +1,47 @@
-/* pages/tenderlist/tenderdetail/tenderdetail.wxss */
+
+.list-header {
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+}
+
+.list-title {
+  flex: 1;
+}
+.list-title text{
+  font-weight: 500；
+}
+.list-title text::before {
+  content: " ";
+  width: 6rpx;
+  height: 13px;
+  background: #f8a52d;
+  display: inline-block;
+  margin-bottom: -1px;
+  margin-right: 6px;
+}
+
+.info{
+  display: flex;flex-direction: column;
+  padding: 10px;
+}
+.info .jieshao{
+  display: flex;flex-direction: column;text-align:center;
+
+}
+.info .jieshao text{
+  font-size: 14px;
+  color: #666;
+}
+.img{
+width: 100%;
+border-radius: 5px;
+}
+.content{
+  font-size:15px;
+font-weight:500;
+margin-top:10px;
+
+}

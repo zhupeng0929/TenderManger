@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  tenderinfo:{}
+  tenderinfo:{},
+  baseurl: app.baseurl
   },
 
   /**
@@ -13,7 +14,7 @@ Page({
    */
   onLoad: function (options) {
     // var id=options.id;
-    var id ='068d8008- 98d4- 482e-b134 - 607737216843'
+    var id ='d8fb861b-f999-4e14-80b8-8fa2d77e7141'
     this.getTendetList(id);
   },
 
@@ -70,7 +71,11 @@ Page({
     app.http("TenderInfo/GetTenderInfo?id="+id).then(res => {
       this.setData({
         tenderinfo: res.Result
-      })
+      });
+       
+      wx.setNavigationBarTitle({
+        title: res.Result.Title
+      });
     })
   },
 })
