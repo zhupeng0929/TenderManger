@@ -39,7 +39,12 @@ namespace Tender.Mvc.Controllers
         {
             base.OnActionExecuting(filterContext);
 
-            if (!AuthUtil.CheckLogin()) return;
+            if (!AuthUtil.CheckLogin())
+            {
+                //filterContext.Result =
+                return;
+            }
+            
 
             Controllername = Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
             Actionname = filterContext.ActionDescriptor.ActionName.ToLower();

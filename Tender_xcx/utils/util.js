@@ -70,7 +70,8 @@ function http(params) {
         success: (res) => {
           wx.hideNavigationBarLoading()
           let statusCode = res.statusCode
-
+          console.log(res)
+debugger;
           switch (statusCode) {
             case 200:
               resolve(res.data)
@@ -82,6 +83,7 @@ function http(params) {
               resolve(res.data)
               break
             case 401:
+            case 404:
               if (params.url != 'authorizations') {
                 wx.showToast({
                   title: '授权过期，请重新登录',

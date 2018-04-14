@@ -21,7 +21,7 @@ namespace Tender.Mvc.Controllers
     /// <para>用于控制登录用户是否有权限访问指定的Action</para>
     /// <para>ZhuPeng新增于2018-07-19 11:12:09</para>
     /// </summary>
-    public class TokenController : SSOController
+    public class TokenController : Controller
     {
         protected Response Result = new Response();
         protected ModuleView CurrentModule;
@@ -38,12 +38,11 @@ namespace Tender.Mvc.Controllers
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            base.OnActionExecuting(filterContext);
-
+           
             if (!AuthUtil.CheckLogin())
             {
                 filterContext.HttpContext.Response.StatusCode = 401;
-                filterContext.HttpContext.Response.End();
+                filterContext.Result = new ContentResult() { Content = "" };
                 return;
             }
 
