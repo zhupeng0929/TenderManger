@@ -74,6 +74,12 @@ namespace Tender.App
                 _repository.Addentity(view);
             }
         }
+
+        public TenderUser Find(Guid id)
+        {
+            return _repository.FindSingle(t=>t.Id==id);
+        }
+
         public List<User> LoadAll()
         {
             var tenderuser = _repository.Find(null).Select(u=>u.Id).ToList();

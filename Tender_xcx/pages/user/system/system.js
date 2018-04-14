@@ -11,22 +11,15 @@ Page({
   
   logout() {
     app.http({
-      method: 'delete',
-      url: 'authorizations/current',
+      url: 'Account/LogOut',
       data: {
-        identity_type: 'miniprogram'
+       
       }
     }).then(res => {
       wx.removeStorageSync('jwt')
 
-      var pages = getCurrentPages()
-      var prevPage = pages[pages.length - 2]
-      prevPage.setData({
-        isBind: false
-      });
-
-      wx.navigateBack({
-        delta: 1
+      wx.reLaunch({
+        url: '/pages/login/login'
       })
     })
   }

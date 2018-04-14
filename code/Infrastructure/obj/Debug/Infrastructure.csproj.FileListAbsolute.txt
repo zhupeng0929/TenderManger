@@ -128,5 +128,4 @@ E:\xxx招标系统\TenderManger\code\Infrastructure\bin\Debug\zh-Hans\System.Web
 E:\xxx招标系统\TenderManger\code\Infrastructure\obj\Debug\Infrastructure.dll
 E:\xxx招标系统\TenderManger\code\Infrastructure\obj\Debug\Infrastructure.pdb
 E:\xxx招标系统\TenderManger\code\Infrastructure\bin\Debug\Infrastructure.dll.config
-E:\xxx招标系统\TenderManger\code\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
 D:\Git\TenderManger\code\Infrastructure\bin\Debug\Infrastructure.dll.config

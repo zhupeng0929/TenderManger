@@ -25,12 +25,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    if (this.data.TenderInfo.length > 0) {
-      for (var idx in this.data.TenderInfo) {
-        var subject = this.data.TenderInfo[idx];
-        this.countdown('TenderInfo[' + idx + '].EndTime', subject.EndTime)
-      }
-    }
+    
   },
 
   /**
@@ -65,7 +60,13 @@ Page({
     app.http("TenderInfo/GetTenderList").then(res => {
       this.setData({
         TenderInfo: res.Result
-      })
+      });
+      if (this.data.TenderInfo.length > 0) {
+        for (var idx in this.data.TenderInfo) {
+          var subject = this.data.TenderInfo[idx];
+          this.countdown('TenderInfo[' + idx + '].EndTime', subject.EndTime)
+        }
+      }
     })
   },
   countdown: function (that, data) {

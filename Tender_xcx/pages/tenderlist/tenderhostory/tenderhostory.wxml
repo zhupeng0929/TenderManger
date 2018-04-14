@@ -1,0 +1,24 @@
+<view class='tenderlist'>
+  <block wx:for="{{TenderInfo}}" wx:key="">
+    <navigator wx:if="{{item.TenderPrice>0}}" url='/pages/tenderlist/tenderdetail/tenderdetail?id={{item.Id}}'>
+      <view class='tenderinfo'>
+        <view class='title_v border_bottom'>
+          <text class='title_t '>{{item.Title}}</text>
+        </view>
+        <view class='content_v border_bottom'>
+          <image class='tenderimg' mode='aspectFill' src='{{item.EnclosurePic.length==0?"":baseurl+item.EnclosurePic[0].Path}}'></image>
+          <text class='ellipsis_line_4'>{{item.Description}}</text>
+        </view>
+        <view class='remark'>
+          <view class='time_v'>截止时间：
+            <text class='time_t'>{{item.EndTime}}	</text>
+          </view>
+          <view class='time_v'>
+            <text class='time_t'style="font-weight:500">{{item.BidInfoState}}	</text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </block>
+
+</view>

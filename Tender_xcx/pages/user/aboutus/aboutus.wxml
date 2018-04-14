@@ -3,30 +3,29 @@
     <view class='logo-wrapper'>
       <text class='iconfont icon-logo'></text>
     </view>
-    <view class='web-name'>冰橙电影</view>
+    <view class='web-name'>招投标系统</view>
   </view>
 
   <view class='info'>
     <view class='l-wrapper'>
       <view class='l-title'>关于我们</view>
       <view class='l-content'>
-        <text decode="true" space="emsp">  {{info.aboutus}}</text>
+        <text decode="true" space="emsp"> 小程序制作联系我。 </text>
       </view>
     </view>
 
     <view class='l-wrapper'>
       <view class='l-title'>联系我们</view>
 
-      <view class='l-content' wx:for="{{info.contacts}}">
-        <text decode="true" space="emsp">  {{item.key}}</text>
-        <text data-content="{{item.value}}" catchtap='getClipboard' class='l-clip'>{{item.value}} (点击复制)</text>
+      <view class='l-content' >
+        <text decode="true" space="emsp">  651649026</text>
       </view>
     </view>
 
     <view class='l-wrapper'>
       <view class='l-title'>关于作者</view>
       <view class='l-content'>
-        <text decode="true" space="emsp">  {{info.author}}</text>
+        <text decode="true" space="emsp">  小青蛙</text>
       </view>
     </view>
 

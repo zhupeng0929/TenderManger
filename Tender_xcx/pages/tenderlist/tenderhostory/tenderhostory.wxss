@@ -1,0 +1,71 @@
+.tenderlist {
+  padding: 5px;
+}
+
+.tenderlist .tenderinfo {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 5px;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #f2f2f2;
+}
+
+.tenderlist .tenderinfo .title_v {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.tenderlist .tenderinfo .title_v .title_t {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.tenderlist .tenderinfo .content_v {
+  flex-direction: row;
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.tenderlist .tenderinfo .content_v .tenderimg {
+  width: 25%;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.tenderlist .tenderinfo .content_v .ellipsis_line_4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 24px;
+  color: #333;
+  margin-left: 5px;
+  width: 75%;
+}
+
+.tenderlist .tenderinfo .time_v {
+  font-size: 15px;
+  padding-top: 10px;
+}
+
+.tenderlist .tenderinfo .time_v .time_t {
+  font-size: 14px;
+  color: #666;
+}
+
+.tenderlist .tenderinfo .remark {
+  display: flex;
+  justify-content: space-between;
+}
+
+.active {
+  background-color: #effff0;
+  padding: 5px;
+}
+page{
+  background-color: #E0FFFF
+}

@@ -28,7 +28,7 @@ namespace Tender.App.ViewModel
         public decimal TenderPrice { get; set; }
 
         public string SelectUser { get; set; }
-
+        public string BidInfoState { get; set; }
         public List<Guid> TenderUser { get; set; }
     }
 

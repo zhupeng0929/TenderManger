@@ -1,7 +1,7 @@
 function http(params) {
   wx.showNavigationBarLoading()
 
-  let baseUrl = 'http://192.168.1.6:9100/Api/'  //  接口基础
+  let baseUrl = 'http://192.168.1.207:9100/Api/'  //  接口基础
 
   let url = typeof params === 'string' ? baseUrl + params : baseUrl + params.url  //  如果只传一个字符串则该字符串为 URL
 
@@ -47,7 +47,9 @@ function http(params) {
       return new Promise(
         function (resolve) {
           wx.hideNavigationBarLoading()
-          resolve({ code: '401' })
+          wx.reLaunch({
+            url: '/pages/login/login'
+          })
         }
       )
 
@@ -89,6 +91,12 @@ function http(params) {
               }
               wx.removeStorageSync('jwt')
               resolve(res.data)
+              setTimeout(() => {
+                wx.redirectTo({
+                  url: '/pages/login/login'
+                })
+              }, 1100)
+              
               break
 
             case 403:
@@ -109,6 +117,7 @@ function http(params) {
             icon: 'none',
             duration: 2000
           })
+          console.log(res)
         },
         complete: function (res) {
           // console.log(res)

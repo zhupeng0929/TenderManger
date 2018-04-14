@@ -1,9 +1,8 @@
 {
   "pages": [
-    
-"pages/login/login",
-   "pages/tenderlist/tenderdetail/tenderdetail",
-    
+    "pages/user/user",
+    "pages/login/login",
+    "pages/tenderlist/tenderdetail/tenderdetail",
     "pages/tenderlist/tenderlist",
     "pages/index/index",
     "pages/search/search",
@@ -25,9 +24,10 @@
     "pages/user/system/system",
     "pages/user/suggest/suggest",
     "pages/user/aboutus/aboutus",
-    "pages/user/user",
+    
     "pages/user/info/info",
-    "pages/user/info/school/school"
+    "pages/user/info/school/school",
+    "pages/tenderlist/tenderhostory/tenderhostory"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -35,25 +35,25 @@
   },
   "tabBar": {
     "borderStyle": "black",
-    "selectedColor": "#f7af0c",
+    "selectedColor": "#000",
     "list": [
       {
         "pagePath": "pages/tenderlist/tenderlist",
         "text": "正在竞标",
-        "iconPath": "/images/home.png",
-        "selectedIconPath": "/images/home-actived.png"
+        "iconPath": "/images/home1.png",
+        "selectedIconPath": "/images/home2.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/tenderlist/tenderhostory/tenderhostory",
         "text": "历史竞标",
-        "iconPath": "/images/home.png",
-        "selectedIconPath": "/images/home-actived.png"
+        "iconPath": "/images/tender1.png",
+        "selectedIconPath": "/images/tender2.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的",
-        "iconPath": "/images/user.png",
-        "selectedIconPath": "/images/user-actived.png"
+        "iconPath": "/images/people.png",
+        "selectedIconPath": "/images/people_fill.png"
       }
     ]
   }

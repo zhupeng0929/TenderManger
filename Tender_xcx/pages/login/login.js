@@ -8,25 +8,31 @@ Page({
   },
 
   onLoad(e) {
-
-    app.http({
-      method: 'post',
-      url: "Account/CheckLogin",
-      data: {
-      },
-      token: true
-    }).then(res => {
-      wx.hideLoading()
-
-      if (res.Status) {
-        wx.reLaunch({
-          url: '/pages/tenderlist/tenderlist'
-        })
-        return
-      }
-    })
+    this.checklogin();
   },
+  checklogin() {
+    var jwt = null;
+    jwt = wx.getStorageSync('jwt')
+    if (jwt) {
 
+      app.http({
+        method: 'post',
+        url: "Account/CheckLogin",
+        data: {
+        },
+        token: true
+      }).then(res => {
+        wx.hideLoading()
+
+        if (res.Status) {
+          wx.reLaunch({
+            url: '/pages/tenderlist/tenderlist'
+          })
+          return
+        }
+      })
+    }
+  },
   doLogin(e) {
     var account = e.detail.value.account
     var password = e.detail.value.password
@@ -54,8 +60,6 @@ Page({
           method: 'post',
           url: "Account/Login",
           data: {
-            identity_type: 'miniprogram',
-            wxcode: wxcode,
             username: account,
             password: password
           },

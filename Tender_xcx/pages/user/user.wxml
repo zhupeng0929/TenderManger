@@ -19,7 +19,7 @@
 </view>
 
 <!-- 横排菜单 -->
-<view class="nav-wrapper">
+<!-- <view class="nav-wrapper">
   <view class='nav' catchtap='forbid'>
     <text class='iconfont icon-movie-love'></text>
     <text class='txt'>电影收藏</text>
@@ -36,27 +36,17 @@
     <text class='iconfont icon-review-love'></text>
     <text class='txt'>影评收藏</text>
   </view>
-</view>
+</view> -->
 
 <!-- 竖列导航栏 -->
 <view class="menu-wrapper">
   <view class='menu' data-url='/pages/user/info/info' catchtap='navigateTo'>
     <text class="iconfont icon-me"></text>
     <view class='txt'>个人资料</view>
-     <view class='tip' wx:if="{{user.percent}}">完善度{{user.percent}}%</view> 
+    <view class='tip' wx:if="{{user.percent}}">完善度{{user.percent}}%</view>
     <text class="iconfont icon-right"></text>
   </view>
-   <view class='menu' catchtap='forbid'>
-    <text class="iconfont icon-jifen"></text>
-    <view class='txt'>积分成长</view>
-    <view class='tip' wx:if="{{user.score}}">{{user.score}} 积分</view>
-     <text class="iconfont icon-right"></text> 
-  </view> 
-  <view class='menu' data-url='/pages/user/suggest/suggest' catchtap='navigateTo'>
-    <text class="iconfont icon-feed"></text>
-    <view class='txt'>意见反馈</view>
-    <text class="iconfont icon-right"></text>
-  </view>
+
   <view class='menu' data-url='/pages/user/aboutus/aboutus' catchtap='navigateTo'>
     <text class="iconfont icon-aboutus"></text>
     <view class='txt'>关于我们</view>

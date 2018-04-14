@@ -12,16 +12,9 @@ Page({
   onLoad: function (options) {
     app.setBarColor()
 
-    this.getAboutus()
+   
   },
 
-  getAboutus() {
-    app.http('aboutus?type=miniprogram').then(res => {
-      this.setData({
-        info: res
-      })
-    })
-  },
 
   getClipboard(e) {
     var content = e.currentTarget.dataset.content
