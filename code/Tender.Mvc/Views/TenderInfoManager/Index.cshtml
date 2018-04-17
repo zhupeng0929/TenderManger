@@ -3,6 +3,7 @@
 }
 
 <link href="~/Content/scripts/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" />
+<link href="~/Content/scripts/plugins/bootstrap-duallistbox/bootstrap-duallistbox.min.css" rel="stylesheet" />
 <style>
     .input-group {
         display: table;
@@ -116,7 +117,7 @@
                 <div class="col-sm-7">
                     @Html.DropDownList("TenderUser", @ViewBag.userSelect as List<SelectListItem>
                         ,new { multiple = "multiple" })
-                        @*<select id="TenderUser" multiple="multiple"></select>*@
+                        
                 </div>
 
             </div>
@@ -124,30 +125,11 @@
     </div>
 
 </div>
-<div id="userDlg" style="display: none;margin-top:10px;">
-    <div class="col-xs-12">
-        <form action="/TenderInfoManager/PublishTender" method="post" class="form-horizontal" id="userForm">
 
-            <div class="form-group">
-                <label for="account" class="col-sm-3 control-label no-padding-right">账号：</label>
-                <div class="col-sm-7">
-                    <input id="account" name="account" autocomplete="new-password" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-sm-3 control-label no-padding-right">密码：</label>
-                <div class="col-sm-7">
-                    <input type="password" id="password" autocomplete="new-password" name="password" class="form-control" />
-                </div>
-            </div>
-
-        </form>
-    </div>
-
-</div>
 <script src="~/Content/scripts/zTree/js/jquery.ztree.excheck.js"></script>
 <script src="~/BllScripts/grid.js"></script>
 <script src="~/BllScripts/parentTree.js"></script>
 <script src="~/BllScripts/jqEvent.js"></script>
+<script src="~/Content/scripts/plugins/bootstrap-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 <script src="~/Content/scripts/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
 <script src="~/BllScripts/TenderInfo.js"></script>

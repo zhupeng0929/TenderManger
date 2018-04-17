@@ -1,37 +1,23 @@
 {
   "pages": [
-    "pages/user/user",
+    
     "pages/login/login",
+    "pages/user/user",
     "pages/tenderlist/tenderdetail/tenderdetail",
     "pages/tenderlist/tenderlist",
-    "pages/index/index",
-    "pages/search/search",
-    "pages/search/list/list",
-    "pages/movie/top/top",
-    "pages/movie/award/award",
-    "pages/movie/today/today",
-    "pages/movie/coming/coming",
-    "pages/movie/theater/theater",
-    "pages/movie/list/list",
-    "pages/movie/detail/detail",
-    "pages/movie/comment/comment",
-    "pages/movie/review/review",
-    "pages/movie/review/detail/detail",
-    "pages/actor/list/list",
-    "pages/actor/info/info",
-    "pages/actor/info/detail/detail",
-    "pages/actor/info/works/works",
+    
     "pages/user/system/system",
-    "pages/user/suggest/suggest",
+
     "pages/user/aboutus/aboutus",
     
     "pages/user/info/info",
-    "pages/user/info/school/school",
+
     "pages/tenderlist/tenderhostory/tenderhostory"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "招投标系统"
   },
   "tabBar": {
     "borderStyle": "black",

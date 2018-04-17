@@ -1,3 +1,13 @@
+<view class='findtools-view'>
+  <text>竞标价：</text>
+  <input wx:if="{{tenderinfo.State==1&&tenderinfo.TenderPrice==0}}" placeholder="请输入竞标价格" style="height: 1.9rem;line-height: 1.9rem;background-color: #f2f2f2;border-radius: 20px;padding-left:10px;width:76%;" bindconfirm="sendTender" placeholder-style="font-size:13px;"
+    confirm-type="done"></input>
+  <text wx:if="{{tenderinfo.TenderPrice>0}}">{{tenderinfo.TenderPrice}}元</text>
+</view>
+<view id="tip" wx:if="{{dialogTip}}">
+  <text>{{tipText}}</text>
+</view>
+
 <view class='info'>
   <view class='list-header'>
     <view class='list-title'>
@@ -37,12 +47,3 @@
 
 </view>
 
-<view class='findtools-view'>
-  <text>竞标价：</text>
-  <input wx:if="{{tenderinfo.State==1&&tenderinfo.TenderPrice==0}}" placeholder="请输入竞标价格" style="height: 1.9rem;line-height: 1.9rem;background-color: #f2f2f2;border-radius: 20px;padding-left:10px" bindconfirm="sendTender" placeholder-style="font-size:13px;"
-    confirm-type="done"></input>
-  <text wx:if="{{tenderinfo.TenderPrice>0}}">{{tenderinfo.TenderPrice}}元</text>
-</view>
-<view id="tip" wx:if="{{dialogTip}}">
-  <text>{{tipText}}</text>
-</view>

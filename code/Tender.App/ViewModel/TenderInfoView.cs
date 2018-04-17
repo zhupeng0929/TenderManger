@@ -6,7 +6,10 @@ namespace Tender.App.ViewModel
 {
     public class TenderInfoView : TenderInfo
     {
-
+        public TenderInfoView()
+        {
+            EnclosurePic = new List<Enclosure>();
+        }
         private List<Enclosure> _enclosurePic = new List<Enclosure>();
         //private Enclosure _enclosureVido = new Enclosure();
         /// <summary>

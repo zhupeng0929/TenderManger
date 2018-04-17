@@ -107,13 +107,13 @@ function MainGrid() {
                    label: '竞标状态',
                    formatter: function (cellvalue, options, rowObject) {
                        if (rowObject.State == 0) {
-                           return '<span  class=\"label label-info arrowed\">竞标中</span>';
+                           return '<span  class=\"label label-info arrowed\">' + rowObject.StateDes + '</span>';
                        } else if (rowObject.State == 1) {
-                           return '<span  class=\"label label-success arrowed-in\">已中标</span>';
-                       } else if (rowObject.State == 2) {
-                           return '<span  class=\"label label-pink\">未中标</span>';
+                           return '<span  class=\"label label-success arrowed-in\">' + rowObject.StateDes + '</span>';
+                       } else if (rowObject.State == 3) {
+                           return '<span  class=\"label label-pink\">' + rowObject.StateDes + '</span>';
                        } else {
-                           return '<span  class=\"label label-grey\">已作废</span>';
+                           return '<span  class=\"label label-grey\">' + rowObject.StateDes + '</span>';
                        }
                    }
                },
@@ -127,8 +127,8 @@ function MainGrid() {
             pager: "#grid-pager",
             altRows: true,
             height: 'auto',
-            multiselect: true,
-            multiboxonly: true,
+            multiselect: false,
+            multiboxonly: false,
 
             loadComplete: function () {
                 var table = this;
@@ -245,8 +245,19 @@ function publishbid() {
         layer.msg('请先选择投标人！');
         return;
     }
-
-    var lid = layer.confirm("确认该标书已截止招标",
+    if (selectednode[0].State == 0) {
+        layer.msg('暂未开标');
+        return;
+    }
+    if (selectednode[0].State == 1) {
+        layer.msg('请先停止招标！');
+        return;
+    }
+    if (selectednode[0].State > 2) {
+        layer.msg('标书已结束或已流标');
+        return;
+    }
+    var lid = layer.confirm("确认发布？",
         null,
         function () {
             layer.close(lid);
@@ -263,6 +274,7 @@ function publishbid() {
                             function (data) {
                                 if (data.Status) {
                                     list.reload();
+                                    ztree.reload();
                                 } else {
                                     layer.msg(data.Message);
                                 }
@@ -276,4 +288,33 @@ function publishbid() {
         });
     
 
+}
+
+function abortivetender() {
+    var selectednode = zTreeObj.getSelectedNodes();
+    if (selectednode.length == 0 || selectednode[0].Id == '00000000-0000-0000-0000-000000000000') {
+        layer.msg('请先选择标书！');
+        return;
+    }
+    if (selectednode[0].State != 2) {
+        layer.msg('该状态下不能进行流标操作！');
+        return;
+    }
+
+    var lid = layer.confirm("确定流标？",
+        null,
+        function () {
+            layer.close(lid);
+            $.post("/TenderInfoManager/AbortiveTender",
+                { id: selectednode[0].Id },
+                function (data) {
+                    if (data.Status) {
+                        list.reload();
+                        ztree.reload();
+                    } else {
+                        layer.msg(data.Message);
+                    }
+                },
+                "json");
+        });
 }

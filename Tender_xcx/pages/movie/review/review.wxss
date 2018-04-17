@@ -1,3 +1,0 @@
-@import '/pages/component/review/review.wxss';
-
-page {background: #efefef;}

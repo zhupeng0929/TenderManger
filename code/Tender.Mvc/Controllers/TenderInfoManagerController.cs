@@ -40,6 +40,28 @@ namespace Tender.Mvc.Controllers
         [HttpPost]
         public string Add(TenderInfoView model)
         {
+            #region 参数验证
+            if (String.IsNullOrWhiteSpace(model.Title))
+            {
+                Result.Status = false;
+                Result.Message = "标题不能为空";
+                return JsonHelper.Instance.Serialize(Result);
+            }
+            if (String.IsNullOrWhiteSpace(model.Description))
+            {
+                Result.Status = false;
+                Result.Message = "描述不能为空";
+                return JsonHelper.Instance.Serialize(Result);
+            }
+            if (_app.Find(model.Id,model.Title)!=null)
+            {
+                Result.Status = false;
+                Result.Message = "该标书已存在，请更换标题";
+                return JsonHelper.Instance.Serialize(Result);
+            }
+            #endregion
+
+
             var files = Request.Files;
 
             if (files != null && files.Count > 0)
@@ -148,6 +170,26 @@ namespace Tender.Mvc.Controllers
 
             return JsonHelper.Instance.Serialize(Result);
         }
+
+        public ActionResult TenderInfoDetail(Guid id,int type=0)
+        {
+            TenderInfoView model = _app.Find(id).MapTo<TenderInfoView>();
+            model.EnclosurePic = _app.GetFiles(id);
+            model.SelectUser = JsonHelper.Instance.Serialize(_app.GetRelevace(id));
+
+
+
+            List<SelectListItem> userSelectlist = new List<SelectListItem>();
+            var userList = _app.GetTenderUser();
+            if (userList != null)
+            {
+                userList.ForEach(u => { userSelectlist.Add(new SelectListItem() { Text = u.Company, Value = u.Id.ToString() }); });
+            }
+            ViewBag.userSelect = userSelectlist;
+            ViewBag.type = type;
+            return View(model);
+        }
+
         /// <summary>
         /// 发布招标
         /// </summary>
@@ -156,13 +198,19 @@ namespace Tender.Mvc.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpPost]
-        public string PublishTender(Guid id, string account, string password)
+        public string PublishTender(Guid id, string account, string password, List<Guid> tenderuser)
         {
+            if (string.IsNullOrWhiteSpace(account)||string.IsNullOrWhiteSpace(password)|| tenderuser==null|| tenderuser.Count==0)
+            {
+                Result.Status = false;
+                Result.Message = "请输入账号密码和参加竞标人！";
+                return JsonHelper.Instance.Serialize(Result);
+            }
             if (account != BaseUserInfo.User.Account)
             {
                 try
                 {
-                    _app.PublishTender(id, account, password);
+                    _app.PublishTender(id, account, password, tenderuser);
                     Log("发布招标", JsonHelper.Instance.Serialize(new { id = id, account = account }));
                 }
                 catch (Exception ex)
@@ -202,6 +250,52 @@ namespace Tender.Mvc.Controllers
             return JsonHelper.Instance.Serialize(Result);
         }
 
+        /// <summary>
+        /// 停止招标
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public string StopTender(Guid id)
+        {
+            try
+            {
+                _app.StopTender(id);
+                Log("停止招标", JsonHelper.Instance.Serialize(id));
+            }
+            catch (Exception ex)
+            {
+                Result.Status = false;
+                Result.Message = ex.Message;
+            }
+
+            return JsonHelper.Instance.Serialize(Result);
+        }
+        /// <summary>
+        /// 流标
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public string AbortiveTender(Guid id)
+        {
+            try
+            {
+                _app.AbortiveTender(id);
+                Log("设置流标", JsonHelper.Instance.Serialize(id));
+            }
+            catch (Exception ex)
+            {
+                Result.Status = false;
+                Result.Message = ex.Message;
+            }
+
+            return JsonHelper.Instance.Serialize(Result);
+        }
+        
+
+
+
         [HttpPost]
         public string CheckDate(Guid id)
         {
@@ -211,12 +305,12 @@ namespace Tender.Mvc.Controllers
                 Result.Status = false;
                 Result.Message = "招标未截止前无法发布中标人！";
             }
-            if (tenderinfo.State == 0)//未截止招标
+            if (tenderinfo.State == 0)//暂未开标
             {
                 Result.Status = false;
                 Result.Message = "暂未开标";
             }
-            if (tenderinfo.State > 1)//未截止招标
+            if (tenderinfo.State > 2)//未截止招标
             {
                 Result.Status = false;
                 Result.Message = "该标书已结束或已作废！";

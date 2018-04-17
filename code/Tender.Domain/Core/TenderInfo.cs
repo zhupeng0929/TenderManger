@@ -55,7 +55,7 @@ namespace Tender.Domain
 	    /// </summary>
         public string Cycle { get; set; }
         /// <summary>
-	    /// 0未开标，1已开标，2已结束，3已作废
+	    /// 0未开标，1已开标，2已截止，3已结束，4已流标，5已作废
 	    /// </summary>
         public int State { get; set; }
         [NotMapped]
@@ -67,8 +67,10 @@ namespace Tender.Domain
                 {
                     case 0: return "未开标";
                     case 1: return "已开标";
-                    case 2: return "已结束";
-                    case 3: return "已作废";
+                    case 2: return "已截止";
+                    case 3: return "已结束";
+                    case 4: return "已流标";
+                    case 5: return "已作废";
                     default: return "无效";
                 };
             }

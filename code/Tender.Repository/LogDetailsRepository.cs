@@ -15,17 +15,17 @@ namespace Tender.Repository
         {
             if (!string.IsNullOrWhiteSpace(LogLevel))
             {
-                return Context.LogDetails.Where(l => l.LogLevel == LogLevel).OrderBy(u => u.LogID).Skip((pageindex - 1) * pagesize).Take(pagesize);
+                return Context.LogDetails.Where(l => l.LogLevel == LogLevel).OrderByDescending(u => u.LogID).Skip((pageindex - 1) * pagesize).Take(pagesize);
             }
             if (!string.IsNullOrWhiteSpace(LogActionClick))
             {
-                return Context.LogDetails.Where(l => l.LogActionClick == LogActionClick).OrderBy(u => u.LogID).Skip((pageindex - 1) * pagesize).Take(pagesize);
+                return Context.LogDetails.Where(l => l.LogActionClick == LogActionClick).OrderByDescending(u => u.LogID).Skip((pageindex - 1) * pagesize).Take(pagesize);
             }
             if (!string.IsNullOrWhiteSpace(UserName))
             {
-                return Context.LogDetails.Where(l => l.UserName == UserName).OrderBy(u => u.LogID).Skip((pageindex - 1) * pagesize).Take(pagesize);
+                return Context.LogDetails.Where(l => l.UserName == UserName).OrderByDescending(u => u.LogID).Skip((pageindex - 1) * pagesize).Take(pagesize);
             }
-            return Context.LogDetails.OrderBy(u => u.LogID).Skip((pageindex - 1) * pagesize).Take(pagesize);
+            return Context.LogDetails.OrderByDescending(u => u.LogID).Skip((pageindex - 1) * pagesize).Take(pagesize);
         }
 
         /// <summary>

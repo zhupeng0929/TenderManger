@@ -22,7 +22,7 @@ App({
       }
     })
   },
-  baseurl: 'http://192.168.1.207:9100/'
+  baseurl: 'http://ztb.quanshensh.top/'
 
 })
 

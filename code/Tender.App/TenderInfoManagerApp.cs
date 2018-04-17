@@ -86,6 +86,12 @@ namespace Tender.App
 
             return tenderinfo;
         }
+        public TenderInfo Find(Guid id, string title)
+        {
+            var tenderinfo = _repository.FindSingle(u => u.Title == title && u.Id != id);
+
+            return tenderinfo;
+        }
 
         public void Delete(Guid[] ids)
         {
@@ -122,7 +128,7 @@ namespace Tender.App
                     model.EnclosurePic.ForEach(e => e.RelationId = model.Id);
                     _enclosureRepository.BatchAdd(model.EnclosurePic.ToArray());
                 }
-                _relevanceRepository.Delete(t => t.FirstId == model.Id);
+                _relevanceRepository.Delete(t => t.FirstId == model.Id && t.Key == "TenderUser");
                 if (model.TenderUser != null)
                 {
                     model.TenderUser.ForEach(t =>
@@ -162,10 +168,20 @@ namespace Tender.App
             return result;
         }
 
-        public void PublishTender(Guid id, string account, string password)
+        public void PublishTender(Guid id, string account, string password, List<Guid> tenderuser)
         {
             //验证
             //AuthUtil.Login
+            #region 先保存竞标人
+            _relevanceRepository.Delete(t => t.FirstId == id && t.Key == "TenderUser");
+            if (tenderuser != null)
+            {
+                tenderuser.ForEach(t =>
+                {
+                    _relevanceRepository.Add(new Relevance() { FirstId = id, SecondId = t, Key = "TenderUser" });
+                });
+            }
+            #endregion
             var tenderinfo = _repository.FindSingle(t => t.Id == id);
             if (tenderinfo == null)
             {
@@ -174,6 +190,10 @@ namespace Tender.App
             if (tenderinfo.StartTime >= DateTime.Now)
             {
                 throw new Exception("未到开标时间禁止开标！");
+            }
+            if (tenderinfo.State != 0)
+            {
+                throw new Exception("该状态下的标书无法进行开标！");
             }
             var user = _userRepository.FindSingle(u => u.Account == account);
             if (user != null && user.Password == Md5.Encrypt(password))//账号正确
@@ -199,11 +219,34 @@ namespace Tender.App
             //发送短信等通知
 
         }
+        
+        /// <summary>
+        /// 停止招标
+        /// </summary>
+        /// <param name="id"></param>
+
+        public void StopTender(Guid id)
+        {
+            _repository.Update(u => u.Id == id, u => new TenderInfo { State = 2 });//停止招标
+            _bidInfoRepository.Update(u => u.TenderId == id, u => new BidInfo { State = 3});//作废已参与竞标
+        }
+        /// <summary>
+        /// 作废标书
+        /// </summary>
+        /// <param name="id"></param>
         public void InvalidTender(Guid id)
         {
-            _repository.Update(u => u.Id == id, u => new TenderInfo { State = 3 });//作废标书
-            _bidInfoRepository.Update(u => u.TenderId == id, u => new BidInfo { State = 3 });//作废已参与竞标
+            _repository.Update(u => u.Id == id, u => new TenderInfo { State = 5 });//作废标书
+            _bidInfoRepository.Update(u => u.TenderId == id, u => new BidInfo { State = 5});//作废已参与竞标
         }
-
+        /// <summary>
+        /// 流标
+        /// </summary>
+        /// <param name="id"></param>
+        public void AbortiveTender(Guid id)
+        {
+            _repository.Update(u => u.Id == id, u => new TenderInfo { State = 4});//流标
+            _bidInfoRepository.Update(u => u.TenderId == id, u => new BidInfo { State = 4 });//流标
+        }
     }
 }

@@ -31,8 +31,10 @@
 
 .tenderlist .tenderinfo .content_v .tenderimg {
   width: 25%;
-  height: 100px;
+  height: 90px;
   border-radius: 5px;
+  border:1px solid #f2f2f2;
+
 }
 
 .tenderlist .tenderinfo .content_v .ellipsis_line_4 {

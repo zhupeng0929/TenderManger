@@ -1,5 +1,6 @@
 var app = getApp()
 import $wuxCountDown from '../../utils/countdown.js'
+var { dayTimeArr } = require('../../utils/util.js')
 // pages/tenderlist.js
 Page({
 
@@ -18,14 +19,14 @@ Page({
     this.setData({
       baseurl: app.baseurl
     });
-    console.log(app.baseurl)
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
@@ -61,10 +62,30 @@ Page({
       this.setData({
         TenderInfo: res.Result
       });
+      // var mpThing = this.data.TenderInfo
+      // var that=this;
+      // mpThing.find(function (v) {
+
+      //   var aa = (new Date(v.EndTime.replace(/-/g, '/')) - new Date())/1000;
+
+      //   var bb = dayTimeArr(aa);
+      //   v.EndTime = bb
+      //   that.setData({
+      //     TenderInfo: mpThing,
+      //   })
+      //   var ref = setInterval(function () {
+      //     aa--
+      //     var timeArr = dayTimeArr(aa);
+      //     v.EndTime = timeArr
+      //     that.setData({
+      //       TenderInfo: mpThing,
+      //     })
+      //   }, 1000);
+      // })
       if (this.data.TenderInfo.length > 0) {
         for (var idx in this.data.TenderInfo) {
           var subject = this.data.TenderInfo[idx];
-          this.countdown('TenderInfo[' + idx + '].EndTime', subject.EndTime)
+          this.countdown('TenderInfo[' + idx + '].EndTime', subject.EndTime.replace(/-/g, '/'))
         }
       }
     })

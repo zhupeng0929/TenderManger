@@ -23,6 +23,9 @@ $(function () {
         //onchange:''
         //
     });
+    //var demo1 = $('select[name="TenderUser"]').bootstrapDualListbox({ infoTextFiltered: '<span class="label label-purple label-lg">Filtered</span>' });
+    //var container1 = demo1.bootstrapDualListbox('getContainer');
+    //container1.find('.btn').addClass('btn-white btn-info btn-bold');
     $('#TenderUser').multiselect({
         enableFiltering: true,
         enableHTML: true,
@@ -90,13 +93,13 @@ function MainGrid() {
                     align: 'center',
                     formatter: function (cellvalue, options, rowObject) {
                         if (rowObject.State == 0) {
-                            return '<span  class=\"label label-info arrowed\">未开标</span>';
+                            return '<span  class=\"label label-info arrowed\">' + rowObject.StateDes + '</span>';
                         } else if (rowObject.State == 1) {
-                            return '<span  class=\"label label-success arrowed-in\">已开标</span>';
-                        } else if (rowObject.State == 2) {
-                            return '<span  class=\"label label-pink\">已结束</span>';
+                            return '<span  class=\"label label-success arrowed-in\">' + rowObject.StateDes + '</span>';
+                        } else if (rowObject.State == 3) {
+                            return '<span  class=\"label label-pink\">' + rowObject.StateDes + '</span>';
                         } else {
-                            return '<span  class=\"label label-grey\">已作废</span>';
+                            return '<span  class=\"label label-grey\">' + rowObject.StateDes + '</span>';
                         }
                     }
                 },
@@ -123,6 +126,15 @@ function MainGrid() {
                     index: 'CreateUser',
                     hidden: true
                 },
+                {
+                    name: '',
+                    index: 'Tools',
+                    label: '操作',
+                    formatter: function (cellvalue, options, rowObject) {
+                        var detail = "<button class='btn btn-sm btn-success' onclick='btn_detail(\"" + rowObject.Id + "\")'' title='详细信息' style='padding:0px 10px'>" + "<i class='ace-icon fa fa-print'></i>详细信息</button>";
+                        return detail;
+                    }, align: 'center', width: 80
+                },
             ],
             url: url,
             datatype: "json",
@@ -132,8 +144,8 @@ function MainGrid() {
             pager: "#grid-pager",
             altRows: true,
             height: 'auto',
-            multiselect: true,
-            multiboxonly: true,
+            multiselect: false,
+            multiboxonly: false,
 
             loadComplete: function () {
                 var table = this;
@@ -205,7 +217,8 @@ var editDlg = function () {
                     Id: '00000000-0000-0000-0000-000000000000',
                     isSelect: 'ok'
                 });
-            $('#TenderUser').multiselect('refresh');
+            $('#TenderUser').multiselect('clearSelection');
+            $(".remove").click();
         },
         update: function (ret) {  //弹出编辑框
             update = true;
@@ -213,6 +226,8 @@ var editDlg = function () {
             vm.$set('$data', ret);
             eval('var ret=' + ret.SelectUser);
             //console.log(ret);
+            $('#TenderUser').multiselect('clearSelection');
+            $(".remove").click();
             $("#TenderUser").multiselect('dataprovider', ret);
             $('#TenderUser').multiselect('refresh');
         }
@@ -225,6 +240,7 @@ function del() {
     list.del("Id", "/TenderInfoManager/Delete", function () {
         list.reload();
     });
+
 }
 
 //自定义的编辑按钮
@@ -233,8 +249,8 @@ function edit() {
     if (selected == null) {
         return;
     }
-    if (selected.State == "1") {
-        layer.msg('已开标禁止修改！');
+    if (selected.State != 0) {
+        layer.msg("该状态下标书无法编辑！");
         return;
     }
     editDlg.update(selected);
@@ -253,7 +269,10 @@ function editFile() {
     if (selected == null) {
         return;
     }
-
+    if (selected.State != 0) {
+        layer.msg("该状态下标书无法编辑！");
+        return;
+    }
     layer.open({
         type: 2,
         skin: 'layui-layer-rim', //加上边框
@@ -271,7 +290,11 @@ function publish() {
     if (selected == null) {
         return;
     } if (new Date(selected.StartTime) > new Date()) {
-        layer.msg("未到开标时间禁止开标！");
+        layer.msg("未到开标时间禁止发布！");
+        return;
+    }
+    if (selected.State != 0) {
+        layer.msg("该状态下标书无法发布！");
         return;
     }
     var lid = layer.confirm("确定要开标？开标后不可编辑",
@@ -281,15 +304,15 @@ function publish() {
 
 
             layer.open({
-                type: 1,
+                type: 2,
                 skin: 'layui-layer-rim', //加上边框
-                title: "开标验证", //不显示标题
-                area: ['300px', '220px'], //宽高
+                title: "发布标书", //不显示标题
+                area: ['800px', '700px'], //宽高
                 maxmin: false, //开启最大化最小化按钮
-                content: $('#userDlg'), //捕获的元素
-                btn: ['验证', '取消'],
+                content: "/TenderInfoManager/TenderInfoDetail?id=" + selected.Id,
+                btn: ['发布', '取消'],
                 yes: function (index, layero) {
-                    var data = $('#userForm').serializeArray();
+                    var data = $($(layero).find("iframe")[0].contentWindow.document.getElementById("userForm")).serializeArray();
                     data.push({ name: "id", value: selected.Id });
                     $.ajax(
                     {
@@ -299,9 +322,10 @@ function publish() {
                         data: data,
                         success: function (data) {
                             layer.msg(data.Message);
+                            list.reload();
                             if (data.Status) {
                                 layer.close(index);
-                                list.reload();
+
                             }
                         }
                     }
@@ -349,4 +373,40 @@ function invalidtender() {
                 "json");
         });
 }
+//截止标书
+function stoptender() {
+    var selected = list.getSelectedObj();
+    if (selected == null) {
+        return;
+    }
+
+    var lid = layer.confirm("确定要停止招标？",
+        null,
+        function () {
+            layer.close(lid);
+            $.post("/TenderInfoManager/StopTender",
+                { id: selected.Id },
+                function (data) {
+                    if (data.Status) {
+                        list.reload();
+                    } else {
+                        layer.msg(data.Message);
+                    }
+                },
+                "json");
+        });
+}
 //@@ sourceURL=TenderInfo.js
+
+function btn_detail(id) {
+
+    layer.open({
+        type: 2,
+        skin: 'layui-layer-rim', //加上边框
+        title: "标书详情", //不显示标题
+        area: ['800px', '700px'], //宽高
+        maxmin: false, //开启最大化最小化按钮
+        content: "/TenderInfoManager/TenderInfoDetail?id=" + id+"&type=1",
+    });
+
+}

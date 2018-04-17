@@ -50,7 +50,7 @@ namespace Tender.Domain
 	    /// </summary>
         public decimal TenderPrice { get; set; }
 
-        public string TenderPriceDes { get { if (EndTime >= DateTime.Now) { return "***"; } else { return TenderPrice.ToString(); }; } }
+        public string TenderPriceDes { get { if (State == 0 || State == 3) { return "***"; } else { return TenderPrice.ToString(); }; } }
         /// <summary>
 	    /// 投标时间
 	    /// </summary>
@@ -61,11 +61,11 @@ namespace Tender.Domain
         /// </summary>
         public DateTime EndTime { get; set; }
         /// <summary>
-        /// 投标状态，0竞标中，1中标，2未中标，3作废
+        /// 投标状态，0竞标中，1中标，2未中标，4已流标，5已作废
         /// </summary>
         public int State { get; set; }
         /// <summary>
-        /// 投标状态，0竞标中，1中标，2未中标，3作废
+        /// 投标状态，0竞标中，1中标，2未中标，4已流标，5已作废
         /// </summary>
         [NotMapped]
         public string StateDes
@@ -77,7 +77,9 @@ namespace Tender.Domain
                     case 0: return "竞标中";
                     case 1: return "中标";
                     case 2: return "未中标";
-                    case 3: return "作废";
+                    case 3: return "待公布";
+                    case 4: return "已流标";
+                    case 5: return "已作废";
                     default: return "未知";
                 }
             }

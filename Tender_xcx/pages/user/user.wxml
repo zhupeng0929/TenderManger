@@ -18,26 +18,6 @@
   </view>
 </view>
 
-<!-- 横排菜单 -->
-<!-- <view class="nav-wrapper">
-  <view class='nav' catchtap='forbid'>
-    <text class='iconfont icon-movie-love'></text>
-    <text class='txt'>电影收藏</text>
-  </view>
-  <view class='nav' catchtap='forbid'>
-    <text class='iconfont icon-actor-love'></text>
-    <text class='txt'>演员关注</text>
-  </view>
-  <view class='nav' catchtap='forbid'>
-    <text class='iconfont icon-video-love'></text>
-    <text class='txt'>视频收藏</text>
-  </view>
-  <view class='nav' catchtap='forbid'>
-    <text class='iconfont icon-review-love'></text>
-    <text class='txt'>影评收藏</text>
-  </view>
-</view> -->
-
 <!-- 竖列导航栏 -->
 <view class="menu-wrapper">
   <view class='menu' data-url='/pages/user/info/info' catchtap='navigateTo'>

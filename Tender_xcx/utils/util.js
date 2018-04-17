@@ -1,7 +1,7 @@
 function http(params) {
   wx.showNavigationBarLoading()
 
-  let baseUrl = 'http://192.168.1.207:9100/Api/'  //  接口基础
+  let baseUrl = 'http://ztb.quanshensh.top/Api/'  //  接口基础
 
   let url = typeof params === 'string' ? baseUrl + params : baseUrl + params.url  //  如果只传一个字符串则该字符串为 URL
 
@@ -71,7 +71,6 @@ function http(params) {
           wx.hideNavigationBarLoading()
           let statusCode = res.statusCode
           console.log(res)
-debugger;
           switch (statusCode) {
             case 200:
               resolve(res.data)
@@ -165,11 +164,42 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+// 直接输出倒计时封装
+function dayTime(bb) {
+  var bb = bb
+  var day = parseInt(bb / 86400);
+  var time = parseInt((bb - (day * 86400)) / 3600);
+  var min = parseInt((bb - (time * 3600 + day * 86400)) / 60)
+  var sinTime = time * 3600 + min * 60 + day * 86400
+  var sinTimeb;
+  var sin1 = parseInt((bb - sinTime))
+  var thisTime = addEge(day) + "天" + addEge(time) + ":" + addEge(min) + ":" + addEge(sin1);
+  bb <= 0 ? thisTime = "0天00:00:00" : thisTime
+  return thisTime
+}
+function addEge(a) {
+  return a < 10 ? a = "0" + a : a = a
+}
+// 输出数组倒计时封装
+function dayTimeArr(bb) {
+  var bb = bb
+  var day = parseInt(bb / 86400);
+  var time = parseInt((bb - (day * 86400)) / 3600);
+  var min = parseInt((bb - (time * 3600 + day * 86400)) / 60)
+  var sinTime = time * 3600 + min * 60 + day * 86400
+  var sinTimeb;
+  var sin1 = parseInt((bb - sinTime))
+  var timeArr = [addEge(day), addEge(time), addEge(min), addEge(sin1)];
+  if (bb <= 0) {
+    timeArr = ["00", "00", "00", "00"];
+  }
+  return timeArr
+}
 module.exports = {
   formatTime: formatTime,
   formatNumber: formatNumber,
   formatDate: formatDate,
   http: http,
-  starToArray: starToArray
+  starToArray: starToArray,
+  dayTimeArr: dayTimeArr
 }

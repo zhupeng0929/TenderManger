@@ -394,6 +394,10 @@
     <Content Include="Content\scripts\jqGrid\jquery.jqGrid.src.js" />
     <Content Include="Content\scripts\jqGrid\ui.jqgrid.css" />
     <Content Include="Content\scripts\jquery\jQuery-2.1.4.min.js" />
+    <Content Include="Content\scripts\plugins\bootstrap-duallistbox\bootstrap-duallistbox.css" />
+    <Content Include="Content\scripts\plugins\bootstrap-duallistbox\bootstrap-duallistbox.min.css" />
+    <Content Include="Content\scripts\plugins\bootstrap-duallistbox\jquery.bootstrap-duallistbox.js" />
+    <Content Include="Content\scripts\plugins\bootstrap-duallistbox\jquery.bootstrap-duallistbox.min.js" />
     <Content Include="Content\scripts\plugins\bootstrap-multiselect\css\bootstrap-multiselect.css" />
     <Content Include="Content\scripts\plugins\bootstrap-multiselect\js\bootstrap-multiselect.js" />
     <Content Include="Content\scripts\plugins\flow-ui\img\gooflow_bg.png" />
@@ -1133,10 +1137,12 @@
     <Content Include="Views\TenderInfoManager\GetFiles.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Views\TenderInfoManager\TenderInfoDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Api\Views\TenderInfo\" />
+    <Folder Include="Content\scripts\plugins\NewFolder1\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

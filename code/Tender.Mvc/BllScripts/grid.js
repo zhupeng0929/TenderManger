@@ -1,7 +1,7 @@
 ﻿
-function Grid() {}
+function Grid() { }
 
-Grid.prototype.selectObjs = function() {
+Grid.prototype.selectObjs = function () {
     var ids = this.maingrid.jqGrid("getGridParam", "selarrrow");
     if (ids.length == 0) {
         return null;
@@ -9,7 +9,7 @@ Grid.prototype.selectObjs = function() {
     var ret = new Array();
     var maingrid = this.maingrid;
     $(ids)
-        .each(function() {
+        .each(function () {
             var obj = maingrid.jqGrid("getRowData", this);
             ret.push(obj);
         });
@@ -17,12 +17,12 @@ Grid.prototype.selectObjs = function() {
 };
 
 //选择多行对象
-Grid.prototype.getSelectedMany = function() {
+Grid.prototype.getSelectedMany = function () {
     return this.selectObjs();
 };
 
 //选择单行对象
-Grid.prototype.getSelectedObj = function() {
+Grid.prototype.getSelectedObj = function () {
     var row = this.maingrid.jqGrid("getGridParam", "selrow");
     if (row) {
         var ret = this.maingrid.jqGrid("getRowData", row);
@@ -33,31 +33,41 @@ Grid.prototype.getSelectedObj = function() {
 };
 
 //返回选择多行的属性JSON，默认选择id属性，如果选择其他属性，可重写
-Grid.prototype.getSelectedProperties = function(propName) {
+Grid.prototype.getSelectedProperties = function (propName) {
     var selected = this.selectObjs();
     var result = new Array();
     if (selected != null) {
-        result = selected.map(function(elem) { return elem[propName]; });
+        result = selected.map(function (elem) { return elem[propName]; });
     }
     return result;
 };
 
 //删除操作，服务端的接收必须是post且参数为string[] ids
-Grid.prototype.del = function(idname, url, callback) {
+Grid.prototype.del = function (idname, url, callback) {
     var selected = this.getSelectedProperties(idname);
-    if (selected == null) return;
+    if (selected.length == 0) {
+        selected = this.getSelectedObj()
+        if (selected != null) {
+            selected = selected[idname]
+        }
+    }
+    if (selected == null || selected.length == 0) {
+        layer.msg('请先选择标书！');
+        return;
+    }
 
     var lid = layer.confirm("确定要删除所选？",
         null,
-        function() {
+        function () {
             layer.close(lid);
             $.post(url,
                 { ids: selected },
-                function(data) {
+                function (data) {
+                    layer.msg(data.Message);
                     if (data.Status) {
                         callback();
                     } else {
-                        layer.msg(data.Message);
+                        
                     }
                 },
                 "json");

@@ -7,7 +7,7 @@
         </view>
         <view class='content_v border_bottom'>
           <image class='tenderimg' mode='aspectFill' src='{{item.EnclosurePic.length==0?"":baseurl+item.EnclosurePic[0].Path}}'></image>
-          <text class='ellipsis_line_4'>{{item.Description}}</text>
+          <text class='ellipsis_line_4' decode="true" space="emsp">  {{item.Description}}</text>
         </view>
         <view class='remark'>
           <view class='time_v'>截止时间：

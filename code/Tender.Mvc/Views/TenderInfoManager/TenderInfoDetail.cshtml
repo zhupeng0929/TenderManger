@@ -1,0 +1,128 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
+}
+@model Tender.App.ViewModel.TenderInfoView
+<link href="~/Content/scripts/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" />
+<link href="~/Content/scripts/plugins/bootstrap-duallistbox/bootstrap-duallistbox.min.css" rel="stylesheet" />
+<style>
+  li{
+      width:100%;
+  }
+</style>
+
+<!--编辑对话框-->
+<div id="editDlg" style="margin-top:10px;">
+    <div class="col-xs-12">
+
+        <div style="text-align:center;">
+            <h3>@Model.Title</h3>
+        </div>
+        <div style="display: flex;justify-content: space-around;">
+            <p>开始时间 @Model.StartTime</p>
+            <p>结束时间 @Model.EndTime</p>
+            <p>提货周期 @Model.Cycle</p>
+        </div>
+        <div class="form-group">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; @Model.Description</p>
+        </div>
+
+        <div style="text-align:center;">
+            <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-10">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div style="text-align:center;">
+                        <ul class="ace-thumbnails clearfix">
+                            @if (Model.EnclosurePic != null)
+                            {
+                            foreach (var item in Model.EnclosurePic)
+                            {
+                            if (item.Type == 0)
+                            {
+                            <li id="@item.Id">
+
+                                <img width="100%"  alt="150x150" src="@item.Path">
+
+
+                            </li>
+                            }
+                            if (item.Type == 1)
+                            {
+                            <li id="@item.Id">
+
+                                <video style="width:100%" controls="controls" src="@item.Path"></video>
+
+
+                            </li>
+                            }
+                            } 
+                            }
+                        </ul>
+
+                    </div><!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+                <div class="col-xs-1"></div>
+            </div>
+        </div>
+        <div style="text-align:center;">
+        </div>
+    </div>
+
+</div>
+<div id="userDlg" style="margin-top:10px;">
+    <div class="col-xs-12">
+        <form action="/TenderInfoManager/PublishTender" method="post" class="form-horizontal" id="userForm">
+            <div class="form-group" style="margin-top: 50px;">
+                <label for="TenderUser" class="col-sm-3 control-label no-padding-right">参投人员：</label>
+                <div class="col-sm-7">
+                    @Html.DropDownList("TenderUser", @ViewBag.userSelect as List<SelectListItem>
+                        ,new { multiple = "multiple" })
+
+                </div>
+
+            </div>
+            @if(ViewBag.type==0)
+            {
+            <div class="form-group">
+                <label for="account" class="col-sm-3 control-label no-padding-right">账号：</label>
+                <div class="col-sm-7">
+                    <input id="account" name="account" autocomplete="new-password" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-3 control-label no-padding-right">密码：</label>
+                <div class="col-sm-7">
+                    <input type="password" id="password" autocomplete="new-password" name="password" class="form-control" />
+                </div>
+            </div>
+            }
+           
+
+        </form>
+    </div>
+
+</div>
+@Html.Hidden("SelectUser", @Model.SelectUser)
+<script src="~/Content/scripts/zTree/js/jquery.ztree.excheck.js"></script>
+<script src="~/BllScripts/grid.js"></script>
+<script src="~/BllScripts/parentTree.js"></script>
+<script src="~/BllScripts/jqEvent.js"></script>
+<script src="~/Content/scripts/plugins/bootstrap-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<script src="~/Content/scripts/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+<script>
+    $(function () {
+        $('#TenderUser').multiselect({
+            enableFiltering: true,
+            enableHTML: true,
+            buttonClass: 'btn btn-white btn-primary',
+            buttonWidth: '100%',
+            nonSelectedText: '请选择参投人员', //默认展示文本
+            selectAllText: '全选',  //全选文本
+            includeSelectAllOption: true
+        });
+        eval('var ret=' + $('#SelectUser').val());
+        $("#TenderUser").multiselect('dataprovider', ret);
+        $('#TenderUser').multiselect('refresh');
+    });
+</script>
