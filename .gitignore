@@ -54,3 +54,8 @@ code/.vs/Tender/v15/Server/sqlite3/storage.ide
 /code/.vs
 code/Tender.Mvc/bin/Tender.App.dll
 code/Infrastructure/bin/Debug/Infrastructure.dll
+code/Infrastructure/obj/Debug/Infrastructure.csproj.FileListAbsolute.txt
+code/Tender.App/obj/Debug/Tender.App.csproj.FileListAbsolute.txt
+code/Tender.Domain/obj/Debug/Tender.Domain.csproj.FileListAbsolute.txt
+code/Tender.Mvc/obj/Debug/Tender.Mvc.csproj.FileListAbsolute.txt
+code/Tender.Repository/obj/Debug/Tender.Repository.csproj.FileListAbsolute.txt
