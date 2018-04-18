@@ -40,7 +40,7 @@
         </view>
         <view class='remark'>
           <view class='time_v'>截止时间：
-            <text class='time_t'>{{time+index}}	</text>
+            <text class='time_t'>{{item.EndTime}}	</text>
           </view>
           <view class='time_v'>投标金额：
             <text> {{item.TenderPrice}}</text>

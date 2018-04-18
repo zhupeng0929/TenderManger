@@ -52,3 +52,5 @@ code/.vs/Tender/v14/.suo
 code/.vs/Tender/v15/.suo
 code/.vs/Tender/v15/Server/sqlite3/storage.ide
 /code/.vs
+code/Tender.Mvc/bin/Tender.App.dll
+code/Infrastructure/bin/Debug/Infrastructure.dll
